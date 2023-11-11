@@ -94,16 +94,13 @@
                             <div class="product-countdown" data-until="+{{Carbon\Carbon::now()->diffInHours($product->validity, false)}}h" data-relative="true" data-labels-short="true"></div>
 
                             <div class="product-action-vertical">
-                                {{-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> --}}
-                                {{-- <button type="button" class="btn-product-icon btn-wishlist btn-expandable add_to_wishlist"><span>add to wishlist</span></button> --}}
                                 
                                 <a href="{{route('product_quick_view', $product->id)}}" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
                             </div><!-- End .product-action-vertical -->
 
                             <div class="product-action">
                                 <input type="hidden" class="product_id_value" value="{{$product->id}}">
-                                {{-- <a href="#" class="btn-product btn-cart add_to_cart" title="Add to cart"><span>add to cart</span></a> --}}
-                                {{-- <button type="button" class="btn-product btn-cart add_to_cart" title="Add to cart"><span>add to cart</span></button> --}}
+                                
                             </div><!-- End .product-action -->
                         </figure><!-- End .product-media -->
 
@@ -124,73 +121,6 @@
                 @endforeach
             </div>
         </div><!-- .End .tab-pane -->
-        {{-- <div class="tab-pane p-0 fade" id="arrivals-women-tab" role="tabpanel" aria-labelledby="arrivals-women-link">
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-6">
-                    <div class="product demo21">
-                        <figure class="product-media">
-                            <span class="product-label label-sale">Sale</span>
-                            <a href="{{route('product.details', $products->slug)}}">
-                                <img src="assets/images/demos/demo-21/newArrivals/product-2.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body text-center">
-                            <div class="product-cat">
-                                <a href="#">Jackets &amp; Vests</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('product.details', $product->slug)}}">The North Face Fanorak 2.0</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$76.99</span>
-                                <span class="old-price">Was $109.99</span>
-                            </div><!-- End .product-price -->
-                            
-
-                            <div class="product-action">
-                                <button type="button" class="btn-product btn-cart" title="Add to cart"><span>ADD TO CART</span></button>
-                            </div><!-- End .product-action -->
-
-                            <a href="#" class="btn-addtolist"><span>&nbsp;Add to Wishlist</span></a>
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div>
-                <div class="col-lg-2 col-md-3 col-6">
-                    <div class="product demo21">
-                        <figure class="product-media">
-                            <a href="{{route('product.details', $product->slug)}}">
-                                <img src="assets/images/demos/demo-21/newArrivals/product-6.jpg" alt="Product image" class="product-image">
-                            </a>
-
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body text-center">
-                            <div class="product-cat">
-                                <a href="#">Tops</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="{{route('product.details', $product->slug)}}">Alphaskin Sport Bra</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="cur-price">$34.99</span>
-                            </div><!-- End .product-price -->
-                            
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #d64042;"><span class="sr-only">Color name</span></a>
-                                <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
-                            </div><!-- End .product-nav -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart"><span>ADD TO CART</span></a>
-                            </div><!-- End .product-action -->
-
-                            <a href="#" class="btn-addtolist"><span>&nbsp;Add to Wishlist</span></a>
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-                </div>
-            </div>
-        </div><!-- .End .tab-pane --> --}}
     </div><!-- End .tab-content -->
     <div class="load-more-container text-center mb-5">
         <button type="button" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></button>

@@ -125,24 +125,6 @@
                                         <td></td>
                                         <td>৳ 150</td>
                                     </tr>
-                                    {{-- <tr class="summary-shipping-row">
-                                        <td class="pt-3">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" name="payment_method" id="c1" class="custom-control-input" checked="" value="1">
-                                                <label class="custom-control-label" for="c1">Cash on delivery</label>
-                                            </div>
-                                        </td>
-                                        <td class="pt-3"></td>
-                                    </tr>
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" name="payment_method" id="c2" class="custom-control-input" value="2">
-                                                <label class="custom-control-label" for="c2">Bkash</label>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                    </tr> --}}
                                 </tbody>
                             </table><!-- End .table table-summary -->
                             <div class="cart-bottom mt-3">

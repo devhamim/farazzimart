@@ -18,24 +18,6 @@
 @endsection
 @section('content')
 <div class="mb-4"></div>
-
-{{-- <div class="container">
-    <ul class="menu-category entry-filter justify-content-center row">
-        @foreach ($categories as $category)
-        <li class="col-md-3  col-6 col-sm-4 col-lg-2">
-            <a href="{{route('category.one', $category->id)}}" data-filter="*" class="cat-block">
-                <figure class="d-flex align-items-center justify-content-center">
-                    <span>
-                        <img class="pt-2 pb-1" src="{{asset('uploads/category')}}/{{$category->category_image}}" alt="Category image">
-                    </span>
-                </figure>
-
-                <h3 class="cat-block-title">{{$category->category_name}}</h3>
-            </a>
-        </li>
-        @endforeach
-    </ul>
-</div> --}}
 <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3 d-none d-sm-block order-lg-first order-first">
@@ -78,10 +60,6 @@
                     <div class="heading-left mb-1">
                         <h2 class="title">Category Products</h2>
                     </div>
-            
-                   <!-- <div class="heading-right">
-                        <a href="" class="see_more"><h3 class="me-1">See More</h3><span>></span></a>
-                   </div> -->
                 </div>
             
                 <div class="tab-content tab-content-carousel">
@@ -96,16 +74,13 @@
                                         </a>
             
                                         <div class="product-action-vertical">
-                                            {{-- <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a> --}}
-                                            {{-- <button type="button" class="btn-product-icon btn-wishlist btn-expandable add_to_wishlist"><span>add to wishlist</span></button> --}}
                                             
                                             <a href="{{route('product_quick_view', $product->id)}}" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
                                         </div><!-- End .product-action-vertical -->
             
                                         <div class="product-action">
                                             <input type="hidden" class="product_id_value" value="{{$product->id}}">
-                                            {{-- <a href="#" class="btn-product btn-cart add_to_cart" title="Add to cart"><span>add to cart</span></a> --}}
-                                            {{-- <button type="button" class="btn-product btn-cart add_to_cart" title="Add to cart"><span>add to cart</span></button> --}}
+                                           
                                         </div><!-- End .product-action -->
                                     </figure><!-- End .product-media -->
             

@@ -26,9 +26,6 @@
                     @if (Cookie::get('shopping_cart'))
                         <div class="col-lg-9">
                             <table class="table table-cart table-mobile">
-                                {{-- <div class="col-md-12 text-right mb-3">
-                                    <a href="javascript:void(0)" class="clear_cart font-weight-bold">Clear Cart</a>
-                                </div> --}}
                                 <thead>
                                     <tr>
                                         <th>Product</th>
@@ -62,10 +59,6 @@
                                                 <input type="hidden" class="product_id" value="{{ $data['item_id'] }}" >
                                             </div>
                                         </td>
-                                        {{-- @php
-                                            $total_price = $data['item_price']*{{ number_format($data['item_price'], 0) }}
-                                        @endphp --}}
-                                        {{-- <td class="total-col">৳ {{$total_price}}</td> --}}
                                         <td class="total-col">৳ {{ number_format($data['item_quantity'] * $data['item_price'], 2) }}</td>
                                         <td class="remove-col delete_cart_data"><button class="btn-remove"><i class="icon-close"></i></button></td>
                                     </tr>
