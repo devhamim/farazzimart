@@ -47,5 +47,9 @@ class AppServiceProvider extends ServiceProvider
      View::composer('layouts.dashboard', function ($view){
         $view->with('setting', setting::all());
     });
+    // setting
+     View::composer('auth.login', function ($view){
+        $view->with('setting', setting::all());
+    });
 }
 }

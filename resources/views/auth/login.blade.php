@@ -5,7 +5,9 @@
 
 <!-- Mirrored from html.phoenixcoded.net/empire/bootstrap/default/pages_authentication_login-v2.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 09 May 2023 13:38:33 GMT -->
 <head>
-    <title>Empire | B4+ admin template</title>
+    @if($setting->first()->title != null)
+        <title>{{$setting->first()->title}}</title>
+    @endif
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +15,9 @@
     <meta name="description" content="Empire is one of the unique admin template built on top of Bootstrap 4 framework. It is easy to customize, flexible code styles, well tested, modern & responsive are the topmost key factors of Empire Dashboard Template" />
     <meta name="keywords" content="bootstrap admin template, dashboard template, backend panel, bootstrap 4, backend template, dashboard template, saas admin, CRM dashboard, eCommerce dashboard">
     <meta name="author" content="Codedthemes" />
-    <link rel="icon" type="image/x-icon" href="{{asset('backend/img/favicon.ico')}}">
+    @if($setting->first()->favicon != null)
+        <link rel="icon" type="image/x-icon" href="{{ asset('uploads/setting') }}/{{ $setting->first()->favicon }}">
+    @endif
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
@@ -54,9 +58,11 @@
                 <div class="p-4 p-sm-5">
                     <!-- [ Logo ] Start -->
                     <div class="d-flex justify-content-center align-items-center pb-2 mb-4">
-                        <div class="ui-w-60">
+                        <div class="">
                             <div class="w-100 position-relative">
-                                <img src="{{asset('backend/img/logo-dark.png')}}" alt="Brand Logo" class="img-fluid">
+                                    @if($setting->first()->logo != null)
+                                        <img src="{{ asset('uploads/setting') }}/{{ $setting->first()->logo }}" alt="Brand Logo" class="img-fluid">
+                                    @endif
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -92,21 +98,15 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center m-0">
-                            <label class="custom-control custom-checkbox m-0">
+                            {{-- <label class="custom-control custom-checkbox m-0">
                                 <input type="checkbox" class="custom-control-input">
                                 <span class="custom-control-label">Remember me</span>
-                            </label>
+                            </label> --}}
                             <button type="submit" class="btn btn-primary">Sign In</button>
                         </div>
                     </form>
                     <!-- [ Form ] End -->
 
-                </div>
-                <div class="card-footer py-3 px-4 px-sm-5">
-                    <div class="text-center text-muted">
-                        Don't have an account yet?
-                        <a href="{{route('register')}}">Sign Up</a>
-                    </div>
                 </div>
             </div>
 
