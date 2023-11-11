@@ -25,6 +25,7 @@
                                     <th>SL</th>
                                     <th>Image</th>
                                     <th>Product</th>
+                                    <th>Code</th>
                                     <th>Category</th>
                                     <th>Price(TK)</th>
                                     <th>Status</th>
@@ -39,6 +40,7 @@
                                         <td>{{$sl+1}}</td>
                                         <td><img src="{{asset('uploads/products/preview')}}/{{$product->preview_image}}" alt class="img-fluid wid-40"></td>
                                         <td>{{$product->product_name}}</td>
+                                        <td>{{$product->slug}}</td>
                                         <td>{{$product->rel_to_category->category_name}}</td>
                                         <td>{{$product->after_discount}}</td>
                                         <td><span class="badge badge-{{$product->status == 1 ? 'success' : 'danger'}}">{{$product->status == 1 ? 'Active' : 'Deactive'}}</span></td>
