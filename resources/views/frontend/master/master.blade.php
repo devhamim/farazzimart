@@ -213,7 +213,7 @@
                             @if($setting->first()->footer != null)
                                 <span>{{ $setting->first()->footer }} </span>
                             @endif
-                             | Design and Development By Nugortech it
+                             | Design and Development By <a href="https://nugortech.com/">Nugortech it</a>
                     </p><!-- End .footer-copyright -->
                 </div>
             </div><!-- End .footer-bottom -->

@@ -108,24 +108,6 @@
                             </li>
                         </ul>
                     </li>
-                    {{-- <li class="sidenav-item">
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
-                            <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Catalog</div>
-                        </a>
-                        <ul class="sidenav-menu">
-                            <li class="sidenav-item">
-                                <a href="{{route('users')}}" class="sidenav-link">
-                                    <div>List</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item">
-                                <a href="{{route('profile')}}" class="sidenav-link">
-                                    <div>Account settings</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> --}}
                     <li class="sidenav-item {{ Request::is('category*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon feather icon-grid"></i>
@@ -200,16 +182,6 @@
                             <div>Contact</div>
                         </a>
                         <ul class="sidenav-menu {{ Request::is('contact/info') ? 'active' : '' }}">
-                            {{-- <li class="sidenav-item">
-                                <a href="{{route('contact.info')}}" class="sidenav-link">
-                                    <div>Info</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item {{ Request::is('contact/info/list') ? 'active' : '' }}">
-                                <a href="{{route('contact.info.list')}}" class="sidenav-link">
-                                    <div>Info list</div>
-                                </a>
-                            </li> --}}
                             <li class="sidenav-item {{ Request::is('contact/list') ? 'active' : '' }}">
                                 <a href="{{route('contact.list')}}" class="sidenav-link">
                                     <div>Messages</div>
@@ -345,27 +317,7 @@
                     <!-- [ content ] Start -->
                     @yield('content')
 
-                    <!-- [ content ] End -->
-
-                    <!-- [ Layout footer ] Start -->
-
-                    <!-- [ Layout footer ] End -->
-
                 </div>
-                {{-- <nav class="layout-footer footer footer-light">
-                    <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
-                        <div class="pt-3">
-                            <span class="float-md-right d-none d-lg-block">&copy; Exclusive on Themeforest | Hand-crafted &amp; Made with <i class="fas fa-heart text-danger mr-2"></i></span>
-                        </div>
-                        <div>
-                            <a href="javascript:" class="footer-link pt-3">About Us</a>
-                            <a href="javascript:" class="footer-link pt-3 ml-4">Help</a>
-                            <a href="javascript:" class="footer-link pt-3 ml-4">Contact</a>
-                            <a href="javascript:" class="footer-link pt-3 ml-4">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </nav> --}}
-                <!-- [ Layout content ] Start -->
 
             </div>
             <!-- [ Layout container ] End -->
