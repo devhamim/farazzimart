@@ -136,55 +136,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="widget widget-collapsible">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true" aria-controls="widget-2">
-                                    Size
-                                </a>
-                            </h3>
-
-                            <div class="collapse show" id="widget-2">
-                                <div class="widget-body">
-                                    <div class="filter-items">
-                                        @if (!empty($_GET['size']))
-                                            @php
-                                                $filter_cats = explode(',', $_GET['size']);
-                                            @endphp
-                                        @endif
-                                        @foreach ($sizes as $size)
-                                        <div class="filter-item">
-                                            <div class="">
-                                                <input type="radio" name="size" class="size_id" id="size-{{$size->id}}" {{($size->id == @$_GET['size_id'])?'checked': ''}} value="{{$size->id}}">
-                                                <label class="custom-control-label size-custom-control-label" for="size-{{$size->id}}" >{{$size->size_name}}</label>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="widget widget-collapsible">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true" aria-controls="widget-3">
-                                    Colour
-                                </a>
-                            </h3>
-
-                            <div class="collapse show" id="widget-3">
-                                <div class="widget-body">
-                                    <div class="filter-colors">
-                                        @foreach ($colors as $key => $color)
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="radio" name="color" class="color_id" value="{{$color->id}}" id="color-{{$color->id}}" style="display: none!important" {{($color->id == @$_GET['color_id'])?'checked': ''}} >
-                                            <label class="custom-control-label handmade-control-label" for="color-{{$color->id}}"><span style="width: 20px;height: 20px; background:{{$color->color_code}}; display:block; border-radius: 50%; border: {{($color->id == @$_GET['color_id'])?'2px solid #fff': ''}} "></span></label>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 {{-- </form> --}}
             </aside><!-- End .col-lg-3 -->
