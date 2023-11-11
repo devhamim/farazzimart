@@ -7,12 +7,14 @@ use App\Models\Color;
 use App\Models\Inventory;
 use App\Models\Product;
 use App\Models\ProductGallery;
+use App\Models\terms_condition;
 use Illuminate\Http\Request;
 
 class DetailsController extends Controller
 {
     //product_details
     function product_details($slug) {
+        $returns = terms_condition::all();
         $product_info = Product::where('slug', $slug)->get();
         $related_products = Product::where('category_id', $product_info->first()->category_id)->where('status', 1)->where('id', '!=', $product_info->first()->id)->get();
         $product_gallery = ProductGallery::where('product_id', $product_info->first()->id)->get();
@@ -27,6 +29,7 @@ class DetailsController extends Controller
             'available_colors' => $available_colors,
             'product_gallery' => $product_gallery,
             'related_products' => $related_products,
+            'returns' => $returns,
         ]);
     }
 

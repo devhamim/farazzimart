@@ -123,7 +123,7 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="header-center text-white">
+                    <div class="header-right text-white">
                         @if($setting->first()->phone != null)
                             <i class="icon-phone"></i>
                             <a href="tel:{{ $setting->first()->phone }}" class="text-white">{{ $setting->first()->phone }}</a>

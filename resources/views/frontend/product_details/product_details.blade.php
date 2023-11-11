@@ -125,13 +125,13 @@
                                         <a href="{{route('category.one', $product_info->first()->rel_to_category->id)}}">{{$product_info->first()->rel_to_category->category_name}}</a>
                                     </div><!-- End .product-cat -->
     
-                                    <div class="social-icons social-icons-sm">
+                                    {{-- <div class="social-icons social-icons-sm">
                                         <span class="social-label">Share:</span>
                                         <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
                                         <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
                                         <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
                                         <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                                    </div>
+                                    </div> --}}
                                 </div><!-- End .product-details-footer -->
                             </div><!-- End .product-details -->
                         </form>
@@ -145,11 +145,23 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">পন্যের বিবরণ</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">ডেলিভারি এবং রিটার্ন পলিসি</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                    <div class="product-desc-content" style="font-size: 100px!important">
-                        {!! $product_info->first()->description !!}
+                    <div class="product-desc-content">
+                        <h3>Product Information</h3>
+                        <p>{!! $product_info->first()->description !!}</p>
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                    <div class="product-desc-content">
+                        <h3>Information</h3>
+                        <p>
+                            {!! $returns->first()->terms_conditions !!}
+                        </p>
                     </div><!-- End .product-desc-content -->
                 </div><!-- .End .tab-pane -->
             </div><!-- End .tab-content -->

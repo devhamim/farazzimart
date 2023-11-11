@@ -34,20 +34,19 @@
                 }'>
                
                 @foreach ($banners as $banner)
+                <a href="{{ $banner->banner_link }}" target="_blank">
                 <div class="intro-slide" style="background-image: url({{asset('uploads/banner')}}/{{ $banner->banner_image }});">
-                    <div class="container intro-content">
-                        <div class="row">
-                            <div class="col-auto offset-lg-3 intro-col">
-                                <h2 class="intro-title">{{ $banner->banner_title }}</h2><!-- End .intro-title -->
+                        <div class="container intro-content">
+                            <div class="row">
+                                <div class="col-auto offset-lg-3 intro-col">
+                                    <h2 class="intro-title">{{ $banner->banner_title }}</h2><!-- End .intro-title -->
 
-                                <a href="{{ $banner->banner_link }}" target="_blank" class="btn btn-outline-primary-2">
-                                    <span>Shop Now</span>
-                                    <i class="icon-long-arrow-right"></i>
-                                </a>
-                            </div><!-- End .col-auto offset-lg-3 -->
-                        </div>
-                    </div><!-- End .container intro-content -->
-                </div><!-- End .intro-slide -->
+                                    
+                                </div><!-- End .col-auto offset-lg-3 -->
+                            </div>
+                        </div><!-- End .container intro-content -->
+                    </div><!-- End .intro-slide -->
+                </a>
                 @endforeach
             </div><!-- End .owl-carousel owl-simple -->
 
@@ -137,7 +136,7 @@
                     
                     <div class="product cartpage">
                         <figure class="product-media">
-                            <span class="product-label label-new">-{{$product->product_discount}}Tk</span>
+                            <span class="product-label label-new">off {{$product->product_discount}}Tk</span>
                             <a href="{{route('product.details', $product->slug)}}">
                                 <img src="{{asset('uploads/products/preview')}}/{{$product->preview_image}}" alt="Product image" class="product-image">
                             </a>
