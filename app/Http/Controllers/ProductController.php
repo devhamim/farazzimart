@@ -35,7 +35,7 @@ class ProductController extends Controller
             'description'=> 'required',
             'product_price'=> 'required',
             'preview_image' => 'required|mimes:jpg,jpeg,gif,png,webp|max:5000',
-            'gallery_image' => 'required',
+            'quantity' => 'required',
             'gallery_image.*' => 'image|mimes:jpg,jpeg,gif,png,webp',
             
         ], [
@@ -50,7 +50,6 @@ class ProductController extends Controller
                 'quantity' => $request->quantity,
                 'after_discount' => $request->product_price-$request->product_discount,
                 'description' => $request->description,
-                // 'slug' => str_replace(' ', '-', Str::lower($request->product_name)).'-'.rand(1000, 9999),
                 'slug' => Str::random(7),
                 'created_at' => Carbon::now(),
             ]);
@@ -122,7 +121,8 @@ class ProductController extends Controller
             'category_id'=> 'required',
             'description'=> 'required',
             'product_price'=> 'required',
-            'sku*' => 'required'
+            'sku*' => 'required',
+            'quantity' => 'required',
         ], [
             'category_id.required' => 'The category field is required',
         ]);
@@ -176,7 +176,6 @@ class ProductController extends Controller
                 'status' => $request->status,
                 'description' => $request->description,
                 'additional_desc' => $request->additional_desc,
-                // 'slug' => str_replace(' ', '-', Str::lower($request->product_name)).'-'.rand(1000, 9999),
                 'slug' => Str::random(7),
                 'updated_at' => Carbon::now(),
             ]);
