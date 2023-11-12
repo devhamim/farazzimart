@@ -45,7 +45,6 @@
                         <button name="status" value="{{ $orders_details->first()->order_id .','. '4' }}" class="dropdown-item status">Delivered</button>
                     </div>
                 </div>
-                {{-- <span class="text-muted small ml-1">02/25/2018</span> --}}
             </div>
             <hr class="m-0">
             <!-- / Status -->
@@ -61,34 +60,11 @@
                     $items= 0;
                         $items += $orders_details->first()->quantity;
                     @endphp
-                    {{-- <div class="col-md-4 mb-3">
-                        <div class="text-muted small">Payment Method</div>
-                        @if ($orderproducts->first()->payment_method == 1)
-                            Cash on Delevary
-                        @else
-                            Bkash
-                        @endif
-                    </div> --}}
                     <div class="col-md-4 mb-3">
                         <div class="text-muted small">Order Id</div>
                         {{ $orders_details->first()->order_id }}
                     </div>
-                    {{-- <div class="col-md-4 mb-3">
-                        <div class="text-muted small">Transaction number</div>
-                        @if ($orderproducts->first()->tran_number == Null)
-                            N/A
-                        @else
-                        {{ $orderproducts->first()->tran_number }}
-                        @endif
-                    </div> --}}
-                    {{-- <div class="col-md-4 mb-3">
-                        <div class="text-muted small">Transaction Id</div>
-                        @if ($orderproducts->first()->tran_id == Null)
-                            N/A
-                        @else
-                        {{ $orderproducts->first()->tran_id }}
-                        @endif
-                    </div> --}}
+                    
                     <div class="col-md-2 mb-3">
                         <div class="text-muted small">Charge</div>
                         @if ($orderproducts->first()->charge == Null)
@@ -97,14 +73,6 @@
                         {{ $orderproducts->first()->charge }}
                         @endif
                     </div>
-                    {{-- <div class="col-md-2 mb-3">
-                        <div class="text-muted small">Coupon Price</div>
-                        @if ($orderproducts->first()->coupon_price == Null)
-                            N/A
-                        @else
-                        {{ $orderproducts->first()->coupon_price }}
-                        @endif
-                    </div> --}}
                 </div>
             </div>
             <hr class="m-0">
@@ -122,10 +90,7 @@
                         <div class="text-muted small">Phone</div>
                         {{ $billingdetails->first()->mobile }}
                     </div>
-                    {{-- <div class="col-md-3 mb-3">
-                        <div class="text-muted small">Email</div>
-                        {{ $billingdetails->first()->email }}
-                    </div> --}}
+
                     <div class="col-12">
                         <div class="text-muted small">Address</div>
                         {{ $billingdetails->first()->address }}
@@ -147,6 +112,7 @@
                                 $prices = 0;
                             @endphp
                             @foreach ($orders_details as $products)
+                            @if ($products->rel_to_product != null)
                             <tr>
                                 <td class="p-4">
                                     <div class="media align-items-center">
@@ -185,6 +151,7 @@
                                     $items += $products->quantity;
                                     $prices += $total_prices;
                                 @endphp
+                            @endif
                             @endforeach
                             <tr>
                                 <td class="p-4" style="text-align: end">Sub Total: </td>

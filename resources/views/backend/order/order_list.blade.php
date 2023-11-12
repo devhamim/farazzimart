@@ -33,7 +33,6 @@
                         <tr>
                             <th>No.</th>
                             <th>ID</th>
-                            {{-- <th>Amount</th> --}}
                             <th>Date</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -42,16 +41,6 @@
                         <tr>
                             <td>{{ $sl+1 }}</td>
                             <td>{{ $order->order_id }}</td>
-                            {{-- @php
-                                $sum_price = 0;
-
-                                $order_prices = $order->price*$order->quantity;
-                                $order_coupons = $order_prices-$order->coupon_price;
-                                $total_prices = $order_coupons+$order->charge;
-
-                                $sum_price += $order_prices
-                            @endphp --}}
-                            {{-- <td>৳{{ $sum_price }}</td> --}}
                             <td>{{ $order->created_at->format('d-M-Y') }}</td>
                             <td>
                                 @if ($order->status==0)

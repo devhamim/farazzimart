@@ -151,16 +151,6 @@
                             </span>
                         </div>
                     </div>
-                    {{-- <div class="d-flex col-sm-6 col-md-6 col-lg-6 align-items-center">
-                        <div class="card-body media align-items-center text-dark">
-                            <i class="lnr lnr-clock display-4 d-block text-warning"></i>
-                            <span class="media-body d-block ml-3">
-                                <span class="text-big"><span class="mr-1 text-warning">111</span>Working Hours</span>
-                                <br>
-                                <small class="text-muted">Spent this month</small>
-                            </span>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
             <div class="row">
@@ -216,33 +206,34 @@
                                 <th>Quantity</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                {{-- <th class="text-right">Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders_list->take(5) as $orders)
+                            @if ($orders->rel_to_product != null)
                             <tr>
                                 <td>{{ $orders->customer_id }}</td>
                                 <td>{{ $orders->order_id }}</td>
-                                <td>{{ $orders->rel_to_product->product_name }}</td>
-                                <td>{{ $orders->quantity }}</td>
-                                <td>{{ $orders->created_at->format('d-M-Y') }}</td>
+                                    <td>{{ $orders->rel_to_product->product_name }}</td>
+                                    <td>{{ $orders->quantity }}</td>
+                                    <td>{{ $orders->created_at->format('d-M-Y') }}</td>
                                 <td>
-                                <label class="label label-warning">
-                                    @if ($orders->status == 0)
-                                        Pending
-                                    @elseif ($orders->status == 1)
-                                        Confirm
-                                    @elseif ($orders->status == 2)
-                                        Packaging
-                                    @elseif ($orders->status == 3)
+                                    <label class="label label-warning">
+                                        @if ($orders->status == 0)
+                                            Pending
+                                        @elseif ($orders->status == 1)
+                                            Confirm
+                                        @elseif ($orders->status == 2)
+                                            Packaging
+                                        @elseif ($orders->status == 3)
                                         On the way
-                                    @else
+                                        @else
                                         Delivery
-                                    @endif
-                                </label></td>
-                                {{-- <td class="text-right"><a href="javascript:"><i class="lnr lnr-pencil mr-2"></i></a><a href="javascript:"><i class="lnr lnr-trash text-danger"></i></a></td> --}}
+                                        @endif
+                                    </label>
+                                </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>
