@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //size_add
     function size_add() {
         return view('backend.size.size_add');

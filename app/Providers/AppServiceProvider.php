@@ -51,5 +51,9 @@ class AppServiceProvider extends ServiceProvider
      View::composer('auth.login', function ($view){
         $view->with('setting', setting::all());
     });
+    // setting
+     View::composer('invoice.invoice', function ($view){
+        $view->with('setting', setting::all());
+    });
 }
 }

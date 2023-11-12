@@ -13,6 +13,7 @@
                 <li class="breadcrumb-item active">Orders details</li>
             </ol>
         </div>
+        <a href="{{ route('invoice.download', $orders_details->first()->id) }}" class="btn btn-success p-2">invoice Download</a>
         <div class="card">
             <!-- Status -->
             <div class="card-body d-flex">

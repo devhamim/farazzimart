@@ -10,6 +10,16 @@ use Image;
 
 class bannerContoller extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //banner_add
     function banner_add() {
         return view('backend.banner.banner_add');

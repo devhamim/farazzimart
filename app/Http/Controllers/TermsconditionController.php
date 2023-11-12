@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class TermsconditionController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //terms_condition
     function terms_condition(){
         $terms_conditions = terms_condition::all();

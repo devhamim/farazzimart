@@ -11,6 +11,16 @@ use Image;
 
 class BrandController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //brand_add
     function brand_add() {
         return view('backend.brand.brand_add');

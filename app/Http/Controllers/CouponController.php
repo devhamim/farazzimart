@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Cookie;
 
 class CouponController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //coupon
     function coupon_add() {
         return view('frontend.coupon.coupon');

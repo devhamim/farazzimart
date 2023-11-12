@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //color_add
     function color_add() {
         return view('backend.color.color_add');

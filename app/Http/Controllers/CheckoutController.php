@@ -80,6 +80,7 @@ class CheckoutController extends Controller
                     'product_id' => $itemdata['item_id'],
                     'quantity' => $itemdata['item_quantity'],
                     'price' => $itemdata['item_price'],
+                    'charge' => $request->charge,
                     'created_at' => Carbon::now(),
                 ]);
                 Inventory::where('product_id', $itemdata['item_id'])->decrement('quantity', $itemdata['item_quantity']);

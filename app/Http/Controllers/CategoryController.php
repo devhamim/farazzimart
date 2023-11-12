@@ -11,6 +11,16 @@ use Image;
 
 class CategoryController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //category_add
     function category_add() {
         return view('backend.category.category_add');

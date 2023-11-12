@@ -24,16 +24,6 @@ class WishlistController extends Controller
         if(Inventory::where('product_id', $prod_id)->where('color_id', 0)->where('size_id', 0)->exists()) {
             if((Inventory::where('product_id', $prod_id)->where('color_id', 0)->where('size_id', 0)->first()->quantity) > 0) {
                 $product_info = Product::find($prod_id);
-                
-                // if($product_info->quantity == null) {
-                //     $quantity = 1;
-                // }
-                // if($product_info->color_id == null) {
-                //     $color_id = 0;
-                // }
-                // if($product_info->size_id == null) {
-                //     $size_id = 0;
-                // }
                 if(Cookie::get('shopping_wishlist'))
                 {
                     $cookie_data = stripslashes(Cookie::get('shopping_wishlist'));

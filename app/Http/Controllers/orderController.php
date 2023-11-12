@@ -11,6 +11,16 @@ use str;
 
 class orderController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //order_list
     function order_list(){
         $orders = OrderProduct::orderBy("id", "desc")->get();

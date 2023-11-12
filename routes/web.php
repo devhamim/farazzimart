@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\settingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\invoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,3 +216,7 @@ Route::get('/contact/info/status/{status_id}', [ContactController::class, 'conta
 
 Route::get('/login/google', [CustomerAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [CustomerAuthController::class, 'handleGoogleCallback']);
+
+
+// invoice.download
+Route::get('/invoice/download/{order_id}', [invoiceController::class, 'invoice_download'])->name('invoice.download');
