@@ -222,11 +222,12 @@
                 <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-dark container-p-x" id="layout-navbar">
 
                     <!-- Brand demo (see assets/css/demo/demo.css) -->
-                    <a href="index.html" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
+                    <a href="{{ route('site') }}" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
                         <span class="app-brand-logo demo">
-                            <img src="assets/img/logo-dark.png" alt="Brand Logo" class="img-fluid">
+                            @if($setting->first()->logo != null)
+                                <img src="{{ asset('uploads/setting') }}/{{ $setting->first()->logo }}" alt="Brand Logo" class="img-fluid">
+                            @endif
                         </span>
-                        <span class="app-brand-text demo font-weight-normal ml-2">Empire</span>
                     </a>
 
                     <!-- Sidenav toggle (see assets/css/demo/demo.css) -->
