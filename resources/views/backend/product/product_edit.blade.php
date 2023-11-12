@@ -57,7 +57,7 @@
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="form-label">Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="{{$product->quantity != null ? $product->product_discount : ''}}">
+                                    <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="{{$product->quantity != null ? $product->quantity : ''}}">
                                     @error('quantity')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
