@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8">
     <title>Example 2</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <style>
-
+        @font-face {
+  font-family: SourceSansPro;
+  src: url(SourceSansPro-Regular.ttf);
+}
 
 .clearfix:after {
   content: "";
@@ -28,8 +28,9 @@ body {
   margin: 0 auto; 
   color: #555555;
   background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
   font-size: 14px; 
-  font-family: 'Tiro Bangla', serif;
+  font-family: SourceSansPro;
 }
 
 header {
