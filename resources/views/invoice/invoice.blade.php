@@ -3,12 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 2</title>
+    <title>PDF Download</title>
     <style>
-        @font-face {
-  font-family: SourceSansPro;
-  src: url(SourceSansPro-Regular.ttf);
-}
 
 .clearfix:after {
   content: "";
@@ -28,9 +24,7 @@ body {
   margin: 0 auto; 
   color: #555555;
   background: #FFFFFF; 
-  font-family: Arial, sans-serif; 
   font-size: 14px; 
-  font-family: SourceSansPro;
 }
 
 header {
@@ -236,7 +230,7 @@ footer {
         <thead>
           <tr>
             <th class="no">#</th>
-            <th class="desc">DESCRIPTION</th>
+            <th class="desc">NAME</th>
             <th class="unit">UNIT PRICE</th>
             <th class="qty">QUANTITY</th>
             <th class="total">TOTAL</th>
@@ -249,7 +243,7 @@ footer {
           @foreach ($order_product as $sl=>$order)
           <tr>
             <td class="no">{{ $sl+1 }}</td>
-            <td class=""><h3>{{ $order->rel_to_product->product_name }}</h3></td>
+            <td class=""><h3 >{{ $order->rel_to_product->product_name }}</h3></td>
             <td class="unit">{{ number_format($order->price) }}</td>
             <td class="qty">{{ $order->quantity }}</td>
             <td class="total">{{ number_format($order->price*$order->quantity) }}</td>
