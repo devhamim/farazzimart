@@ -4,6 +4,9 @@
   <head>
     <meta charset="utf-8">
     <title>Example 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <style>
 
 
@@ -26,7 +29,7 @@ body {
   color: #555555;
   background: #FFFFFF; 
   font-size: 14px; 
-
+  font-family: 'Tiro Bangla', serif;
 }
 
 header {
