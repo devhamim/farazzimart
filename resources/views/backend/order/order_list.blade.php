@@ -59,6 +59,7 @@
                                 $order_ids = str_replace("#","",$order->order_id);
                             @endphp
                            <td><a href="{{ route('order.details', $order_ids) }}">view</a></td>
+                           <td><a href="{{ route('order.delete', $order->id) }}">Delete</a></td>
                         </tr>
                         @endforeach
                     </thead>

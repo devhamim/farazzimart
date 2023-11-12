@@ -73,4 +73,10 @@ class orderController extends Controller
         ]);
         return back();
     }
+
+    // order.delete
+    function order_delete($order_id){
+        OrderProduct::find($order_id)->delete();
+        return back();
+    }
 }
