@@ -5,7 +5,12 @@
 
     <!-- [ content ] Start -->
     <div class="container-fluid flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-0">Orders details</h4>
+        <div class="d-flex justify-content-between">
+            <h4 class="font-weight-bold py-3 mb-0">Orders details</h4>
+            <div class="invoice">
+                <a href="{{ route('invoice.download', $orders_details->first()->id) }}" class="btn btn-success p-2 py-3 mb-0 mr-5">invoice Download</a>
+            </div>
+        </div>
         <div class="text-muted small mt-0 mb-4 d-block breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#"><i class="feather icon-home"></i></a></li>
@@ -13,7 +18,7 @@
                 <li class="breadcrumb-item active">Orders details</li>
             </ol>
         </div>
-        <a href="{{ route('invoice.download', $orders_details->first()->id) }}" class="btn btn-success p-2">invoice Download</a>
+        
         <div class="card">
             <!-- Status -->
             <div class="card-body d-flex">
