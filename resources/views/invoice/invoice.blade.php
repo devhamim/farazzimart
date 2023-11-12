@@ -5,10 +5,7 @@
     <meta charset="utf-8">
     <title>Example 2</title>
     <style>
-        @font-face {
-  font-family: SourceSansPro;
-  src: url(SourceSansPro-Regular.ttf);
-}
+
 
 .clearfix:after {
   content: "";
@@ -30,7 +27,7 @@ body {
   background: #FFFFFF; 
   font-family: Arial, sans-serif; 
   font-size: 14px; 
-  font-family: SourceSansPro;
+
 }
 
 header {
