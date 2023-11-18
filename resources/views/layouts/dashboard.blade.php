@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{asset('backend/css/pages/users.css')}}">
     <link rel="stylesheet" href="{{asset('backend/libs/bootstrap-sweetalert/bootstrap-sweetalert.css')}}">
     <link rel="stylesheet" href="{{asset('backend/libs/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/libs/select2/select2.css')}}">
     <link rel="stylesheet" href="{{asset('backend/libs/bootstrap-datepicker/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('backend/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('backend/libs/bootstrap-material-datetimepicker/bootstrap-material-datetimepicker.css')}}">
@@ -126,22 +127,22 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidenav-item {{ Request::is('product*') ? 'active open' : '' }}">
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                    <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
+                        <a href="{{route('product.list')}}" class="sidenav-link">
                             <i class="sidenav-icon lnr lnr-coffee-cup"></i>
                             <div>Product</div>
                         </a>
                         <ul class="sidenav-menu {{ Request::is('product/add') ? 'active' : '' }}">
-                            <li class="sidenav-item">
+                            {{-- <li class="sidenav-item">
                                 <a href="{{route('product.add')}}" class="sidenav-link">
                                     <div>Add</div>
                                 </a>
-                            </li>
-                            <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
+                            </li> --}}
+                            {{-- <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
                                 <a href="{{route('product.list')}}" class="sidenav-link">
                                     <div>List</div>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                     <li class="sidenav-item {{ Request::is('order*') ? 'active open' : '' }}">
@@ -330,8 +331,8 @@
 
     <!-- Core scripts -->
     <script src="{{asset('backend/js/pace.js')}}"></script>
-    {{-- <script src="{{asset('backend/js/jquery-3.3.1.min.js')}}"></script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="{{asset('backend/js/jquery-3.3.1.min.js')}}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script> --}}
     <script src="{{asset('backend/libs/popper/popper.js')}}"></script>
     <script src="{{asset('backend/js/bootstrap.js')}}"></script>
     <script src="{{asset('backend/js/sidenav.js')}}"></script>
@@ -353,6 +354,8 @@
     <script src="{{asset('backend/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js')}}"></script>
     <script src="{{asset('backend/libs/datatables/datatables.js')}}"></script>
     <script src="{{asset('backend/libs/bootbox/bootbox.js')}}"></script>
+    <script src="{{asset('backend/libs/select2/select2.js')}}"></script>
+    <script src="{{asset('backend/js/pages/forms_selects.js')}}"></script>
     <script src="{{asset('backend/libs/bootstrap-sweetalert/bootstrap-sweetalert.js')}}"></script>
     <script src="{{asset('backend/libs/bootstrap-datepicker/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('backend/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js')}}"></script>

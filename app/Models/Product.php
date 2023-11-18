@@ -38,4 +38,9 @@ class Product extends Model
     // public function products() {
     //     return $this->hasMany('App\Models\Inventory', 'size_id', 'id')->where('status', 1);
     // }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('after_discount');
             $table->integer('brand')->nullable();
             $table->integer('status');
+            $table->integer('sku')->nullable();
             $table->text('preview_image')->nullable();
             $table->text('slug')->nullable();
             $table->date('validity')->nullable();

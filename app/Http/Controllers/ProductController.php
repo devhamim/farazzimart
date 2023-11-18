@@ -41,30 +41,29 @@ class ProductController extends Controller
     function product_store(Request $request) {
         $request->validate([
             'product_name'=> 'required',
-            'category_id'=> 'required',
+
             'description'=> 'required',
             'product_price'=> 'required',
+            'sku'=> 'required',
             'preview_image' => 'required|mimes:jpg,jpeg,gif,png,webp|max:5000',
             'quantity' => 'required',
             'gallery_image.*' => 'image|mimes:jpg,jpeg,gif,png,webp',
             
-        ], [
-            'category_id.required' => 'The category field is required',
         ]);
-
+        $after_emplode_cat = implode(',', $request->category_id);
             $product_id = Product::insertGetId([
                 'product_name' => $request->product_name,
-                'category_id' => $request->category_id,
+                'category_id' => $after_emplode_cat,
                 'product_price' => $request->product_price,
                 'product_discount' => $request->product_discount,
                 'quantity' => $request->quantity,
+                'sku' => $request->sku,
                 'after_discount' => $request->product_price-$request->product_discount,
                 'description' => $request->description,
-                'slug' => Str::random(7),
+                'slug' => Str::random(8).'-'.rand(10000,99999),
                 'created_at' => Carbon::now(),
             ]);
         
-
         // Preview image
 
         $uploaded_file_one = $request->preview_image;

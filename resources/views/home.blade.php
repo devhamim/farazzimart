@@ -24,7 +24,7 @@
                                 $orders_price += $total_order;
                             }
                             @endphp
-                            <div class="text-white small">Total Balance</div>
+                            <div class="text-white small">Total Revenue</div>
                             <div class="text-large">৳ {{ $orders_price }}</div>
                         </div>
                     </div>
