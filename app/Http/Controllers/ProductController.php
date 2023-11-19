@@ -41,7 +41,6 @@ class ProductController extends Controller
     function product_store(Request $request) {
         $request->validate([
             'product_name'=> 'required',
-
             'description'=> 'required',
             'product_price'=> 'required',
             'sku'=> 'required',
@@ -58,7 +57,7 @@ class ProductController extends Controller
                 'product_discount' => $request->product_discount,
                 'quantity' => $request->quantity,
                 'sku' => $request->sku,
-                'after_discount' => $request->product_price-$request->product_discount,
+                'status' => $request->status,
                 'description' => $request->description,
                 'slug' => Str::random(8).'-'.rand(10000,99999),
                 'created_at' => Carbon::now(),
@@ -173,24 +172,22 @@ class ProductController extends Controller
                 ]);
             }
         }
-
+            $after_emplode_cat = implode(',', $request->category_id);
             Product::find($request->product_id)->update([
-                'product_id' => $request->product_id,
                 'product_name' => $request->product_name,
-                'category_id' => $request->category_id,
+                'category_id' => $after_emplode_cat,
                 'product_price' => $request->product_price,
                 'product_discount' => $request->product_discount,
-                'after_discount' => $request->product_price-$request->product_discount,
                 'quantity' => $request->quantity,
+                'sku' => $request->sku,
                 'status' => $request->status,
                 'description' => $request->description,
-                'additional_desc' => $request->additional_desc,
-                'slug' => Str::random(7),
+                'slug' => Str::random(8).'-'.rand(10000,99999),
                 'updated_at' => Carbon::now(),
             ]);
         
         
-        return back()->withSuccess('Product updated successfully');
+        return redirect()->route('product.list')->withSuccess('Product updated successfully');
     }
     
 }

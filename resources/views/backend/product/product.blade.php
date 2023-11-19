@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-label">Sale Price</label>
+                                    <label class="form-label">Sale Price *</label>
                                     <input type="number" name="product_discount" class="form-control" placeholder="Sale Price">
                                     @error('product_discount')
                                         <span class="text-danger">{{$message}}</span>

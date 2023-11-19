@@ -17,6 +17,13 @@
                             @enderror
                             <div class="clearfix"></div>
                         </div>
+                        <div class="form-group">
+                            <label class="form-label mb-2">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1" {{$category->status == 1 ? 'selected' : ''}}>Active</option>
+                                <option value="2" {{$category->status == 2 ? 'selected' : ''}}>Deactive</option>
+                            </select>
+                        </div>
                         <div class="form-group upload_file">
                             <label class="form-label w-100">Category image</label>
                             <label class="btn btn-outline-primary  mt-2">

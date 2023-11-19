@@ -109,41 +109,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidenav-item {{ Request::is('category*') ? 'active open' : '' }}">
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                    
+                    <li class="sidenav-item {{ Request::is('category/list') ? 'active' : '' }}">
+                        <a href="{{route('category.list')}}" class="sidenav-link">
                             <i class="sidenav-icon feather icon-grid"></i>
                             <div>Category</div>
                         </a>
-                        <ul class="sidenav-menu">
-                            <li class="sidenav-item {{ Request::is('category/add') ? 'active' : '' }}">
-                                <a href="{{route('category.add')}}" class="sidenav-link">
-                                    <div>Add</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item {{ Request::is('category/list') ? 'active' : '' }}">
-                                <a href="{{route('category.list')}}" class="sidenav-link">
-                                    <div>List</div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
                         <a href="{{route('product.list')}}" class="sidenav-link">
                             <i class="sidenav-icon lnr lnr-coffee-cup"></i>
                             <div>Product</div>
                         </a>
-                        <ul class="sidenav-menu {{ Request::is('product/add') ? 'active' : '' }}">
-                            {{-- <li class="sidenav-item">
-                                <a href="{{route('product.add')}}" class="sidenav-link">
-                                    <div>Add</div>
-                                </a>
-                            </li> --}}
-                            {{-- <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
-                                <a href="{{route('product.list')}}" class="sidenav-link">
-                                    <div>List</div>
-                                </a>
-                            </li> --}}
-                        </ul>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('shipping.methods') ? 'active' : '' }}">
+                        <a href="{{route('shipping.methods')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-coffee-cup"></i>
+                            <div>Shipping Methods</div>
+                        </a>
                     </li>
                     <li class="sidenav-item {{ Request::is('order*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
@@ -291,7 +274,7 @@
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
 
                                         @if (Auth::user()->image == null)
-                                            <img src="{{Avatar::create($user->name)->toBase64()}}" class="img-fluid img-radius wid-40" alt="">
+                                            <img src="{{Avatar::create(Auth::user()->name)->toBase64()}}" class="img-fluid img-radius wid-40" alt="">
                                         @else
                                             <img src="{{asset('uploads/user')}}/{{Auth::user()->image}}" alt class="d-block ui-w-30 rounded-circle">
                                         @endif
@@ -331,10 +314,12 @@
 
     <!-- Core scripts -->
     <script src="{{asset('backend/js/pace.js')}}"></script>
-    <script src="{{asset('backend/js/jquery-3.3.1.min.js')}}"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script> --}}
-    <script src="{{asset('backend/libs/popper/popper.js')}}"></script>
-    <script src="{{asset('backend/js/bootstrap.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{{asset('backend/libs/popper/popper.js')}}"></script> --}}
+    {{-- <script src="{{asset('backend/js/bootstrap.js')}}"></script> --}}
     <script src="{{asset('backend/js/sidenav.js')}}"></script>
     <script src="{{asset('backend/js/layout-helpers.js')}}"></script>
     <script src="{{asset('backend/js/material-ripple.js')}}"></script>

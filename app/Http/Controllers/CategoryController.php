@@ -36,6 +36,7 @@ class CategoryController extends Controller
         $category_id = Category::insertGetId([
             'category_name' => $request->category_name,
             'added_by' => Auth::id(),
+            'status' => $request->status,
             'created_at' => Carbon::now(),
         ]);
 
@@ -76,10 +77,11 @@ class CategoryController extends Controller
         if($request->category_image == null) {
             Category::find($request->category_id)->update([
                 'category_name' => $request->category_name,
+                'status' => $request->status,
                 'added_by' => Auth::id(),
                 'updated_at' => Carbon::now(),
             ]);
-            return back()->withSuccess('Category updated successfully');
+            return redirect()->route('category.list')->withSuccess('Category updated successfully');
         } else {
             $category_img_del = Category::where('id', $request->category_id)->first()->category_image;
             $delete_from = public_path('uploads/category/'.$category_img_del);
@@ -92,10 +94,16 @@ class CategoryController extends Controller
             Category::find($request->category_id)->update([
                 'category_name' => $request->category_name,
                 'category_image' => $file_name,
+                'status' => $request->status,
                 'added_by' => Auth::id(),
                 'updated_at' => Carbon::now(),
             ]);
-            return back()->withSuccess('Category updated successfully');
+            return redirect()->route('category.list')->withSuccess('Category updated successfully');
         }
+    }
+
+    function category_delete($category_id){
+        Category::find($category_id)->delete();
+        return back()->withError('Category Delete successfully');
     }
 }

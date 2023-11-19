@@ -19,19 +19,19 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="report-table" class="table mb-0">
+                        <table id="report-table" class="table table-bordered text-center table-striped">
                             <thead>
                                 <tr>
                                     <th>SL</th>
                                     <th>Image</th>
                                     <th>Product</th>
-                                    <th>Code</th>
                                     <th>Category</th>
-                                    <th>Price(TK)</th>
+                                    <th>Sku</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
+                                    <th>Sale Price</th>
                                     <th>Status</th>
-                                    <th>Create date</th>
-                                    <th>Update date</th>
-                                    <th>Options</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,15 +40,28 @@
                                         <td>{{$sl+1}}</td>
                                         <td><img src="{{asset('uploads/products/preview')}}/{{$product->preview_image}}" alt class="img-fluid wid-40"></td>
                                         <td>{{$product->product_name}}</td>
-                                        <td>{{$product->slug}}</td>
-                                        <td>{{$product->rel_to_category->category_name}}</td>
-                                        <td>{{$product->after_discount}}</td>
-                                        <td><span class="badge badge-{{$product->status == 1 ? 'success' : 'danger'}}">{{$product->status == 1 ? 'Active' : 'Deactive'}}</span></td>
-                                        <td>{{$product->created_at->format('d M o h:i:s')}}</td>
-                                        <td>{{$product->updated_at == null ? 'Not updated': $product->updated_at->format('d M o')}}</td>
+                                        @php
+                                            $after_explode = explode(',', $product->category_id);
+                                        @endphp
                                         <td>
-                                            <a href="{{route('product.edit', $product->id)}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                            <a href="{{route('product.delete', $product->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                            @foreach ($after_explode as $category_id)
+                                            @php
+                                                $categorys = App\Models\Category::where('id', $category_id)->get();
+                                            @endphp
+                                            @foreach ($categorys as $category)
+                                                {{ $category->category_name }},
+                                            @endforeach
+                                        @endforeach
+                                        </td>
+                                        {{-- <td>{{$after_explode->rel_to_category->category_name}}</td> --}}
+                                        <td>{{$product->sku}}</td>
+                                        <td>{{$product->quantity}}</td>
+                                        <td>{{$product->product_price}}</td>
+                                        <td>{{$product->product_discount}}</td>
+                                        <td><span class="badge badge-{{$product->status == 1 ? 'success' : 'danger'}}">{{$product->status == 1 ? 'Active' : 'Deactive'}}</span></td>
+                                        <td>
+                                            <a href="{{route('product.edit', $product->id)}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp; </a>
+                                            <a href="{{route('product.delete', $product->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp; </a>
                                         </td>
                                     </tr>
                                 @endforeach

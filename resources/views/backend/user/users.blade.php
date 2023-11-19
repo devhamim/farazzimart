@@ -20,42 +20,45 @@
                             <button class="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#user_register"><i class="feather icon-plus"></i> Users</button>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table table-bordered text-center table-striped">
                         <table id="report-table" class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Info</th>
-                                    <th>Create Date</th>
-                                    <th>Update Date</th>
+                                    <th>Mobile</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $sl=>$user)
                                     <tr>
-                                        <td>
-                                            @if ($user->image == null)
-                                                <img src="{{Avatar::create($user->name)->toBase64()}}" class="img-fluid img-radius wid-40" alt="">
-                                            @else
-                                                <img src="{{asset('uploads/user')}}/{{$user->image}}" alt class="img-fluid img-radius wid-40">
-                                            @endif
-                                        </td>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->mobile == null ? 'null': $user->mobile}}</td>
-                                        <td>{{$user->address == null ? 'null': $user->address}}</td>
-                                        <td>{{$user->description == null ? 'null': Str::limit($user->description, '40', '...')}}</td>
-                                        <td>{{$user->created_at->format('d M Y')}}</td>
-                                        <td>{{$user->updated_at == null ? 'null' : $user->updated_at->format('d M Y')}}</td>
                                         <td>
-                                            {{-- <button type="button" value="{{$user->id}}" class="btn btn-info btn-sm edit-btn" data-toggle="modal" data-target="#modals-default"><i class="feather icon-edit"></i>&nbsp;Edit </button> --}}
-
-                                            <a href="{{route('user.delete', $user->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                            @if ($user->role == 1)
+                                                Super Admin
+                                            @elseif ($user->role == 2)
+                                                Manager
+                                            @else
+                                                Employee
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($user->status == 1)
+                                                <span class="badge badge-success">Active</span>
+                                            @else
+                                                <span class="badge badge-danger">Deactive</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <button type="button" value="{{$user->id}}" class="btn btn-info btn-sm edit-btn" data-user-id="{{$user->id}}" data-toggle="modal" data-target="#modals-default">
+                                                <i class="feather icon-edit"></i>&nbsp;
+                                            </button>
+                                            {{-- <a href="{{route('user.delete', $user->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a> --}}
 
                                         </td>
                                     </tr>
@@ -71,13 +74,13 @@
     </div>
 </div>
 
-@if ($errors->has('user_name')||$errors->has('user_email') || session('userpassworderror'))
+@if ($errors->has('user_name')||$errors->has('user_email') || session('user_password'))
     <div class="modal fade show" id="modals-default" aria-modal="true" style="display: block;">
 @else
     <div class="modal fade" id="modals-default">
 @endif
     <div class="modal-dialog">
-        <form class="modal-content" method="POST" action="{{route('user.update')}}">
+        <form class="modal-content" method="POST" action="{{ route('user.update') }}">
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title">Update user</h5>
@@ -86,21 +89,9 @@
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group col">
-                        {{-- <label class="form-label">Name</label>
-                            <input type="file" name="image" id="user_image" class="account-settings-fileinput">
-                        @error('image')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror --}}
-                        {{-- <img src="{{asset('uploads/user/3.png')}}" id="user_image" alt=""> --}}
-                        <img src="" id="user_image" alt="">
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
                         <label class="form-label">Name</label>
-                        <input type="text" name="user_name" id="name" class="form-control" placeholder="Enter your name">
-                        <input type="hidden" name="user_id" id="user_id" class="form-control" placeholder="Enter your name" >
+                        <input type="hidden" name="user_id" id="user_id" value="">
+                        <input type="text" name="user_name" id="name" class="form-control" placeholder="Enter your name" >
                         @error('user_name')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
@@ -116,11 +107,35 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="mobile">Mobile</label>
+                            <input type="mobile" name="mobile" class="form-control" id="mobile" placeholder="Enter your Mobile">
+                            @error('mobile')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="role">Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="1">Super Admin</option>
+                                <option value="2">Manager</option>
+                                <option value="3">Employee</option>
+                            </select>
+                            @error('role')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col mb-0">
                         <label class="form-label">New Password</label>
                         <input type="password" name="user_password" class="form-control" placeholder="Password">
-                        @if(session('userpassworderror'))
-                            <span class="text-danger">{{session('userpassworderror')}}</span>
+                        @if(session('user_password'))
+                            <span class="text-danger">{{session('user_password')}}</span>
                         @endif
                         <div class="clearfix"></div>
                     </div>
@@ -128,6 +143,20 @@
                         <label class="form-label">Confirm password</label>
                         <input type="password" name="user_password_confirmation" class="form-control" placeholder="Confirm password">
                         <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-sm-6 mb-5">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="2">Deactive</option>
+                            </select>
+                            @error('status')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,9 +168,9 @@
     </div>
 </div>
 
-@if ($errors->has('name')||$errors->has('email')||$errors->has('password') ||$errors->has('password_confirmation') || session('passworderror'))
+@if ($errors->has('name')||$errors->has('email')||$errors->has('role')||$errors->has('mobile')||$errors->has('password') ||$errors->has('password_confirmation') || session('passworderror'))
     <div class="modal show" id="user_register" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" style="display: block;" aria-modal="true">
-      @else
+@else
       <div class="modal" id="user_register" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 @endif
 <div class="modal-dialog">
@@ -176,6 +205,28 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group fill">
+                            <label class="floating-label" for="mobile">Mobile</label>
+                            <input type="mobile" name="mobile" class="form-control" id="mobile" placeholder="">
+                            @error('mobile')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="role">Role</label>
+                            <select name="role" id="" class="form-control">
+                                <option value="1">Super Admin</option>
+                                <option value="2">Manager</option>
+                                <option value="3">Employee</option>
+                            </select>
+                            @error('role')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group fill">
                             <label class="floating-label" for="Password">Password</label>
                             <input type="password" name="password" class="form-control" id="Password" placeholder="">
                             @error('password')
@@ -195,6 +246,18 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-sm-6 mb-5">
+                        <div class="form-group fill">
+                            <label class="floating-label" for="role">Status</label>
+                            <select name="status" id="" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="2">Deactive</option>
+                            </select>
+                            @error('status')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-sm-12">
                         <button class="btn btn-primary" type="submit">Submit</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
@@ -206,26 +269,34 @@
 </div>
 @endsection
 
-
 @section('footer_script')
-    <script>
-        $('.edit-btn').click(function() {
-            var edit_id = $(this).val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+<script>
+    $('.edit-btn').click(function() {
+        var edit_id = $(this).data('user-id');
 
-            $.ajax({
-                type: 'POST',
-                url: '/editUser',
-                data: {'user_id': edit_id},
-                success: function(data) {
-                    $('#name').val(data.user.name);
-                    $('#email').val(data.user.email);
-                }
-            })
-        })
-    </script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/editUser/' + edit_id, // Include the user ID in the URL
+            data: {'user_id': edit_id},
+            dataType: 'json',
+            success: function(data) {
+                $('#user_id').val(data.user.id);
+                $('#name').val(data.user.name);
+                $('#email').val(data.user.email);
+                $('#mobile').val(data.user.mobile);
+                $('#role').val(data.user.role);
+                $('#status').val(data.user.status);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
 @endsection

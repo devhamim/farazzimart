@@ -18,6 +18,16 @@
                             @enderror
                             <div class="clearfix"></div>
                         </div>
+                        <div class="form-group fill">
+                            <label class="floating-label" for="role">Status</label>
+                            <select name="status" id="" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="2">Deactive</option>
+                            </select>
+                            @error('status')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
                         <div class="form-group upload_file">
                             <label class="form-label w-100">Category image</label>
                             <label class="btn btn-outline-primary  mt-2">

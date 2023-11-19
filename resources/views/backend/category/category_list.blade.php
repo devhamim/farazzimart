@@ -25,10 +25,7 @@
                                     <th>SL</th>
                                     <th>Category image</th>
                                     <th>Category name</th>
-                                    <th>Create Date</th>
-                                    <th>Update Date</th>
-                                    {{-- <th>Age</th>
-                                    <th>Status</th> --}}
+                                    <th>Status</th>
                                     <th>Options</th>
                                 </tr>
                             </thead>
@@ -40,8 +37,13 @@
                                             <img src="{{asset('uploads/category')}}/{{$category->category_image}}" alt class="img-fluid wid-40">
                                         </td>
                                         <td>{{$category->category_name}}</td>
-                                        <td>{{$category->created_at->format('d M Y')}}</td>
-                                        <td>{{$category->updated_at == null ? 'Null' : $category->updated_at->format('d M Y')}}</td>
+                                        <td>
+                                            @if ($category->status == 1)
+                                                <span class="badge badge-success">Active</span>
+                                            @else
+                                                <span class="badge badge-danger">Deactive</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{route('category.edit', $category->id)}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
                                             <a href="{{route('category.delete', $category->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
@@ -58,5 +60,5 @@
     </div>
 </div>
 
-
 @endsection
+

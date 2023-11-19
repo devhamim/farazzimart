@@ -26,6 +26,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'mobile' => '',
+            'role' => 'required',
             'image' => 'mimes:png,jpg,jpeg,gif',
         ]);
         $upload_file = $request->image;
@@ -63,14 +65,9 @@ class UserController extends Controller
             return back()->withError('Password credentials do not matched!');
         }
 
-        if($request->description != null) {
+        if($request->status != null) {
             User::find(Auth::id())->update([
-                'description' => $request->description,
-                'updated_at' => Carbon::now(),
-            ]);
-        } else {
-            User::find(Auth::id())->update([
-                'description' => null,
+                'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
         }
@@ -86,14 +83,9 @@ class UserController extends Controller
             ]);
         }
 
-        if($request->address != null) {
+        if($request->role != null) {
             User::find(Auth::id())->update([
-                'address' => $request->address,
-                'updated_at' => Carbon::now(),
-            ]);
-        } else {
-            User::find(Auth::id())->update([
-                'address' => null,
+                'role' => $request->role,
                 'updated_at' => Carbon::now(),
             ]);
         }
@@ -130,6 +122,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
+            'mobile' => '',
+            'role' => 'required',
             'password' => 'required',
             'password_confirmation' => 'required',
         ], [
@@ -140,6 +134,8 @@ class UserController extends Controller
             User::insert([
                 'name' => $request->name,
                 'email' => $request->email,
+                'mobile' => $request->mobile,
+                'role' => $request->role,
                 'password' => bcrypt($request->password),
                 'created_at' => Carbon::now(),
             ]);
@@ -151,45 +147,57 @@ class UserController extends Controller
         return back();
     }
 
-    // user edit
-    function editUser(Request $request) {
-        $user = User::find($request->user_id);
+    public function editUser(Request $request, $id) {
+        $user = User::find($id);
+    
         return response()->json([
             'status' => 200,
             'user' => $user,
         ]);
-        // echo $request->user_id;
     }
 
     // user update
-    function user_update(Request $request) {;
-        $request->validate([
-            'user_name' => 'required',
-            'user_email' => 'required',
-        ]);
-        print_r($request->all());
-        die();
+    function user_update(Request $request) {
         if($request->user_password != null) {
-            // if($request->user_password == $request->user_password_confirmation) {
-            //     User::where('id', $request->user_id)->update([
-            //         'name' => $request->user_name,
-            //         'email' => $request->user_email,
-            //         'password' => bcrypt($request->user_password),
-            //         'updated_at' => Carbon::now(),
-            //     ]);
-            //     return back()->withSuccess('User updated successfully');
-            // } else{
-            //     return back()->withUserpassworderror('Password credentials do not matched');
-            // }
-            print_r($request->all());
+            $request->validate([
+                'user_name' => 'required',
+                'user_email' => 'required',
+                'role' => 'required',
+                'user_password' => 'required',
+                'status' => 'required',
+            ]);
+
+            if($request->user_password == $request->user_password_confirmation) {
+                User::where('id', $request->user_id)->update([
+                    'name' => $request->user_name,
+                    'email' => $request->user_email,
+                    'password' => bcrypt($request->user_password),
+                    'role' => $request->role,
+                    'status' => $request->status,
+                    'mobile' => $request->mobile,
+                    'updated_at' => Carbon::now(),
+                ]);
+                return back()->withSuccess('User updated successfully');
+            } else{
+                return back()->withUserpassworderror('Password credentials do not matched');
+            }
         } else {
-            // User::where('id', $request->user_id)->update([
-            //     'name' => $request->user_name,
-            //     'email' => $request->user_email,
-            //     'updated_at' => Carbon::now(),
-            // ]);
-            // return back()->withSuccess('User updated successfully');
-            print_r($request->all());
+            $request->validate([
+                'user_name' => 'required',
+                'user_email' => 'required',
+                'role' => 'required',
+                'status' => 'required',
+            ]);
+
+            User::where('id', $request->user_id)->update([
+                'name' => $request->user_name,
+                'email' => $request->user_email,
+                'role' => $request->role,
+                'status' => $request->status,
+                'mobile' => $request->mobile,
+                'updated_at' => Carbon::now(),
+            ]);
+            return back()->withSuccess('User updated successfully');
         }
     }
 }

@@ -11,10 +11,38 @@
             </div>
             <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-12 col-lg-12">
+                            
+                            <div class="col-lg-6">
+                                <div class="position-relative">
+                                    <label class="floating-label" for="Category">Product Category *</label>
+                                    <select class="select2-demo form-control select2-hidden-accessible" multiple style="width: 100%" name="category_id[]" tabindex="-1" aria-hidden="true">
+                                        <optgroup label="">
+                                            @php
+                                                $after_explode = explode(',', $product->category_id);
+                                            @endphp
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" data-select2-id="{{ $category->id }}" {{ in_array($category->id, $after_explode) ? 'selected' : '' }}>
+                                                    {{ $category->category_name }}
+                                                </option>
+                                            @endforeach
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-label">Product name</label>
-                                    <input type="text" name="product_name" class="form-control" placeholder="name" value="{{$product->product_name}}">
+                                    <label class="form-label">Regular Price *</label>
+                                    <input type="number" name="product_price" class="form-control" placeholder="Regular Price" value="{{$product->product_price}}">
+                                    @error('product_price')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-label">Product Name *</label>
+                                    <input type="text" name="product_name" class="form-control" placeholder="Product Name" value="{{$product->product_name}}">
                                     <input type="hidden" name="product_id" class="form-control" placeholder="product_id" value="{{$product->id}}">
                                     <input type="hidden" name="added_by" class="form-control" placeholder="added_by" value="{{$product->added_by}}">
                                     @error('product_name')
@@ -24,31 +52,8 @@
                             </div>
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Category">Category</label>
-                                    <select class="form-control" name="category_id" id="Category">
-                                        <option value="">product category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}" {{$category->id == $product->category_id  ? 'selected': ''}}>{{$category->category_name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-label">Product price</label>
-                                    <input type="number" name="product_price" class="form-control" placeholder="price" value="{{$product->product_price}}">
-                                    @error('product_price')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-lg-6">
-                                <div class="form-group">
-                                    <label class="form-label">Product discount</label>
-                                    <input type="number" name="product_discount" class="form-control" placeholder="discount" value="{{$product->product_discount != null ? $product->product_discount : ''}}">
+                                    <label class="form-label">Sale Price *</label>
+                                    <input type="number" name="product_discount" class="form-control" placeholder="Sale Price" value="{{$product->product_discount != null ? $product->product_discount : ''}}">
                                     @error('product_discount')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -56,38 +61,19 @@
                             </div>
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-label">Quantity</label>
-                                    <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="{{$product->quantity != null ? $product->quantity : ''}}">
-                                    @error('quantity')
+                                    <label class="form-label">SKU *</label>
+                                    <input type="text" name="sku" class="form-control" placeholder="SKU" value="{{$product->sku != null ? $product->sku : ''}}">
+                                    @error('sku')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-label mb-2">Status</label>
-                                    <div class="radio-list d-flex">
-                                        <div class="radio-inline pl-0 mr-5">
-                                            <div class="radio radio-info">
-                                                <input type="radio" name="status" id="radio1" value="1" {{$product->status == 1 ? 'checked' : ''}} >
-                                                <label for="radio1">Published</label>
-                                            </div>
-                                        </div>
-                                        <div class="radio-inline">
-                                            <div class="radio radio-info">
-                                                <input type="radio" name="status" id="radio2" value="0" {{$product->status == 0 ? 'checked' : ''}}>
-                                                <label for="radio2">Draft</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="form-label w-100 mb-2">Product description</label>
-                                    <textarea id="summernote" name="description" class="form-control" placeholder="Product description">{!! $product->description !!}</textarea>
-                                    @error('description')
-                                        <strong class="text-danger">{{$message}}</strong>
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" name="quantity" class="form-control" placeholder="Quantity" value="{{$product->quantity != null ? $product->quantity : ''}}">
+                                    @error('quantity')
+                                        <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -120,7 +106,25 @@
                                     @endforeach
                                 </div>
                             </div>
-                        
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label w-100 mb-2">Product description</label>
+                                    <textarea id="summernote" name="description" class="form-control" placeholder="Product description">{!! $product->description !!}</textarea>
+                                    @error('description')
+                                        <strong class="text-danger">{{$message}}</strong>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-label mb-2">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="1" {{$product->status == 1 ? 'selected' : ''}}>Publish</option>
+                                        <option value="2" {{$product->status == 2 ? 'selected' : ''}}>Unpublished</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md-4 mb-4 ml-3 m-auto pb-5 text-center">

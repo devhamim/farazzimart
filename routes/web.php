@@ -23,6 +23,7 @@ use App\Http\Controllers\TimerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\settingController;
+use App\Http\Controllers\shippingMethodsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\invoiceController;
 
@@ -52,7 +53,17 @@ Route::get('/user/delete/{user_id}', [UserController::class, 'user_delete'])->na
 Route::post('/user/register', [UserController::class, 'user_register'])->name('user.register');
 // Route::get('/user/edit/{user_id}', [UserController::class, 'user_edit'])->name('user.edit');
 Route::post('/user/update', [UserController::class, 'user_update'])->name('user.update');
-Route::post('/editUser', [UserController::class, 'editUser'])->name('editUser');
+Route::post('/editUser/{id}', [UserController::class, 'editUser'])->name('editUser');
+
+// shipping methods
+Route::get('/shipping/methods', [shippingMethodsController::class, 'shipping_methods'])->name('shipping.methods');
+Route::post('/shipping/methods/store', [shippingMethodsController::class, 'shipping_methods_store'])->name('shipping.methods.store');
+Route::post('/shipping/methods/update', [shippingMethodsController::class, 'shipping_methods_update'])->name('shipping.methods.update');
+Route::post('/editShipping/{id}', [shippingMethodsController::class, 'editShipping'])->name('editShipping');
+// Route::get('/user/list', [shippingMethodsController::class, 'users'])->name('users');
+// Route::get('/user/delete/{user_id}', [shippingMethodsController::class, 'user_delete'])->name('user.delete');
+// // Route::get('/user/edit/{user_id}', [shippingMethodsController::class, 'user_edit'])->name('user.edit');
+// Route::post('/user/update', [shippingMethodsController::class, 'user_update'])->name('user.update');
 
 // Category
 Route::get('/category/add', [CategoryController::class, 'category_add'])->name('category.add');
