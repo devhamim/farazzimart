@@ -24,6 +24,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\settingController;
 use App\Http\Controllers\shippingMethodsController;
+use App\Http\Controllers\courierController;
+use App\Http\Controllers\cityController;
+use App\Http\Controllers\courierZoneController;
+use App\Http\Controllers\mediaController;
+use App\Http\Controllers\OrderslistController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\invoiceController;
 
@@ -60,10 +65,44 @@ Route::get('/shipping/methods', [shippingMethodsController::class, 'shipping_met
 Route::post('/shipping/methods/store', [shippingMethodsController::class, 'shipping_methods_store'])->name('shipping.methods.store');
 Route::post('/shipping/methods/update', [shippingMethodsController::class, 'shipping_methods_update'])->name('shipping.methods.update');
 Route::post('/editShipping/{id}', [shippingMethodsController::class, 'editShipping'])->name('editShipping');
-// Route::get('/user/list', [shippingMethodsController::class, 'users'])->name('users');
-// Route::get('/user/delete/{user_id}', [shippingMethodsController::class, 'user_delete'])->name('user.delete');
-// // Route::get('/user/edit/{user_id}', [shippingMethodsController::class, 'user_edit'])->name('user.edit');
-// Route::post('/user/update', [shippingMethodsController::class, 'user_update'])->name('user.update');
+Route::get('/shipping/methods/delete/{id}', [shippingMethodsController::class, 'shipping_methods_delete'])->name('shipping.methods.delete');
+
+// courier
+Route::get('/courier/list', [courierController::class, 'courier_list'])->name('courier.list');
+Route::post('/courire/store', [courierController::class, 'courire_store'])->name('courire.store');
+Route::post('/editCourier/{id}', [courierController::class, 'editCourier'])->name('editCourier');
+Route::post('/courire/update', [courierController::class, 'courire_update'])->name('courire.update');
+Route::get('/courire/delete/{id}', [courierController::class, 'courire_delete'])->name('courire.delete');
+
+// city.list
+Route::get('/city/list', [cityController::class, 'city_list'])->name('city.list');
+Route::post('/city/store', [cityController::class, 'city_store'])->name('city.store');
+Route::post('/editcity/{id}', [cityController::class, 'editcity'])->name('editcity');
+Route::post('/city/update', [cityController::class, 'city_update'])->name('city.update');
+Route::get('/city/delete/{id}', [cityController::class, 'city_delete'])->name('city.delete');
+
+// zone
+Route::get('/zone/list', [courierZoneController::class, 'zone_list'])->name('zone.list');
+Route::post('/zone/store', [courierZoneController::class, 'zone_store'])->name('zone.store');
+Route::post('/editzone/{id}', [courierZoneController::class, 'editzone'])->name('editzone');
+Route::post('/zone/update', [courierZoneController::class, 'zone_update'])->name('zone.update');
+Route::get('/zone/delete/{id}', [courierZoneController::class, 'zone_delete'])->name('zone.delete');
+
+// media
+Route::get('/media/list', [mediaController::class, 'media_list'])->name('media.list');
+Route::post('/media/store', [mediaController::class, 'media_store'])->name('media.store');
+Route::post('/editmedia/{id}', [mediaController::class, 'editmedia'])->name('editmedia');
+Route::post('/media/update', [mediaController::class, 'media_update'])->name('media.update');
+Route::get('/media/delete/{id}', [mediaController::class, 'media_delete'])->name('media.delete');
+
+// media
+Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('orders.list');
+Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
+Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->name('orders.store');
+Route::post('/getCities', [OrderslistController::class, 'getCities'])->name('getCities');
+Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone');
+// Route::post('/media/update', [OrderslistController::class, 'media_update'])->name('media.update');
+// Route::get('/media/delete/{id}', [OrderslistController::class, 'media_delete'])->name('media.delete');
 
 // Category
 Route::get('/category/add', [CategoryController::class, 'category_add'])->name('category.add');

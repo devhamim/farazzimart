@@ -91,44 +91,7 @@
                             <div>Website</div>
                         </a>
                     </li>
-                    <li class="sidenav-item {{ Request::is('user*') ? 'active open' : '' }}" >
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
-                            <i class="sidenav-icon feather icon-users"></i>
-                            <div>Users</div>
-                        </a>
-                        <ul class="sidenav-menu">
-                            <li class="sidenav-item {{ Request::is('user/list') ? 'active' : '' }}">
-                                <a href="{{route('users')}}" class="sidenav-link">
-                                    <div>List</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item {{ Request::is('user/profile') ? 'active' : '' }}">
-                                <a href="{{route('profile')}}" class="sidenav-link">
-                                    <div>Account settings</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li class="sidenav-item {{ Request::is('category/list') ? 'active' : '' }}">
-                        <a href="{{route('category.list')}}" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-grid"></i>
-                            <div>Category</div>
-                        </a>
-                    </li>
-                    <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
-                        <a href="{{route('product.list')}}" class="sidenav-link">
-                            <i class="sidenav-icon lnr lnr-coffee-cup"></i>
-                            <div>Product</div>
-                        </a>
-                    </li>
-                    <li class="sidenav-item {{ Request::is('shipping.methods') ? 'active' : '' }}">
-                        <a href="{{route('shipping.methods')}}" class="sidenav-link">
-                            <i class="sidenav-icon lnr lnr-coffee-cup"></i>
-                            <div>Shipping Methods</div>
-                        </a>
-                    </li>
-                    <li class="sidenav-item {{ Request::is('order*') ? 'active open' : '' }}">
+                    <li class="sidenav-item {{ Request::is('orders*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon ion ion-md-basket"></i>
                             <div>Order</div>
@@ -139,41 +102,79 @@
                                     <div>List</div>
                                 </a>
                             </li>
+                            <li class="sidenav-item {{ Request::is('orders/list') ? 'active' : '' }}">
+                                <a href="{{route('orders.list')}}" class="sidenav-link">
+                                    <div>Orders List</div>
+                                </a>
+                            </li>
                         </ul>
                     </li>
-
-                    <li class="sidenav-item {{ Request::is('banner*') ? 'active open' : '' }}">
+                    <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
+                        <a href="{{route('product.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-coffee-cup"></i>
+                            <div>Product</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('category/list') ? 'active' : '' }}">
+                        <a href="{{route('category.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-grid"></i>
+                            <div>Category</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('banner/list') ? 'active' : '' }}">
+                        <a href="{{route('banner.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-picture"></i>
+                            <div>Sliders</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('media/list') ? 'active' : '' }}">
+                        <a href="{{route('media.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-picture"></i>
+                            <div>Media</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('courier*', 'city*', 'zone*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon lnr lnr-picture"></i>
-                            <div>Banner</div>
+                            <div>Courier</div>
                         </a>
-                        <ul class="sidenav-menu {{ Request::is('banner/add') ? 'active' : '' }}">
+                        <ul class="sidenav-menu {{ Request::is('courier/list') ? 'active' : '' }}">
                             <li class="sidenav-item">
-                                <a href="{{route('banner.add')}}" class="sidenav-link">
-                                    <div>Add</div>
+                                <a href="{{route('courier.list')}}" class="sidenav-link">
+                                    <div>Courier</div>
                                 </a>
                             </li>
-                            <li class="sidenav-item {{ Request::is('banner/list') ? 'active' : '' }}">
-                                <a href="{{route('banner.list')}}" class="sidenav-link">
-                                    <div>List</div>
+                            <li class="sidenav-item {{ Request::is('city/list') ? 'active' : '' }}">
+                                <a href="{{route('city.list')}}" class="sidenav-link">
+                                    <div>City</div>
+                                </a>
+                            </li>
+                            <li class="sidenav-item {{ Request::is('zone/list') ? 'active' : '' }}">
+                                <a href="{{route('zone.list')}}" class="sidenav-link">
+                                    <div>Zone</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="sidenav-item {{ Request::is('contact*') ? 'active open' : '' }}">
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
-                            <i class="sidenav-icon feather icon-users"></i>
-                            <div>Contact</div>
+                    <li class="sidenav-item {{ Request::is('shipping.methods') ? 'active' : '' }}">
+                        <a href="{{route('shipping.methods')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-coffee-cup"></i>
+                            <div>Shipping Methods</div>
                         </a>
-                        <ul class="sidenav-menu {{ Request::is('contact/info') ? 'active' : '' }}">
-                            <li class="sidenav-item {{ Request::is('contact/list') ? 'active' : '' }}">
-                                <a href="{{route('contact.list')}}" class="sidenav-link">
-                                    <div>Messages</div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
-                    <li class="sidenav-item {{ Request::is('terms*') ? 'active open' : '' }}">
+                    <li class="sidenav-item {{ Request::is('user/list') ? 'active' : '' }}" >
+                        <a href="{{route('users')}}" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-users"></i>
+                            <div>Users</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('contact/info') ? 'active' : '' }}">
+                        <a href="{{route('contact.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon lnr lnr-license"></i>
+                            <div>Messages</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('terms*', 'setting*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
                             <i class="sidenav-icon lnr lnr-license"></i>
                             <div>Terms & Policy</div>
@@ -189,13 +190,12 @@
                                     <div>Delivery Policy</div>
                                 </a>
                             </li>
+                            <li class="sidenav-item">
+                                <a href="{{ route('setting.add') }}" class="sidenav-link">
+                                    <div>Setting</div>
+                                </a>
+                            </li>
                         </ul>
-                    </li>
-                    <li class="sidenav-item">
-                        <a href="{{ route('setting.add') }}" class="sidenav-link">
-                            <i class="sidenav-icon lnr lnr-license"></i>
-                            <div>Setting</div>
-                        </a>
                     </li>
                 </ul>
             </div>
@@ -283,7 +283,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{{route('profile')}}" class="dropdown-item">
-                                        <i class="feather icon-user text-muted"></i> &nbsp; My profile</a>
+                                        <i class="feather icon-user text-muted"></i> &nbsp; Account settings</a>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">
                                         <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

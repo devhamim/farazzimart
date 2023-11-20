@@ -59,4 +59,9 @@ class shippingMethodsController extends Controller
         ]);
         return back()->withSuccess('Shipping Methods updated successfully');
     }
+
+    function shipping_methods_delete($id){
+        shippingMethods::find($id)->delete();
+        return back()->withError('Shipping Methods Delete successfully');
+    }
 }
