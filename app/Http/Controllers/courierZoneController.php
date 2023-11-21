@@ -13,7 +13,7 @@ class courierZoneController extends Controller
     //courier_list
     function zone_list(){
         $couriers = courier::where('status', 1)->get();
-        $citys = city::where('status', 1)->where('courier_id', $couriers->first()->id)->get();
+        $citys = city::where('status', 1)->get();
         $courierzones = courierzone::all();
         return view('backend.courier.courierzone', [
             'couriers'=>$couriers,

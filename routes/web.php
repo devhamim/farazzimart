@@ -100,6 +100,7 @@ Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('
 Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
 Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->name('orders.store');
 Route::post('/getCities', [OrderslistController::class, 'getCities'])->name('getCities');
+Route::post('/getProduct', [OrderslistController::class, 'getProduct'])->name('getProduct');
 Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone');
 // Route::post('/media/update', [OrderslistController::class, 'media_update'])->name('media.update');
 // Route::get('/media/delete/{id}', [OrderslistController::class, 'media_delete'])->name('media.delete');
