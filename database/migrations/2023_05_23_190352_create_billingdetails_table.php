@@ -14,14 +14,9 @@ return new class extends Migration
         Schema::create('billingdetails', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
-            $table->text('address');
-            $table->text('notes')->nullable();
-            $table->string('tran_number')->nullable();
-            $table->string('tran_id')->nullable();
-            $table->string('customer_id')->nullable();
+            $table->string('customer_name');
+            $table->string('customer_phone')->nullable();
+            $table->string('customer_address')->nullable();
             $table->timestamps();
         });
     }

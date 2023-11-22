@@ -102,6 +102,8 @@ Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->nam
 Route::post('/getCities', [OrderslistController::class, 'getCities'])->name('getCities');
 Route::post('/getProduct', [OrderslistController::class, 'getProduct'])->name('getProduct');
 Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone');
+Route::post('/status/update', [OrderslistController::class, 'status_update'])->name('status.update');
+Route::get('/orders/edit/{order_id}', [OrderslistController::class, 'orders_edit'])->name('orders.edit');
 // Route::post('/media/update', [OrderslistController::class, 'media_update'])->name('media.update');
 // Route::get('/media/delete/{id}', [OrderslistController::class, 'media_delete'])->name('media.delete');
 

@@ -47,7 +47,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
                                             <label for="order_date">Order Date <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control datetimepicker" id="order_date" name="order_date" required>
+                                            <input type="date" class="form-control datetimepicker" value="{{ $orders->order_date }}" id="order_date" name="order_date" required>
                                         </div>
 
                                         <div class="form-group col-md-6 col-12">

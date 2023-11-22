@@ -14,13 +14,7 @@ class Order extends Model
     function rel_to_product() {
         return $this->belongsTo(Product::class, 'product_id');
     }
-    function rel_to_size() {
-        return $this->belongsTo(Size::class, 'size_id');
-    }
-    function rel_to_color() {
-        return $this->belongsTo(Color::class, 'color_id');
-    }
-    function rel_to_customer() {
-        return $this->belongsTo(Customerauth::class, 'customer_id');
+    function rel_to_courier() {
+        return $this->belongsTo(courier::class, 'courier_id');
     }
 }

@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_id');
-            $table->string('customer_id')->nullable();
-            $table->integer('product_id');
-            $table->integer('quantity');
-            $table->integer('color_id');
-            $table->integer('size_id');
-            $table->integer('price');
-            $table->integer('coupon_price')->nullable();
-            $table->integer('charge')->nullable();
+            $table->date('order_date')->nullable();
+            $table->integer('invoice_id');
+            $table->integer('sub_total');
+            $table->integer('shipping_cost')->nullable();
+            $table->integer('discount')->nullable();
+            $table->integer('total');
+            $table->integer('courier_id');
+            $table->integer('city_id');
+            $table->integer('courier_zone_id');
+            $table->string('order_note')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });
