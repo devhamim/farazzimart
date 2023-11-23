@@ -56,7 +56,7 @@
                                             <input type="text" class="form-control" id="invoice_id" name="invoice_id" value="{{ $orders->order_id }}" readonly required>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_name">Customer Name <span class="text-danger">*</span></label>

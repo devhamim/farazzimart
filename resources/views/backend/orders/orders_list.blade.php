@@ -260,7 +260,7 @@
                                             <td class="text-center">
                                                 <a href="{{ route('invoice.download', $order->id) }}" class="d-block mb-1 print" data-id="12"><i class="fa fa-print"></i></a>
                                                 
-                                                <a href="{{ route('orders.edit', $order->id) }}" class="d-block mb-1">
+                                                <a href="{{ route('orders.edit', $order->order_id) }}" class="d-block mb-1">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a href="{{ route('orders.delete', $order->id) }}" class="d-block mb-1" onclick="return confirm('Are you sure to delete this?')">

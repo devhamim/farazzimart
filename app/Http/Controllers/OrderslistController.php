@@ -16,6 +16,17 @@ use Str;
 
 class OrderslistController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //orders_list
     function orders_list(){
         // $order_id = Order::all();
@@ -59,7 +70,7 @@ function orders_store(Request $request){
             'customer_phone' => 'required',
             'customer_address' => 'required',
         ]);
-    $order_id = '#'.Str::random(3).'-'.rand(1000,9999);
+    $order_id = Str::random(3).'-'.rand(1000,9999);
     // Create an order
     $order = Order::create([
         'order_id' => $order_id,
@@ -169,8 +180,8 @@ function orders_store(Request $request){
 // orders_update
 function orders_edit($order_id){
     $orders = Order::find($order_id);
-    $billingdetails = Billingdetails::find($order_id);
     $orderproducts = OrderProduct::find($order_id);
+    $billingdetails = Billingdetails::find($order_id);
     $couriers = courier::all();
     $products = Product::all();
     return view('backend.orders.orders_edit', [
@@ -191,7 +202,7 @@ public function orders_update(Request $request)
     ]);
 
     // If you have an existing order_id, retrieve the order
-    $order_id = $request->input('order_id') ?: '#' . Str::random(3) . '-' . rand(1000, 9999);
+    $order_id = $request->input('order_id') ?: Str::random(3) . '-' . rand(1000, 9999);
     $order = Order::where('order_id', $order_id)->first();
 
     Order::find($request->id)->update([
@@ -235,7 +246,7 @@ if($request->product_id != ''){
 }
 
 function orders_delete($id){
-    
+
     Order::find($id)->delete();
     return back()->withError('Order Delete Successfully');
 }

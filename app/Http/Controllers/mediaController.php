@@ -11,6 +11,16 @@ use File;
 
 class mediaController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //media_list
     function media_list(){
         $medias = media::all();

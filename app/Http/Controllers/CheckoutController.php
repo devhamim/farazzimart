@@ -56,7 +56,7 @@ class CheckoutController extends Controller
             $cart_data = json_decode($cookie_data, true);
             $cookie_data = stripslashes(Cookie::get('shopping_cart'));
             $cart_data = json_decode($cookie_data, true);
-            $order_id = '#'.Str::random(3).'-'.rand(1000,9999);
+            $order_id = Str::random(3).'-'.rand(1000,9999);
             Billingdetails::insert([
                 'order_id' => $order_id,
                 'customer_name' => $request->name,

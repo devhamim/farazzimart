@@ -10,6 +10,15 @@ use Carbon\Carbon;
 
 class courierZoneController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //courier_list
     function zone_list(){
         $couriers = courier::where('status', 1)->get();
