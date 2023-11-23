@@ -155,10 +155,10 @@ class ProductController extends Controller
         // Gallery image
         if($request->gallery_image != null) {
             $thumb_image = ProductGallery::where('product_id', $request->product_id)->get();
-            foreach($thumb_image as $thumb) {
-                $delete_from_thumb = public_path('uploads/products/gallery/'.$thumb->gallery_image);
-                unlink($delete_from_thumb);
-            }
+            // foreach($thumb_image as $thumb) {
+            //     $delete_from_thumb = public_path('uploads/products/gallery/'.$thumb->gallery_image);
+            //     unlink($delete_from_thumb);
+            // }
             ProductGallery::where('product_id', $request->product_id)->delete();
             $uploaded_thumbnails = $request->gallery_image;
             foreach ($uploaded_thumbnails as $thumbnail) {
