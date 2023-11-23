@@ -70,8 +70,8 @@
                                     <tr>
                                         <th>Product</th>
                                         <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
+                                        <th>Qty</th>
+                                        <th class="text-center">Total</th>
                                     </tr>
                                 </thead>
 
@@ -79,19 +79,27 @@
                                     @foreach ($cart_data as $data)
                                     <tr>
                                         <td><a href="{{ route('product.details', $data['item_slug']) }}">{{ $data['item_name'] }}</a></td>
-                                        <td>৳ <span class="product-price" style="display: inline">{{ $data['item_price'] }}</span> X </td>
-                                        <td class="ps-3 text-center mt-2" style="display: inline-flex; padding-top: 15px justify-content: center; width: 70%; margin: 0 auto"> 
+                                        <td>
+                                            ৳ <span class="product-price" style="display: inline">
+                                                {{ isset($data['item_price']) ? $data['item_price'] : $data['product_price'] }}
+                                            </span> X
+                                        </td>
+                                        <td class="ps-3 text-center mt-2" style="padding-top: 15px; justify-content: center; width: 15%; margin: 0 auto"> 
                                             <input type="number" class="qty-input form-control mx-2" value="{{ $data['item_quantity'] }}" min="1" max="100" step="1" data-decimals="0" required>
                                         </td>
                                         <td>
                                             <div class="cart-product-quantity">
                                                 <input type="hidden" class="product-id" value="{{ $data['item_id'] }}">
-                                                <span class="subtotal">৳ {{ $data['item_quantity'] * $data['item_price'] }}</span>
+                                                <span class="subtotal">৳ {{ ($data['item_quantity'] ?? 1) * ($data['item_price'] ?? $data['product_price']) }}</span>
                                             </div>
                                         </td>
                                     </tr>
                                     @php
-                                        $total = $total + ($data["item_quantity"]*$data["item_price"]) 
+                                        if ($data['item_price'] != null) {
+                                            $total = $total + ($data["item_quantity"] * $data["item_price"]);
+                                        } else {
+                                            $total = $total + ($data["item_quantity"] * $data["product_price"]);
+                                        }
                                     @endphp
                                     @endforeach
 
@@ -102,7 +110,8 @@
                                         <td class="grand_total_price">৳ {{$total}}</td>
                                         {{-- <td><span class="grandtotal_price">৳ {{number_format($total, 0)}}</span></td> --}}
                                     </tr>
-                                
+                                    <input type="hidden" name="sub_total" value="{{ $total }}">
+                                    <input type="hidden" name="total" value="{{ $total }}">
                                     <tr class="summary-shipping-row">
                                         <td>
                                             <div class="custom-control custom-radio">

@@ -217,9 +217,9 @@ footer {
       <div id="details" class="clearfix">
         <div id="client">
           <div class="to">INVOICE TO:</div>
-          <h2 class="name">{{ $billingdetails->first()->name }}</h2>
-          <div class="address">{{ $billingdetails->first()->address }}</div>
-          <div class="email"><a >{{ $billingdetails->first()->email }}</a></div>
+          <h2 class="name">{{ $billingdetails->first()->customer_name }}</h2>
+          <div class="address">{{ $billingdetails->first()->customer_phone }}</div>
+          <div class="email"><a >{{ $billingdetails->first()->customer_address }}</a></div>
         </div>
         <div id="invoice">
           <h1>#{{ $data->order_id }}</h1>
@@ -244,12 +244,12 @@ footer {
           <tr>
             <td class="no">{{ $sl+1 }}</td>
             <td class=""><h3 >{{ $order->rel_to_product->product_name }}</h3></td>
-            <td class="unit">{{ number_format($order->price) }}</td>
+            <td class="unit">{{ number_format($order->rel_to_product->product_price) }}</td>
             <td class="qty">{{ $order->quantity }}</td>
-            <td class="total">{{ number_format($order->price*$order->quantity) }}</td>
+            <td class="total">{{ number_format($order->rel_to_product->product_price*$order->quantity) }}</td>
           </tr>
           @php
-            $subtotal += $order->price*$order->quantity;
+            $subtotal += $order->rel_to_product->product_price*$order->quantity;
           @endphp
           @endforeach
         </tbody>
@@ -261,13 +261,21 @@ footer {
           </tr>
           <tr>
             <td colspan="2"></td>
+            @php
+            if($order_id->first()->courier_id != null){
+              $order_charge = $order_id->first()->rel_to_courier->charge;
+            }
+            else {
+              $order_charge = 0;
+            }
+            @endphp
             <td colspan="2">Charge</td>
-            <td>{{ $order->charge }}</td>
+            <td>{{ $order_charge }}</td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">GRAND TOTAL</td>
-            <td>{{ number_format($subtotal+$order->charge) }}</td>
+            <td>{{ number_format($subtotal+$order_charge) }}</td>
           </tr>
         </tfoot>
       </table>

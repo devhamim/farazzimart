@@ -91,12 +91,18 @@
                             <div>Website</div>
                         </a>
                     </li>
-                    <li class="sidenav-item {{ Request::is('orders*') ? 'active open' : '' }}">
-                        <a href="javascript:" class="sidenav-link sidenav-toggle">
+                    <li class="sidenav-item">
+                        <a href="{{route('customer.list')}}" class="sidenav-link">
+                            <i class="sidenav-icon feather icon-globe"></i>
+                            <div>Customer</div>
+                        </a>
+                    </li>
+                    <li class="sidenav-item {{ Request::is('orders/list') ? 'active' : '' }}">
+                        <a href="{{route('orders.list')}}" class="sidenav-link">
                             <i class="sidenav-icon ion ion-md-basket"></i>
                             <div>Order</div>
                         </a>
-                        <ul class="sidenav-menu {{ Request::is('order/add') ? 'active' : '' }}">
+                        {{-- <ul class="sidenav-menu {{ Request::is('order/add') ? 'active' : '' }}">
                             <li class="sidenav-item {{ Request::is('order/list') ? 'active' : '' }}">
                                 <a href="{{route('order.list')}}" class="sidenav-link">
                                     <div>List</div>
@@ -107,7 +113,7 @@
                                     <div>Orders List</div>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </li>
                     <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
                         <a href="{{route('product.list')}}" class="sidenav-link">

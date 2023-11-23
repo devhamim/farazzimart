@@ -29,6 +29,7 @@ use App\Http\Controllers\cityController;
 use App\Http\Controllers\courierZoneController;
 use App\Http\Controllers\mediaController;
 use App\Http\Controllers\OrderslistController;
+use App\Http\Controllers\customerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\invoiceController;
 
@@ -95,6 +96,9 @@ Route::post('/editmedia/{id}', [mediaController::class, 'editmedia'])->name('edi
 Route::post('/media/update', [mediaController::class, 'media_update'])->name('media.update');
 Route::get('/media/delete/{id}', [mediaController::class, 'media_delete'])->name('media.delete');
 
+// customer
+Route::get('/customer/list', [customerController::class, 'customer_list'])->name('customer.list');
+
 // media
 Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('orders.list');
 Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
@@ -104,7 +108,7 @@ Route::post('/getProduct', [OrderslistController::class, 'getProduct'])->name('g
 Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone');
 Route::post('/status/update', [OrderslistController::class, 'status_update'])->name('status.update');
 Route::get('/orders/edit/{order_id}', [OrderslistController::class, 'orders_edit'])->name('orders.edit');
-// Route::post('/media/update', [OrderslistController::class, 'media_update'])->name('media.update');
+Route::post('/orders/update', [OrderslistController::class, 'orders_update'])->name('orders.update');
 // Route::get('/media/delete/{id}', [OrderslistController::class, 'media_delete'])->name('media.delete');
 
 // Category

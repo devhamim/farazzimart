@@ -37,7 +37,7 @@
                         </a>
                     </div>
                 </div>
-                <form action="{{ route('orders.store') }}" method="post">
+                <form action="{{ route('orders.update') }}" method="post">
                     @csrf                  
                     <div class="row">
                         <div class="col-md-6 col-12">
@@ -46,32 +46,33 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
+                                            <input type="hidden" name="id" value="{{ $orders->id }}">
                                             <label for="order_date">Order Date <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control datetimepicker" value="{{ $orders->order_date }}" id="order_date" name="order_date" required>
                                         </div>
 
                                         <div class="form-group col-md-6 col-12">
                                             <label for="invoice_id">Invoice ID <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="invoice_id" name="invoice_id" value="INV13" readonly required>
+                                            <input type="text" class="form-control" id="invoice_id" name="invoice_id" value="{{ $orders->order_id }}" readonly required>
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_name">Customer Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ $billingdetails->customer_name }}" required>
                                         </div>
 
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_phone">Customer Phone <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="customer_phone" name="customer_phone" required>
+                                            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ $billingdetails->customer_phone }}" required>
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-12">
                                             <label for="customer_address">Customer Address <span class="text-danger">*</span></label>
-                                            <textarea name="customer_address" id="customer_address" class="form-control"></textarea>
+                                            <textarea name="customer_address" id="customer_address" class="form-control">{{ $billingdetails->customer_address }}</textarea>
                                         </div>
                                     </div>
 
@@ -81,7 +82,7 @@
                                             <select name="courier_id" id="courier_id" class="form-control select2">
                                                 <option value="">Select A Courier</option>
                                                 @foreach ($couriers as $courier)
-                                                    <option value="{{ $courier->id }}">{{ $courier->name }}</option>
+                                                    <option value="{{ $courier->id }}"{{ $courier->id == $orders->courier_id?'selected':'' }}>{{ $courier->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -134,7 +135,8 @@
                                                             <select id="product" class="form-control select2" required>
                                                                     <option value="">Select A Product</option>
                                                                 @foreach ($products as $product)
-                                                                    <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                                                                    <option value="{{ $product->id }}" {{ $product->id == $orderproducts->product_id?'selected':'' }}>{{ $product->product_name }}</option>
+                                                                    {{-- <option value="{{ $product->id }}" {{ in_array($product->id, $orderproducts->product_id) ? 'selected' : '' }}>{{ $product->product_name }}</option> --}}
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -182,28 +184,28 @@
                                     <div class="form-group row" style="padding: 6px 0;">
                                         <label for="sub_total" class="col-md-2 col-form-label text-right">Sub Total</label>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="sub_total" name="sub_total" min="0" value="0.00" readonly>
+                                            <input type="text" class="form-control" id="sub_total" name="sub_total" min="0" value="{{ $orders->sub_total }}" readonly>
                                         </div>
                                     </div>
                                     
                                     <div class="form-group row" style="padding: 6px 0;">
                                         <label for="shipping_cost" class="offset-md-6 col-md-2 col-form-label text-right">Delivery</label>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="shipping_cost" min="0" name="shipping_cost" value="0.00">
+                                            <input type="text" class="form-control" id="shipping_cost" min="0" name="shipping_cost" value="{{ $orders->shipping_cost }}">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group row" style="padding: 6px 0;">
                                         <label for="discount" class="offset-md-6 col-md-2 col-form-label text-right">Discount</label>
                                         <div class="col-md-4">
-                                            <input type="number" class="form-control" id="discount" min="0" name="discount" value="0.00">
+                                            <input type="number" class="form-control" id="discount" min="0" name="discount" value="{{ $orders->discount }}">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group row" style="padding: 6px 0;">
                                         <label for="total" class="offset-md-6 col-md-2 col-form-label text-right">Total</label>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" id="total" min="0" name="total" value="0.00" readonly>
+                                            <input type="text" class="form-control" id="total" min="0" name="total" value="{{ $orders->total }}" readonly>
                                         </div>
                                     </div>
                                     {{-- ===================== --}}
@@ -397,5 +399,73 @@
         };
     });
 </script>
+{{-- <script>
+    $(document).ready(function () {
+        // Function to add a product row to the table
+        function addProductRow(product) {
+            var newRowHtml = '<tr>' +
+                '<td>' + (product.sku ? product.sku : 'null') + '</td>' +
+                '<td>' +
+                '<input type="hidden" name="product_id[]" value="' + (product.product_id ? product.product_id : '') + '">' +
+                '<input type="text" class="form-control" value="' + (product.productName ? product.productName : '') + '" readonly>' +
+                '</td>' +
+                '<td>' +
+                '<input style="width: 60px; border: 1px solid #ddd;" min="1" type="number" class="form-control qty" name="quantity[]" value="1">' +
+                '<input type="hidden" name="price[]" class="price" value="' + (product.product_price ? product.product_price : '') + '">' +
+                '</td>' +
+                '<td class="total_price">' + ((product.product_price ? product.product_price : 0) * 1).toFixed(2) + '</td>' +
+                '<td><button type="button" class="btn btn-danger" onclick="removeProduct(this)">Remove</button></td>' +
+                '</tr>';
 
+            // Append the new row to the table body
+            $('#prod_row').append(newRowHtml);
+
+            // Update totals
+            updateTotals();
+
+            // Add event listener for quantity input change
+            $('.qty').on('input', function () {
+                updateRowTotal($(this), product.product_price);
+            });
+        }
+
+        // Fetch existing order products
+        var existingProducts = {!! json_encode($orderProducts) !!};
+
+        // Add existing products to the table
+        existingProducts.forEach(function (product) {
+            addProductRow(product);
+        });
+
+        // Event listener for product selection change
+        $('#product').on('change', function () {
+            var selectedProductId = $(this).val();
+
+            // Check if the selected product is already in the table
+            var isProductExists = $('.prod_row').find('[name="product_id[]"][value="' + selectedProductId + '"]').length > 0;
+
+            // If the product is not in the table, fetch and add it
+            if (!isProductExists) {
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': CSRF_TOKEN
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ route('getProduct') }}',
+                    type: 'POST',
+                    data: { _token: CSRF_TOKEN, id: selectedProductId },
+                    success: function (data) {
+                        addProductRow(data);
+                    }
+                });
+            }
+        });
+
+        // ... (other JavaScript code)
+    });
+</script> --}}
 @endsection

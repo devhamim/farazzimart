@@ -33,25 +33,31 @@ class HomeController extends Controller
 
         $month_order =  DB::table('orders')
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") = ?', [$currentMonth])
-            ->sum('price');
+            ->sum('total');
 
         $product_id = Product::all();
         $orders_list = Order::all();
         $products_count = Product::count();
         $users_count = User::count();
         $orders_count = Order::count();
-        $brand_count = Brand::count();
-        $brands = Brand::all();
-        $brands_order = Order::where('product_id', $product_id->first()->rel_to_brand)->get();
+        $total_processing = Order::where('status', 1)->count();
+        $total_pending = Order::where('status', 3)->count();
+        $total_hold = Order::where('status', 0)->count();
+        $total_completed = Order::where('status', 2)->count();
+        $total_cancel = Order::where('status', 4)->count();
+        // $brands_order = Order::where('product_id', $product_id->first()->rel_to_brand)->get();
         return view('home', [
             'orders_count'=>$orders_count,
             'users_count'=>$users_count,
             'products_count'=>$products_count,
             'orders_list'=>$orders_list,
-            'brand_count'=>$brand_count,
             'month_order'=>$month_order,
-            'brands'=>$brands,
-            'brands_order'=>$brands_order,
+            'total_processing'=>$total_processing,
+            'total_pending'=>$total_pending,
+            'total_hold'=>$total_hold,
+            'total_completed'=>$total_completed,
+            'total_cancel'=>$total_cancel,
+            // 'brands_order'=>$brands_order,
         ]);
     }
 

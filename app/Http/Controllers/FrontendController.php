@@ -24,12 +24,12 @@ class FrontendController extends Controller
         $categories = Category::all();
         $category= Category::take(6)->get();
         $products = Product::where('status', '1')->get();
-        $top_selling_products = Order::groupBy('product_id')
-        ->selectRaw('sum(price) as sum, product_id')
-        ->havingRaw('sum >= 1')
-        ->take(3)
-        ->orderBy('sum', 'DESC')
-        ->get();
+        // $top_selling_products = Order::groupBy('product_id')
+        // ->selectRaw('sum(total) as sum, product_id')
+        // ->havingRaw('sum >= 1')
+        // ->take(3)
+        // ->orderBy('sum', 'DESC')
+        // ->get();
         $latest_products = Product::where('status', '1')->latest()->get();
         $discount_products = Product::where('status', '1')->where('product_discount', '!=', null)->get();
         // $discount_products_count = Product::where('status', '1')->where('product_discount', '!=', null)->where('validity', '>', Carbon::now())->get();
@@ -41,7 +41,7 @@ class FrontendController extends Controller
             'categoryy' => $category,
             'products' => $products,
             'latest_products' => $latest_products,
-            'top_selling_products' => $top_selling_products,
+            // 'top_selling_products' => $top_selling_products,
             'discount_products' => $discount_products,
             'banners' => $banners,
 

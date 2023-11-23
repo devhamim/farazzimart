@@ -30,12 +30,12 @@
 
                 <div class="row mb-md-4 mb-3">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders">
+                        <a href="#">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5>Total Order</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">12</h1>
+                                        <h1 class="mb-1">{{ $total_orders }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -43,12 +43,12 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders/status/processing">
+                        <a href="#">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-info">Total Processing</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">10</h1>
+                                        <h1 class="mb-1">{{ $total_processing }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -56,12 +56,12 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders/status/pending_payment">
+                        <a href="#">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-secondary">Total Pending Payment</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">0</h1>
+                                        <h1 class="mb-1">{{ $total_pending }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -69,12 +69,12 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders/status/hold">
+                        <a href="#">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-warning">Total Hold</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">0</h1>
+                                        <h1 class="mb-1">{{ $total_hold }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -82,24 +82,24 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders/status/canceled">
+                        <a href="##">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-danger">Total Canceled</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">1</h1>
+                                        <h1 class="mb-1">{{ $total_cancel }}</h1>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="https://ecom.prodevsltd.com/admin-orders/status/completed">
+                        <a href="#">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-success">Total Completed</h5>
                                     <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">1</h1>
+                                        <h1 class="mb-1">{{ $total_completed }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                         <a href="{{ route('orders.add') }}"
                            class="btn btn-success btn-sm">Add Order</a>
                     </div>
-                                            <div class="col-md-10 col-12 mt-md-0 mt-2">
+                        {{-- <div class="col-md-10 col-12 mt-md-0 mt-2">
                             <form action="https://ecom.prodevsltd.com/admin-p_orders" method="get" class="form-inline float-md-right">
                                 <div class="form-group">
                                     <input type="hidden" name="status" value="">
@@ -137,9 +137,9 @@
                                     <a href="https://ecom.prodevsltd.com/admin-p_orders" class="btn btn-info btn-sm">Reset</a>
                                 </div>
                             </form>
-                        </div>
-                                                                            </div>
-                                    <div class="row mb-2">
+                        </div> --}}
+                </div>
+                    {{-- <div class="row mb-2">
                         <div class="col-md-2 col-12">
                             <form action="https://ecom.prodevsltd.com/admin-orders/all-status" method="post" id="all_status_form">
                                 <input type="hidden" name="_token" value="ktLkxYSgW2CFqo1LaSSBAFMYLYEfg60BNopr8gRu">                                <input type="hidden" id="all_status" name="all_status">
@@ -176,8 +176,8 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-                                                                <div class="row">
+                    </div> --}}
+                   <div class="row">
                     <div class="col-12">
                         <div class="card ">
                             <div class="card-body table-responsive">
@@ -204,24 +204,26 @@
                                             <td><input type="checkbox" class="sub_chk" data-id="12">
                                             </td>
                                             <td>{{ $sl+1 }}</td>
-                                            <td>{{ $order->invoice_id }}</td>
+                                            <td>{{ $order->order_id }}</td>
                                             <td>
-                                                @if($billingdetails->isNotEmpty())
-                                                    <span>{{ $billingdetails->first()->customer_name }}</span> <br>
-                                                    <a href="tel:{{ $billingdetails->first()->customer_phone }}"><span>{{ $billingdetails->first()->customer_phone }}</span></a>
-                                                    <br>
-                                                    <span>{{ $billingdetails->first()->customer_address }}</span>
-                                                @else
-                                                    <span>No Billing Details</span>
-                                                @endif
+                                                <span> {{ $order->rel_to_billing ? $order->rel_to_billing->customer_name : 'No Billing Details' }}</span> <br>
+                                                <a href="tel: {{ $order->rel_to_billing ? $order->rel_to_billing->customer_phone : 'No Billing Details' }}"><span>{{ $order->rel_to_billing ? $order->rel_to_billing->customer_phone : 'No Billing Details' }}</span></a>
+                                                <br>
+                                                <span>{{ $order->rel_to_billing ? $order->rel_to_billing->customer_address : 'No Billing Details' }}</span>
+                                                <br>
+                                                
                                             </td>
                                             <td>
                                                 @foreach ($OrderProducts as $OrderProduct) 
-                                                {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
+                                                    {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
                                                 @endforeach
                                             </td>
                                             <td>৳ {{ $order->total }}</td>
-                                            <td>{{ $order->rel_to_courier->name }}</td>
+                                            @if ($order->courier_id != null)
+                                                <td>{{ $order->rel_to_courier->name }}</td>
+                                            @else
+                                                <td>Null</td>
+                                            @endif
                                             <td>{{$order->order_date}}
                                             </td>
                                             <td class="text-center">
@@ -256,14 +258,12 @@
                                             {{-- <td>Mr. Employee</td> --}}
 
                                             <td class="text-center">
-                                                {{-- <a href="javascript:void(0)" class="d-block mb-1 print" data-id="12"><i class="fa fa-print"></i></a> --}}
-                                                @php
-                                                    $after_replace = str_replace('#', '', $order_id);
-                                                @endphp
-                                                {{-- <a href="{{ route('orders.edit',$after_replace) }}" class="d-block mb-1">
+                                                <a href="{{ route('invoice.download', $order->id) }}" class="d-block mb-1 print" data-id="12"><i class="fa fa-print"></i></a>
+                                                
+                                                <a href="{{ route('orders.edit', $order->id) }}" class="d-block mb-1">
                                                     <i class="fa fa-edit"></i>
-                                                </a> --}}
-                                                <a href="https://ecom.prodevsltd.com/admin-orders/delete/12" class="d-block mb-1" onclick="return confirm('Are you sure to delete this?')">
+                                                </a>
+                                                <a href="" class="d-block mb-1" onclick="return confirm('Are you sure to delete this?')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>

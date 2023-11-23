@@ -17,4 +17,8 @@ class Order extends Model
     function rel_to_courier() {
         return $this->belongsTo(courier::class, 'courier_id');
     }
+    public function rel_to_billing()
+{
+    return $this->hasOne(Billingdetails::class, 'order_id', 'order_id');
+}
 }

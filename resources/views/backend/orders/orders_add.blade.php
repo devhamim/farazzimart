@@ -50,26 +50,24 @@
                                             <input type="date" class="form-control datetimepicker" id="order_date" name="order_date" required>
                                         </div>
 
-                                        <div class="form-group col-md-6 col-12">
-                                            <label for="invoice_id">Invoice ID <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="invoice_id" name="invoice_id" value="INV13" readonly required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
+                                        {{-- <div class="form-group col-md-6 col-12">
+                                            <label for="invoice_id">Invoice ID <span class="text-danger">*</span></label> --}}
+                                            <input type="hidden" class="form-control" id="invoice_id" name="invoice_id" value="{{ (int)$order_id->first()->invoice_id + 1 }}" readonly required>
+                                        {{-- </div> --}}
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_name">Customer Name <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="customer_name" name="customer_name" required>
                                         </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        
 
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_phone">Customer Phone <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" id="customer_phone" name="customer_phone" required>
                                         </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-12">
+                                        <div class="form-group col-md-6 col-12">
                                             <label for="customer_address">Customer Address <span class="text-danger">*</span></label>
                                             <textarea name="customer_address" id="customer_address" class="form-control"></textarea>
                                         </div>

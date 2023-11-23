@@ -32,7 +32,7 @@
                         }
                     }
                 }'>
-               
+            
                 @foreach ($banners as $banner)
                 <a href="{{ $banner->banner_link }}" target="_blank">
                 <div class="intro-slide" style="background-image: url({{asset('uploads/banner')}}/{{ $banner->banner_image }});">
@@ -136,7 +136,7 @@
                     
                     <div class="product cartpage">
                         <figure class="product-media">
-                            <span class="product-label label-new">off {{$product->product_discount}}Tk</span>
+                            {{-- <span class="product-label label-new">off {{$product->product_discount}}Tk</span> --}}
                             <a href="{{route('product.details', $product->slug)}}">
                                 <img src="{{asset('uploads/products/preview')}}/{{$product->preview_image}}" alt="Product image" class="product-image">
                             </a>
@@ -156,10 +156,10 @@
 
                         <div class="product-body">
                             @if ($product->product_discount != null)
-                                <span class="new-price d-block">৳ {{$product->after_discount}}</span>
+                                <span class="new-price d-block">৳ {{$product->product_discount}}</span>
                                 <span class="old-price">Was ৳ {{$product->product_price}}</span>
                             @else
-                                <span class="product-price">৳ {{$product->after_discount}}</span>
+                                <span class="product-price">৳ {{$product->product_discount}}</span>
                             @endif
                             <h3 class="product-title"><a href="{{route('product.details', $product->slug)}}">{{Str::limit($product->product_name, '19', '')}}</a></h3>
                         </div>
@@ -206,9 +206,10 @@
                     <div class="text-center">
                         <div class="product-body">
                             @if ($product->product_discount != null)
-                                <span class="new-price d-block">৳ {{ $product->after_discount }}</span>
+                                <span class="new-price d-block">৳ {{ $product->product_discount }}</span>
+                                <span class="old-price">Was ৳ {{$product->product_price}}</span>
                             @else
-                                <span class="product-price">৳ {{ $product->after_discount }}</span>
+                                <span class="product-price">৳ {{ $product->product_price }}</span>
                             @endif
                             <h3 class="product-title"><a href="{{ route('product.details', $product->slug) }}">{{ Str::limit($product->product_name, '19', '') }}</a></h3>
                         </div>

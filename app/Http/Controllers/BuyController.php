@@ -48,7 +48,8 @@ class BuyController extends Controller
              $prod_name = $products->product_name;
              $prod_slug = $products->slug;
              $prod_image = $products->preview_image;
-             $priceval = $products->after_discount;
+             $priceval = $products->product_discount;
+             $product_price = $products->product_price?? 0;
  
              if($products)
              {
@@ -58,7 +59,8 @@ class BuyController extends Controller
                      'item_quantity' => $quantity,
                      'item_price' => $priceval,
                      'item_image' => $prod_image,
-                     'item_slug' => $prod_slug
+                     'item_slug' => $prod_slug,
+                     'product_price' => $product_price,
                  );
                  $cart_data[] = $item_array;
  
@@ -107,7 +109,8 @@ class BuyController extends Controller
              $prod_name = $products->product_name;
              $prod_slug = $products->slug;
              $prod_image = $products->preview_image;
-             $priceval = $products->after_discount;
+             $priceval = $products->product_discount;
+             $product_price = $products->product_price?? 0;
  
              if($products)
              {
@@ -117,7 +120,8 @@ class BuyController extends Controller
                      'item_quantity' => $quantity,
                      'item_price' => $priceval,
                      'item_image' => $prod_image,
-                     'item_slug' => $prod_slug
+                     'item_slug' => $prod_slug,
+                     'product_price' => $product_price,
                  );
                  $cart_data[] = $item_array;
  

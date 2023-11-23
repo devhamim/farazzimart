@@ -20,7 +20,7 @@
                             @php
                             $orders_price = 0;
                             foreach ($orders_list as $order) {
-                                $total_order = $order->quantity*$order->price;
+                                $total_order = $order->quantity*$order->total;
                                 $orders_price += $total_order;
                             }
                             @endphp
@@ -37,7 +37,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ion ion-ios-card display-4"></div>
                         <div class="ml-4">
-                            <div class="text-white small">User</div>
+                            <div class="text-white small">Total Staff</div>
                             <div class="text-large">{{ $users_count }}</div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                     <div class="d-flex align-items-center">
                         <div class="ion ion-md-cart display-4"></div>
                         <div class="ml-4">
-                            <div class="text-white small">order</div>
+                            <div class="text-white small">Total Order</div>
                             <div class="text-large">{{ $orders_count }}</div>
                         </div>
                     </div>
@@ -63,13 +63,80 @@
                     <div class="d-flex align-items-center">
                         <div class="ion ion-md-pulse display-4"></div>
                         <div class="ml-4">
-                            <div class="text-white small">Product</div>
+                            <div class="text-white small">Total Product</div>
                             <div class="text-large">{{ $products_count }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card mb-4 bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="ion ion-md-pulse display-4"></div>
+                        <div class="ml-4">
+                            <div class="text-white small">Total Processing</div>
+                            <div class="text-large">{{ $total_processing }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card mb-4 bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="ion ion-md-pulse display-4"></div>
+                        <div class="ml-4">
+                            <div class="text-white small">Total Pending Payment</div>
+                            <div class="text-large">{{ $total_pending }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card mb-4 bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="ion ion-md-pulse display-4"></div>
+                        <div class="ml-4">
+                            <div class="text-white small">Total Hold</div>
+                            <div class="text-large">{{ $total_hold }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card mb-4 bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="ion ion-md-pulse display-4"></div>
+                        <div class="ml-4">
+                            <div class="text-white small">Total Canceled</div>
+                            <div class="text-large">{{ $total_cancel }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="card mb-4 bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="ion ion-md-pulse display-4"></div>
+                        <div class="ml-4">
+                            <div class="text-white small">Total Completed</div>
+                            <div class="text-large">{{ $total_completed }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
 
         <!-- chart cards start -->
         <div class="col-xl-6">
@@ -95,7 +162,7 @@
                             <div class="pb-4">
                                 Total Sale
                                 <div class="float-right">
-                                    <span class="text-muted small">৳{{ $brand_count }}</span><i class="feather icon-arrow-down text-danger"></i>
+                                    <span class="text-muted small">৳{{ $total_processing }}</span><i class="feather icon-arrow-down text-danger"></i>
                                 </div>
                                 <div class="progress mt-1" style="height:6px;">
                                     <div class="progress-bar bg-primary" style="width: 45%;"></div>
@@ -276,7 +343,7 @@
         var graph = Morris.Donut({
             element: 'chart-pie-moris',
             data: [{
-                    value: {{ $brand_count }},
+                    value: {{ $total_processing  }},
                     label: 'Order'
                 },
                 {
