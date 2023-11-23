@@ -184,7 +184,7 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th><input type="checkbox" id="master"></th>
+                                        {{-- <th><input type="checkbox" id="master"></th> --}}
                                         <th>SL.</th>
                                         <th>Invoice ID</th>
                                         <th>Customer Info</th>
@@ -201,7 +201,7 @@
                                     <tbody>
                                         @foreach ($order_id as $sl=>$order)
                                         <tr id="tr_12">
-                                            <td><input type="checkbox" class="sub_chk" data-id="12">
+                                            {{-- <td><input type="checkbox" class="sub_chk" data-id="12"> --}}
                                             </td>
                                             <td>{{ $sl+1 }}</td>
                                             <td>{{ $order->order_id }}</td>

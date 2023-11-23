@@ -11,130 +11,121 @@
         </ol>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-primary text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-ios-wallet display-4"></div>
-                        <div class="ml-4">
-                            @php
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        @php
                             $orders_price = 0;
                             foreach ($orders_list as $order) {
-                                $total_order = $order->quantity*$order->total;
-                                $orders_price += $total_order;
+                                // $total_order = $order->quantity*$order->total;
+                                $orders_price += $order->total;
                             }
                             @endphp
-                            <div class="text-white small">Total Revenue</div>
-                            <div class="text-large">৳ {{ $orders_price }}</div>
+                        <h5>Total Revenue</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">৳ {{ $orders_price }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-success text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-ios-card display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Staff</div>
-                            <div class="text-large">{{ $users_count }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Staff</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $users_count }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-danger text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-cart display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Order</div>
-                            <div class="text-large">{{ $orders_count }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Order</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $orders_count }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Product</div>
-                            <div class="text-large">{{ $products_count }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Product</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $products_count }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Processing</div>
-                            <div class="text-large">{{ $total_processing }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Processing</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_processing }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Pending Payment</div>
-                            <div class="text-large">{{ $total_pending }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Pending Payment</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_pending }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Hold</div>
-                            <div class="text-large">{{ $total_hold }}</div>
+            </a>
+        </div> 
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Hold</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_hold }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Canceled</div>
-                            <div class="text-large">{{ $total_cancel }}</div>
+            </a>
+        </div> 
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Canceled</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_cancel }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="card mb-4 bg-warning text-white">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="ion ion-md-pulse display-4"></div>
-                        <div class="ml-4">
-                            <div class="text-white small">Total Completed</div>
-                            <div class="text-large">{{ $total_completed }}</div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total Completed</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_completed }}</h1>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </a>
+        </div> 
     </div>
     <div class="row">
 
@@ -260,7 +251,7 @@
         <!-- chart cards end -->
 
         <!-- Data card 8 Start -->
-        <div class="col-xl-8 col-md-12">
+        {{-- <div class="col-xl-8 col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Latest Order</h5>
                 <div class="table-responsive">
@@ -306,7 +297,7 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- <div class="col-xl-4 col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Anual Sales Report</h5>
