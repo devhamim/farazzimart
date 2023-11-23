@@ -46,7 +46,7 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
-                                            <input type="hidden" name="id" value="{{ $orders->id }}">
+                                            {{-- <input type="hidden" name="id" value="{{ $orders->id }}"> --}}
                                             <label for="order_date">Order Date <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control datetimepicker" value="{{ $orders->order_date }}" id="order_date" name="order_date" required>
                                         </div>
