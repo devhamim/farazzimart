@@ -99,7 +99,7 @@ Route::get('/media/delete/{id}', [mediaController::class, 'media_delete'])->name
 // customer
 Route::get('/customer/list', [customerController::class, 'customer_list'])->name('customer.list');
 
-// media
+// order
 Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('orders.list');
 Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
 Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->name('orders.store');
