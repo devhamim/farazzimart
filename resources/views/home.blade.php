@@ -130,7 +130,7 @@
     <div class="row">
 
         <!-- chart cards start -->
-        <div class="col-xl-6">
+        {{-- <div class="col-xl-6">
             <div class="card mb-4">
                 <div class="card-header with-elements">
                     <h6 class="card-header-title mb-0">Sale Order</h6>
@@ -247,57 +247,55 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- chart cards end -->
 
         <!-- Data card 8 Start -->
-        {{-- <div class="col-xl-8 col-md-12">
+        <div class="col-xl-8 col-md-12">
             <div class="card mb-4">
-                <h5 class="card-header">Latest Order</h5>
+                <h5 class="card-header">Recent Orders</h5>
                 <div class="table-responsive">
                     <table class="table table-hover table-borderless">
                         <thead>
                             <tr>
-                                <th>Customer</th>
-                                <th>Order ID</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
+                                <th>SL</th>
                                 <th>Date</th>
+                                <th>C. Name</th>
+                                <th>C. Phone</th>
+                                <th>Total</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($orders_list->take(5) as $orders)
-                            @if ($orders->rel_to_product != null)
+                            @foreach ($orders_list->take(5) as $sl=>$orders)
                             <tr>
-                                <td>{{ $orders->customer_id }}</td>
-                                <td>{{ $orders->order_id }}</td>
-                                    <td>{{ $orders->rel_to_product->product_name }}</td>
-                                    <td>{{ $orders->quantity }}</td>
-                                    <td>{{ $orders->created_at->format('d-M-Y') }}</td>
+                                <td>{{ $sl+1 }}</td>
+                                <td>{{ $orders->created_at->format('d M') }}</td>
+                                <td>{{ $orders->rel_to_billing->customer_name }}</td>
+                                <td>{{ $orders->rel_to_billing->customer_phone }}</td>
+                                <td>{{ $orders->created_at->format('d-M-Y') }}</td>
                                 <td>
                                     <label class="label label-warning">
                                         @if ($orders->status == 0)
-                                            Pending
+                                        <div class="btn btn-info">On Hold</div>
                                         @elseif ($orders->status == 1)
-                                            Confirm
+                                            <div class="btn btn-primary">Processing</div>
                                         @elseif ($orders->status == 2)
-                                            Packaging
+                                            <div class="btn btn-success">Completed</div>
                                         @elseif ($orders->status == 3)
-                                        On the way
+                                            <div class="btn btn-warning">Pending Payment</div>
                                         @else
-                                        Delivery
+                                            <div class="btn btn-danger">Canceled</div>
                                         @endif
                                     </label>
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div> --}}
+        </div>
         {{-- <div class="col-xl-4 col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Anual Sales Report</h5>

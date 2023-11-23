@@ -33,7 +33,7 @@ class HomeController extends Controller
         $month_order =  DB::table('orders')
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") = ?', [$currentMonth])
             ->sum('total');
-
+            
         $product_id = Product::all();
         $orders_list = Order::all();
         $products_count = Product::count();

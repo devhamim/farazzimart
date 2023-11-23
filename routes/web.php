@@ -109,7 +109,7 @@ Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone
 Route::post('/status/update', [OrderslistController::class, 'status_update'])->name('status.update');
 Route::get('/orders/edit/{order_id}', [OrderslistController::class, 'orders_edit'])->name('orders.edit');
 Route::post('/orders/update', [OrderslistController::class, 'orders_update'])->name('orders.update');
-// Route::get('/media/delete/{id}', [OrderslistController::class, 'media_delete'])->name('media.delete');
+Route::get('/orders/delete/{id}', [OrderslistController::class, 'orders_delete'])->name('orders.delete');
 
 // Category
 Route::get('/category/add', [CategoryController::class, 'category_add'])->name('category.add');

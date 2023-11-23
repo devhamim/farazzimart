@@ -214,7 +214,7 @@
                                                 
                                             </td>
                                             <td>
-                                                @foreach ($OrderProducts as $OrderProduct) 
+                                                @foreach ($order->rel_to_orderpro as $OrderProduct) 
                                                     {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
                                                 @endforeach
                                             </td>
@@ -263,7 +263,7 @@
                                                 <a href="{{ route('orders.edit', $order->id) }}" class="d-block mb-1">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="" class="d-block mb-1" onclick="return confirm('Are you sure to delete this?')">
+                                                <a href="{{ route('orders.delete', $order->id) }}" class="d-block mb-1" onclick="return confirm('Are you sure to delete this?')">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>

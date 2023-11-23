@@ -216,7 +216,7 @@ public function orders_update(Request $request)
             'updated_at' => Carbon::now(),
         ]
     );
-
+if($request->product_id != ''){
     // Insert or update order products
     $productIds = $request->product_id;
     $prices = $request->price;
@@ -229,8 +229,15 @@ public function orders_update(Request $request)
             ]
         );
     }
+}
 
     return back()->withSuccess('Order updated successfully');
+}
+
+function orders_delete($id){
+    
+    Order::find($id)->delete();
+    return back()->withError('Order Delete Successfully');
 }
 
 }

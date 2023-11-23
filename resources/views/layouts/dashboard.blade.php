@@ -47,6 +47,11 @@
     <link rel="stylesheet" href="{{asset('backend/libs/minicolors/minicolors.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
+    <style>
+        .sidenav-item a{
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,9 +65,9 @@
     <div class="layout-wrapper layout-2">
         <div class="layout-inner">
             <!-- [ Layout sidenav ] Start -->
-            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-white logo-dark">
+            <div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical logo-dark" style="background: #0e0c28">
                 <!-- Brand demo (see assets/css/demo/demo.css) -->
-                <div class="app-brand demo">
+                <div class="app-brand demo bg-white" style="height: 80px">
                     <a href="{{route('site')}}" target="_" class="app-brand-text demo sidenav-text font-weight-normal ml-2">
                         <span class="app-brand-logo demo">
                             @if($setting->first()->logo != null)
@@ -209,10 +214,10 @@
             <!-- [ Layout container ] Start -->
             <div class="layout-container">
                 <!-- [ Layout navbar ( Header ) ] Start -->
-                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-dark container-p-x" id="layout-navbar">
+                <nav class="layout-navbar navbar navbar-expand-lg align-items-lg-center bg-white container-p-x" id="layout-navbar">
 
                     <!-- Brand demo (see assets/css/demo/demo.css) -->
-                    <a href="{{ route('site') }}" class="navbar-brand app-brand demo d-lg-none py-0 mr-4">
+                    <a href="{{ route('site') }}" class="navbar-brand app-brand demo bg-white d-lg-none py-0 mr-4">
                         <span class="app-brand-logo demo">
                             @if($setting->first()->logo != null)
                                 <img src="{{ asset('uploads/setting') }}/{{ $setting->first()->logo }}" alt="Brand Logo" class="img-fluid">
@@ -406,7 +411,7 @@
     <!-- Demo -->
     {{-- <script src="{{asset('backend/js/demo.js"></script> --}}
     <script src="{{asset('backend/js/analytics.js')}}"></script>
-    <script src="{{asset('backend/js/pages/dashboards_ecommerce.js')}}"></script>
+    {{-- <script src="{{asset('backend/js/pages/dashboards_ecommerce.js')}}"></script> --}}
     <script src="{{asset('backend/js/demo.js')}}"></script>
     <script src="{{asset('backend/js/pages/ui_modals.js')}}"></script>
     <script src="{{asset('backend/js/pages/forms_pickers.js')}}"></script>
