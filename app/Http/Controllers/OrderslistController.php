@@ -268,7 +268,9 @@ if($request->product_id != ''){
             ]
         );
     }
+
 }
+
 
     return back()->withSuccess('Order updated successfully');
 }
