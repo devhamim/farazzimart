@@ -54,7 +54,7 @@ class CategoryController extends Controller
 
     // category list
     function category_list() {
-        $categories = Category::all();
+        $categories = Category::orderBy('created_at', 'desc')->get();
         return view('backend.category.category_list', [
             'categories' => $categories
         ]);

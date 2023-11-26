@@ -93,7 +93,7 @@ class ProductController extends Controller
 
     // Product list
     function product_list() {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->get();
         return view('backend.product.product_list', [
             'products' => $products,
         ]);

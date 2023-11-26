@@ -260,8 +260,8 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Date</th>
-                                {{-- <th>C. Name</th>
-                                <th>C. Phone</th> --}}
+                                <th>C. Name</th>
+                                <th>C. Phone</th>
                                 <th>Total</th>
                                 <th>Status</th>
                             </tr>
@@ -271,8 +271,8 @@
                             <tr>
                                 <td>{{ $sl+1 }}</td>
                                 <td>{{ $orders->created_at->format('d M') }}</td>
-                                {{-- <td>{{ $orders->rel_to_billing->customer_name }}</td>
-                                <td>{{ $orders->rel_to_billing->customer_phone }}</td> --}}
+                                <td>{{ $orders->rel_to_billing->customer_name }}</td>
+                                <td>{{ $orders->rel_to_billing->customer_phone }}</td>
                                 <td>{{ $orders->created_at->format('d-M-Y') }}</td>
                                 <td>
                                     <label class="label label-warning">

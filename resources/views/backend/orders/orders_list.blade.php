@@ -181,7 +181,7 @@
                     <div class="col-12">
                         <div class="card ">
                             <div class="card-body table-responsive">
-                                <table class="table table-bordered table-striped text-center">
+                                <table id="report-table" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
                                         {{-- <th><input type="checkbox" id="master"></th> --}}
