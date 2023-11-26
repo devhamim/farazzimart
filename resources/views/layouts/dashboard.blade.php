@@ -51,6 +51,10 @@
         .sidenav-item a{
             color: #fff;
         }
+        .form-control {
+            border: 1px solid #8897AA !important;
+            border-radius: 5px;
+        }
     </style>
 </head>
 

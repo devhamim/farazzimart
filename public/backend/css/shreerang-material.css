@@ -7117,7 +7117,7 @@ a.bg-linux-darker:hover, a.bg-linux-darker:focus {
     transform: rotate(-2deg); }
   100% {
     transform: rotate(0deg); } }
-.ui-builder {
+/* .ui-builder {
   z-index: 1029;
   position: relative; }
   .ui-builder .style-toggler > a {
@@ -7149,7 +7149,7 @@ a.bg-linux-darker:hover, a.bg-linux-darker:focus {
       line-height: 1;
       color: #fff;
       transition: 0.3s ease-in-out;
-      animation: cir 1.5s linear infinite; }
+      animation: cir 1.5s linear infinite; } */
   .ui-builder.open .style-toggler > a {
     right: 310px; }
     .ui-builder.open .style-toggler > a:after {
