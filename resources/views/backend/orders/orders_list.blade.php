@@ -181,7 +181,7 @@
                     <div class="col-12">
                         <div class="card ">
                             <div class="card-body table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
                                         {{-- <th><input type="checkbox" id="master"></th> --}}
@@ -213,7 +213,7 @@
                                                 <br>
                                                 
                                             </td>
-                                            <td>
+                                            <td >
                                                 @foreach ($order->rel_to_orderpro as $OrderProduct) 
                                                     {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
                                                 @endforeach
