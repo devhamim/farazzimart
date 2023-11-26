@@ -30,7 +30,7 @@ class OrderslistController extends Controller
     //orders_list
     function orders_list(){
         // $order_id = Order::all();
-        $order_id = Order::with('rel_to_billing')->get();
+        $order_id = Order::with('rel_to_billing')->orderBy('created_at', 'desc')->get();
         $billingdetails = Billingdetails::where('order_id', $order_id->first()->order_id)->get();
         $OrderProducts = OrderProduct::where('order_id', $order_id->first()->order_id)->get();
         $total_orders = Order::count();

@@ -112,18 +112,20 @@
                                     </tr>
                                     <input type="hidden" name="sub_total" value="{{ $total }}">
                                     <input type="hidden" name="total" value="{{ $total }}">
-                                    <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" name="charge" id="standart-shipping" checked="" class="custom-control-input" value="80">
-                                                <label class="custom-control-label" for="standart-shipping">ঢাকার ভিতরে ডেলিভারি</label>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>৳ 80</td>
-                                    </tr>
-                                    <tr class="summary-shipping-row">
+                                    @foreach ($shipping_methods as $shipping)
+                                        <tr class="summary-shipping-row">
+                                            <td>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" name="charge" id="standart-shipping" checked="" class="custom-control-input" value="{{ $shipping->amount }}">
+                                                    <label class="custom-control-label" for="standart-shipping">{{ $shipping->text }}</label>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>৳ {{ $shipping->amount }}</td>
+                                        </tr>
+                                    @endforeach
+                                    {{-- <tr class="summary-shipping-row">
                                         <td>
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" name="charge" id="express-shipping" class="custom-control-input" value="150">
@@ -133,7 +135,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>৳ 150</td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table><!-- End .table table-summary -->
                             <div class="cart-bottom mt-3">

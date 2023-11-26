@@ -39,7 +39,7 @@
                                     <tr>
                                         <td>{{$sl+1}}</td>
                                         <td><img src="{{asset('uploads/products/preview')}}/{{$product->preview_image}}" alt class="img-fluid wid-40"></td>
-                                        <td>{{$product->product_name}}</td>
+                                        <td style="width: 50%">{{$product->product_name}}</td>
                                         @php
                                             $after_explode = explode(',', $product->category_id);
                                         @endphp

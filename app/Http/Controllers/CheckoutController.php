@@ -11,6 +11,7 @@ use App\Models\Inventory;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\customers;
+use App\Models\shippingMethods;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,11 +24,13 @@ class CheckoutController extends Controller
     //checkout
     function checkout() {
         $categories = Category::all();
+        $shipping_methods = shippingMethods::where('status', 1)->get();
         $cookie_data = stripslashes(Cookie::get('shopping_cart'));
         $cart_data = json_decode($cookie_data, true);
         return view('frontend.checkout.checkout', [
             'categories'=> $categories,
             'cart_data'=> $cart_data,
+            'shipping_methods'=> $shipping_methods,
         ]);
     }
 

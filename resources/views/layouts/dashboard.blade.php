@@ -91,14 +91,8 @@
                         </a>
                     </li>
                     <li class="sidenav-item">
-                        <a href="{{route('site')}}" target="_" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-globe"></i>
-                            <div>Website</div>
-                        </a>
-                    </li>
-                    <li class="sidenav-item">
                         <a href="{{route('customer.list')}}" class="sidenav-link">
-                            <i class="sidenav-icon feather icon-globe"></i>
+                            <i class="sidenav-icon feather icon-user"></i>
                             <div>Customer</div>
                         </a>
                     </li>
@@ -107,18 +101,6 @@
                             <i class="sidenav-icon ion ion-md-basket"></i>
                             <div>Order</div>
                         </a>
-                        {{-- <ul class="sidenav-menu {{ Request::is('order/add') ? 'active' : '' }}">
-                            <li class="sidenav-item {{ Request::is('order/list') ? 'active' : '' }}">
-                                <a href="{{route('order.list')}}" class="sidenav-link">
-                                    <div>List</div>
-                                </a>
-                            </li>
-                            <li class="sidenav-item {{ Request::is('orders/list') ? 'active' : '' }}">
-                                <a href="{{route('orders.list')}}" class="sidenav-link">
-                                    <div>Orders List</div>
-                                </a>
-                            </li>
-                        </ul> --}}
                     </li>
                     <li class="sidenav-item {{ Request::is('product/list') ? 'active' : '' }}">
                         <a href="{{route('product.list')}}" class="sidenav-link">
@@ -146,7 +128,7 @@
                     </li>
                     <li class="sidenav-item {{ Request::is('courier*', 'city*', 'zone*') ? 'active open' : '' }}">
                         <a href="javascript:" class="sidenav-link sidenav-toggle">
-                            <i class="sidenav-icon lnr lnr-picture"></i>
+                            <i class="sidenav-icon lnr lnr-car"></i>
                             <div>Courier</div>
                         </a>
                         <ul class="sidenav-menu {{ Request::is('courier/list') ? 'active' : '' }}">
@@ -294,7 +276,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{{route('profile')}}" class="dropdown-item">
-                                        <i class="feather icon-user text-muted"></i> &nbsp; Account settings</a>
+                                        {{-- <i class="feather icon-user text-muted"></i> &nbsp; Account settings</a> --}}
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">
                                         <i class="feather icon-power text-danger"></i> &nbsp; Log Out</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
