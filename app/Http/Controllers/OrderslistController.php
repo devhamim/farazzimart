@@ -179,9 +179,9 @@ function orders_store(Request $request){
 
 // orders_update
 function orders_edit($order_id){
-    $orders = Order::find($order_id);
-    $orderproducts = OrderProduct::find($order_id);
-    $billingdetails = Billingdetails::find($order_id);
+    $orders = Order::where('order_id',$order_id)->first();
+    $orderproducts = OrderProduct::where('order_id',$order_id)->first();
+    $billingdetails = Billingdetails::where('order_id',$order_id)->first();
     $couriers = courier::all();
     $products = Product::all();
     return view('backend.orders.orders_edit', [
@@ -205,22 +205,50 @@ public function orders_update(Request $request)
     $order_id = $request->input('order_id') ?: Str::random(3) . '-' . rand(1000, 9999);
     $order = Order::where('order_id', $order_id)->first();
 
-    Order::find($request->id)->update([
-        'order_date' => $request->order_date,
-        'invoice_id' => $request->invoice_id,
-        'sub_total' => $request->sub_total,
-        'shipping_cost' => $request->shipping_cost,
-        'discount' => $request->discount,
-        'total' => $request->total,
-        'courier_id' => $request->courier_id,
-        'city_id' => $request->city_id,
-        'courier_zone_id' => $request->courier_zone_id,
-        'order_note' => $request->order_note,
-        'updated_at' => Carbon::now(),
-    ]);
+    if($request->courier_id == ''){
+        Order::where('order_id',$order_id)->update([
+            'order_date' => $request->order_date,
+            'invoice_id' => $request->invoice_id,
+            'sub_total' => $request->sub_total,
+            'shipping_cost' => $request->shipping_cost,
+            'discount' => $request->discount,
+            'total' => $request->total,
+            'order_note' => $request->order_note,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+    elseif($request->city_id == ''){
+        Order::where('order_id',$order_id)->update([
+            'order_date' => $request->order_date,
+            'invoice_id' => $request->invoice_id,
+            'sub_total' => $request->sub_total,
+            'shipping_cost' => $request->shipping_cost,
+            'discount' => $request->discount,
+            'total' => $request->total,
+            'courier_id' => $request->courier_id,
+            'order_note' => $request->order_note,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+    else{
+        Order::where('order_id',$order_id)->update([
+            'order_date' => $request->order_date,
+            'invoice_id' => $request->invoice_id,
+            'sub_total' => $request->sub_total,
+            'shipping_cost' => $request->shipping_cost,
+            'discount' => $request->discount,
+            'total' => $request->total,
+            'courier_id' => $request->courier_id,
+            'city_id' => $request->city_id,
+            'courier_zone_id' => $request->courier_zone_id,
+            'order_note' => $request->order_note,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+    
 
     // Create or update billing details
-    Billingdetails::find($request->id)->update([
+    Billingdetails::where('order_id',$order_id)->update([
             'customer_name' => $request->input('customer_name'),
             'customer_phone' => $request->input('customer_phone'),
             'customer_address' => $request->input('customer_address'),
@@ -233,7 +261,7 @@ if($request->product_id != ''){
     $prices = $request->price;
 
     foreach ($request->quantity as $key => $quantity) {
-        OrderProduct::find($request->id)->update([
+        OrderProduct::where('order_id',$order_id)->update([
             'product_id' => $productIds[$key],
             'quantity' => $quantity,
             'price' => $prices[$key],

@@ -46,7 +46,7 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
-                                            {{-- <input type="hidden" name="id" value="{{ $orders->id }}"> --}}
+                                            <input type="hidden" name="order_id" value="{{ $orders->order_id }}">
                                             <label for="order_date">Order Date <span class="text-danger">*</span></label>
                                             <input type="date" class="form-control datetimepicker" value="{{ $orders->order_date }}" id="order_date" name="order_date" required>
                                         </div>
@@ -60,19 +60,19 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_name">Customer Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ $billingdetails->customer_name }}" required>
+                                            <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ $billingdetails->customer_name ?? '' }}" required>
                                         </div>
 
                                         <div class="form-group col-md-6 col-12">
                                             <label for="customer_phone">Customer Phone <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ $billingdetails->customer_phone }}" required>
+                                            <input type="text" class="form-control" id="customer_phone" name="customer_phone" value="{{ $billingdetails->customer_phone ?? '' }}" required>
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-12">
                                             <label for="customer_address">Customer Address <span class="text-danger">*</span></label>
-                                            <textarea name="customer_address" id="customer_address" class="form-control">{{ $billingdetails->customer_address }}</textarea>
+                                            <textarea name="customer_address" id="customer_address" class="form-control">{{ $billingdetails->customer_address ?? '' }}</textarea>
                                         </div>
                                     </div>
 
@@ -234,8 +234,85 @@
 
 @section('footer_script')
 
+
+{{-- ===== --}}
+
 <script>
     $(document).ready(function () {
+        var selectedCourierId = {{ $orders->courier_id ?? 0 }};
+        var selectedCityId = {{ $orders->city_id ?? 0 }};
+        var selectedZoneId = {{ $orders->courier_zone_id ?? 0 }};
+
+        // Trigger the change event on page load to populate the cities based on the pre-selected courier
+        $("#courier_id").trigger('change');
+
+        $("#courier_id").on('change', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN
+                }
+            });
+
+            // Fetch cities
+            $.ajax({
+                url: '{{ route('getCities') }}',
+                type: 'POST',
+                data: { _token: CSRF_TOKEN, id: $(this).val() },
+                success: function (data) {
+                    $("#city_id").empty();
+                    $("#city_id").append('<option value="">Select A City</option>');
+                    $.each(data.cities, function (index, value) {
+                        $("#city_id").append(new Option(value, index));
+                    });
+
+                    // Select the city based on the previously selected courier
+                    $("#city_id").val(selectedCityId).trigger('change');
+                }
+            });
+        });
+
+        $("#city_id").on('change', function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN
+                }
+            });
+
+            $.ajax({
+                url: '/getzone',
+                type: 'POST',
+                data: {_token: CSRF_TOKEN, id: $(this).val()},
+                success: function (data) {
+                    $("#zone_id").empty();
+                    $("#zone_id").append('<option value="">Select A Zone</option>');
+
+                    $.each(data, function (index, value) {
+                        $("#zone_id").append(new Option(value, index));
+                    });
+
+                    // Select the zone based on the previously selected city
+                    $("#zone_id").val(selectedZoneId).trigger('change');
+                },
+                error: function (xhr, status, error) {
+                    // Handle AJAX errors
+                    console.error('Error during AJAX request:', status, error);
+                }
+            });
+        });
+    });
+</script>
+
+{{-- ======= --}}
+
+
+{{-- <script>
+    $(document).ready(function () {
+        var selectedCourierId = {{ $orders->city_id ?? 0 }};
+
         $("#courier_id").on('change', function () {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -257,6 +334,7 @@
                         $("#city_id").append(new Option(value, index));
                     });
                     $('#shipping_cost').val(data.charge);
+                    $("#city_id").val(selectedCourierId).trigger('change');
                 }
             });
         });
@@ -266,6 +344,8 @@
 
 <script>
     $(document).ready(function () {
+        var selectedCityId = {{ $orders->city_id ?? 0 }};
+
         $("#city_id").on('change', function () {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -285,6 +365,8 @@
                     $.each(data, function (index, value) {
                             $("#zone_id").append(new Option(value, index));
                         });
+                        
+                    $("#zone_id").val(selectedCityId).trigger('change');
                 },
                 error: function (xhr, status, error) {
                     // Handle AJAX errors
@@ -293,7 +375,7 @@
             });
         });
     });
-</script>
+</script> --}}
 
 
 <script>
