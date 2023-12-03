@@ -333,7 +333,7 @@
                         '<input type="text" class="form-control" value="' + (data.productName ? data.productName : '') + '" readonly>' +
                         '</td>' +
                         '<td>' +
-                        '<input style="width: 60px; border: 1px solid #ddd;" min="1" type="number" class="form-control qty" name="quantity[]" value="1">' +
+                        '<input style="width: 60px; border: 1px solid #ddd;" min="1" type="number" class="form-control qty" name="quantity[]">' +
                         '<input type="hidden" name="price" class="price" value="' + (data.product_price ? data.product_price : '') + '">' +
                         '</td>' +
                         '<td class="total_price">' + ((data.product_price ? data.product_price : 0) * 1).toFixed(2) + '</td>' +

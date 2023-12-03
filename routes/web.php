@@ -101,15 +101,18 @@ Route::get('/customer/list', [customerController::class, 'customer_list'])->name
 
 // order
 Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('orders.list');
+Route::get('/orders/courier/list', [OrderslistController::class, 'orders_courier_list'])->name('orders.courier.list');
 Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
 Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->name('orders.store');
 Route::post('/getCities', [OrderslistController::class, 'getCities'])->name('getCities');
 Route::post('/getProduct', [OrderslistController::class, 'getProduct'])->name('getProduct');
+Route::post('/getProductupdate', [OrderslistController::class, 'getProductupdate'])->name('getProductupdate');
 Route::post('/getzone', [OrderslistController::class, 'getzone'])->name('getzone');
 Route::post('/status/update', [OrderslistController::class, 'status_update'])->name('status.update');
 Route::get('/orders/edit/{order_id}', [OrderslistController::class, 'orders_edit'])->name('orders.edit');
 Route::post('/orders/update', [OrderslistController::class, 'orders_update'])->name('orders.update');
 Route::get('/orders/delete/{id}', [OrderslistController::class, 'orders_delete'])->name('orders.delete');
+Route::get('/orders/exportOrdersReport', [OrderslistController::class, 'orders_exportOrdersReport'])->name('orders.exportOrdersReport');
 
 // Category
 Route::get('/category/add', [CategoryController::class, 'category_add'])->name('category.add');

@@ -17,10 +17,16 @@ class Order extends Model
     function rel_to_courier() {
         return $this->belongsTo(courier::class, 'courier_id');
     }
+    function rel_to_city() {
+        return $this->belongsTo(city::class, 'city_id');
+    }
+    function rel_to_courierzone() {
+        return $this->belongsTo(courierzone::class, 'courier_zone_id');
+    }
     public function rel_to_billing(){
-    return $this->hasOne(Billingdetails::class, 'order_id', 'order_id');
+        return $this->hasOne(Billingdetails::class, 'order_id', 'order_id');
     }
     public function rel_to_orderpro(){
-    return $this->hasMany(OrderProduct::class, 'order_id', 'order_id');
+        return $this->hasMany(OrderProduct::class, 'order_id', 'order_id');
     }
 }

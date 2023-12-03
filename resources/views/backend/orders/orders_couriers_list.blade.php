@@ -119,6 +119,7 @@
                     </div>
 
                 </div>
+
                 <div class="row mb-2">
                     <div class="col-md-2 col-2">
                         <a href="{{ route('orders.add') }}"
@@ -155,7 +156,9 @@
                                 <select name="courier_id" id="courier_id" class="form-control mr-2">
                                     <option value="">Select Courier</option>
                                         @foreach ($couriers as $courier)
-                                            <option value="{{ $courier->id }}">{{ $courier->name }}</option>
+                                        <option value="{{ $courier->id }}" {{ optional($order_id->first())->courier_id == $courier->id ? 'selected' : '' }}>
+                                            {{ $courier->name }}
+                                        </option>
                                         @endforeach
                                 </select>
                                 <button class="btn btn-success">sub</button>
@@ -165,8 +168,8 @@
                     </div>
                     
                 </div>
-                    <div class="row mb-2">
-                        {{-- <div class="col-md-2 col-12">
+                    {{-- <div class="row mb-2">
+                        <div class="col-md-2 col-12">
                             <form action="https://ecom.prodevsltd.com/admin-orders/all-status" method="post" id="all_status_form">
                                 <input type="hidden" name="_token" value="ktLkxYSgW2CFqo1LaSSBAFMYLYEfg60BNopr8gRu">                                <input type="hidden" id="all_status" name="all_status">
                                 <select name="status" id="status" class="form-control">
@@ -178,10 +181,31 @@
                                     <option value="4">Canceled</option>
                                 </select>
                             </form>
-                        </div> --}}
+                        </div>
 
-                        
-                    </div>
+                        <div class="col-md-1 col-12">
+                            <form action="https://ecom.prodevsltd.com/admin-orders/bulk-print" method="post" id="all_print_form">
+                                <input type="hidden" name="_token" value="ktLkxYSgW2CFqo1LaSSBAFMYLYEfg60BNopr8gRu">                                <div class="form-group">
+                                    <button type="button" id="bulk_print_btn" class="btn btn-info btn-sm">Print Invoice
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-9 col-12">
+                            <form action="https://ecom.prodevsltd.com/admin-orders/courier_csv" method="post" id="all_courier_csv">
+                                <input type="hidden" name="_token" value="ktLkxYSgW2CFqo1LaSSBAFMYLYEfg60BNopr8gRu">                                <div class="form-group">
+                                    <input type="hidden" name="status" id="courier_status">
+                                    <input type="hidden" id="all_ord_id" name="all_ord_id">
+                                    <button type="button" id="steadfast_csv" class="btn btn-success btn-sm">Stead Fast
+                                        Export
+                                    </button>
+                                    <button type="button" id="redex_csv" class="btn btn-danger btn-sm">Redex Export
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div> --}}
                    <div class="row">
                     <div class="col-12">
                         <div class="card ">
@@ -189,7 +213,7 @@
                                 <table id="report-table" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
-                                        <th><input type="checkbox" id="master"></th>
+                                        {{-- <th><input type="checkbox" id="master"></th> --}}
                                         <th>SL.</th>
                                         <th>Invoice ID</th>
                                         <th>Customer Info</th>
@@ -205,8 +229,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($order_id as $sl=>$order)
-                                        <tr id="tr_{{ $sl+1 }}">
-                                            <td><input type="checkbox" class="sub_chk" data-id="{{ $sl+1 }}">
+                                        <tr id="tr_12">
+                                            {{-- <td><input type="checkbox" class="sub_chk" data-id="12"> --}}
                                             </td>
                                             <td>{{ $sl+1 }}</td>
                                             <td>{{ $order->order_id }}</td>

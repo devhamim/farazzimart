@@ -39,6 +39,8 @@ class OrderslistController extends Controller
         $total_hold = Order::where('status', 0)->count();
         $total_completed = Order::where('status', 2)->count();
         $total_cancel = Order::where('status', 4)->count();
+        $total_ondelevary = Order::where('status', 5)->count();
+        $couriers = courier::all();
         return view('backend.orders.orders_list', [
             'order_id'=>$order_id,
             'billingdetails'=>$billingdetails,
@@ -49,6 +51,37 @@ class OrderslistController extends Controller
             'total_hold'=>$total_hold,
             'total_completed'=>$total_completed,
             'total_cancel'=>$total_cancel,
+            'couriers'=>$couriers,
+            'total_ondelevary'=>$total_ondelevary,
+        ]);
+    }
+
+    // orders.courier.list
+    function orders_courier_list(Request $request){
+        // $order_id = Order::all();
+        $order_id = Order::where('courier_id', $request->courier_id)->with('rel_to_billing')->orderBy('created_at', 'desc')->get();
+        // $billingdetails = Billingdetails::where('order_id', $order_id->first()->order_id)->get();
+        // $OrderProducts = OrderProduct::where('order_id', $order_id->first()->order_id)->get();
+        $total_orders = Order::count();
+        $total_processing = Order::where('status', 1)->count();
+        $total_pending = Order::where('status', 3)->count();
+        $total_hold = Order::where('status', 0)->count();
+        $total_completed = Order::where('status', 2)->count();
+        $total_cancel = Order::where('status', 4)->count();
+        $total_ondelevary = Order::where('status', 5)->count();
+        $couriers = courier::all();
+        return view('backend.orders.orders_couriers_list', [
+            'order_id'=>$order_id,
+            // 'billingdetails'=>$billingdetails,
+            // 'OrderProducts'=>$OrderProducts,
+            'total_orders'=>$total_orders,
+            'total_processing'=>$total_processing,
+            'total_pending'=>$total_pending,
+            'total_hold'=>$total_hold,
+            'total_completed'=>$total_completed,
+            'total_cancel'=>$total_cancel,
+            'couriers'=>$couriers,
+            'total_ondelevary'=>$total_ondelevary,
         ]);
     }
     //orders_add
@@ -157,30 +190,42 @@ function orders_store(Request $request){
         'sku' => $product->sku,
         'productName' => $product->product_name,
         'product_price' => $product->product_price,
+        'quantity' => $product->quantity,
+        'sub_total' => $product->product_price*$product->quantity,
+    ];
+
+    return response()->json($data);
+}
+    // getProductupdate
+    public function getProductupdate(Request $request)
+{
+    $productId = $request->input('id');
+    if (!$productId) {
+        return response()->json(['error' => 'No product ID provided.']);
+    }
+    $product = Product::find($productId);
+
+    if (!$product) {
+        return response()->json(['error' => 'Product not found.']);
+    }
+    $data = [
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'productName' => $product->product_name,
+        'product_price' => $product->product_price,
+        'quantity' => $product->quantity,
         'sub_total' => $product->product_price*$product->quantity,
     ];
 
     return response()->json($data);
 }
 
- // status_update
- function status_update(Request $request){
-    $order = Order::find($request->order_id);
-
-    if (!$order) {
-        return back()->with('error', 'Order not found');
-    }
-
-    $order->status = $request->status;
-    $order->save();
-
-    return back()->with('success', 'Order status updated successfully');
-}
 
 // orders_update
 function orders_edit($order_id){
     $orders = Order::where('order_id',$order_id)->first();
     $orderproducts = OrderProduct::where('order_id',$order_id)->first();
+    $orderproduct = OrderProduct::where('order_id',$order_id)->get();
     $billingdetails = Billingdetails::where('order_id',$order_id)->first();
     $couriers = courier::all();
     $products = Product::all();
@@ -190,6 +235,7 @@ function orders_edit($order_id){
         'orderproducts' => $orderproducts,
         'couriers' => $couriers,
         'products' => $products,
+        'orderproduct' => $orderproduct,
     ]);
 }
 
@@ -214,6 +260,7 @@ public function orders_update(Request $request)
             'discount' => $request->discount,
             'total' => $request->total,
             'order_note' => $request->order_note,
+            'status' => $request->status,
             'updated_at' => Carbon::now(),
         ]);
     }
@@ -227,6 +274,7 @@ public function orders_update(Request $request)
             'total' => $request->total,
             'courier_id' => $request->courier_id,
             'order_note' => $request->order_note,
+            'status' => $request->status,
             'updated_at' => Carbon::now(),
         ]);
     }
@@ -242,6 +290,7 @@ public function orders_update(Request $request)
             'city_id' => $request->city_id,
             'courier_zone_id' => $request->courier_zone_id,
             'order_note' => $request->order_note,
+            'status' => $request->status,
             'updated_at' => Carbon::now(),
         ]);
     }
@@ -256,21 +305,19 @@ public function orders_update(Request $request)
         ]
     );
 if($request->product_id != ''){
-    // Insert or update order products
     $productIds = $request->product_id;
-    $prices = $request->price;
 
-    foreach ($request->quantity as $key => $quantity) {
+    foreach ($productIds as $key => $product) {
         OrderProduct::where('order_id',$order_id)->update([
-            'product_id' => $productIds[$key],
-            'quantity' => $quantity,
-            'price' => $prices[$key],
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'updated_at' => Carbon::now(),
             ]
         );
     }
 
 }
-
 
     return back()->withSuccess('Order updated successfully');
 }
@@ -279,6 +326,56 @@ function orders_delete($id){
 
     Order::find($id)->delete();
     return back()->withError('Order Delete Successfully');
+}
+
+function orders_exportOrdersReport(){
+
+    $rules = [
+        'start_date' => '',
+        'end_date' => '',
+    ];
+
+    $validatedData = $request->validate($rules);
+
+    $sDate = $validatedData['start_date'];
+    $eDate = $validatedData['end_date'];
+
+
+    $purchases = DB::table('billingdetails')
+            ->join('products', 'purchase_details.product_id', '=', 'products.id')
+            ->join('purchases', 'purchase_details.purchase_id', '=', 'purchases.id')
+            ->whereBetween('purchases.purchase_date',[$sDate,$eDate])
+            ->where('purchases.purchase_status','1')
+            ->select( 'purchases.purchase_no', 'purchases.purchase_date', 'purchases.supplier_id','products.product_code', 'products.product_name', 'purchase_details.quantity', 'purchase_details.unitcost', 'purchase_details.total')
+            ->get();
+
+
+        $purchase_array [] = array(
+            'Date',
+            'No Purchase',
+            'Supplier',
+            'Product Code',
+            'Product',
+            'Quantity',
+            'Unitcost',
+            'Total',
+        );
+
+        foreach($purchases as $purchase)
+        {
+            $purchase_array[] = array(
+                'Date' => $purchase->purchase_date,
+                'No Purchase' => $purchase->purchase_no,
+                'Supplier' => $purchase->supplier_id,
+                'Product Code' => $purchase->product_code,
+                'Product' => $purchase->product_name,
+                'Quantity' => $purchase->quantity,
+                'Unitcost' => $purchase->unitcost,
+                'Total' => $purchase->total,
+            );
+        }
+
+        $this->exportExcel($purchase_array);
 }
 
 }

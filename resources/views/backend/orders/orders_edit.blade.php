@@ -13,12 +13,12 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Create Order</h2>
+                            <h2 class="pageheader-title">Edit Order</h2>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="{{ url('/') }}" class="breadcrumb-link">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Create Order</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Edit Order</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -92,7 +92,7 @@
                                         <div class="form-group col-12">
                                             <label for="city_id">City Name</label>
                                             <select name="city_id" id="city_id" class="form-control select2">
-                                                <option value="">Select A City</option>
+                                                <option value="{{ $orders->city_id }}">{{ $orders->rel_to_city->name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -101,11 +101,21 @@
                                         <div class="form-group col-12">
                                             <label for="zone_id">Zone Name</label>
                                             <select name="courier_zone_id" id="zone_id" class="form-control select2">
-                                                <option value="">Select A Zone</option>
+                                                <option value="{{ $orders->courier_zone_id }}">{{ $orders->rel_to_courierzone->zone }}</option>
                                             </select>
                                         </div>
                                     </div>
-
+                                    <div class="form-group col-12">
+                                        <label for="" class="form-label">Order status</label>
+                                        <select name="status" class="form-control">
+                                            <option value="0" {{ $orders->status == 0?'selected':'' }}>On Hold</option>
+                                            <option value="1" {{ $orders->status == 1?'selected':'' }}>Processing</option>
+                                            <option value="2" {{ $orders->status == 2?'selected':'' }}>Completed</option>
+                                            <option value="3" {{ $orders->status == 3?'selected':'' }}>Pending Payment</option>
+                                            <option value="4" {{ $orders->status == 4?'selected':'' }}>Canceled</option>
+                                            <option value="5" {{ $orders->status == 5?'selected':'' }}>On Delivary</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +135,23 @@
                                                 <th></th>
                                             </tr>
                                             </thead>
+                                            
                                             <tbody id="prod_row">
+                                                @foreach ($orderproduct as $orderpro)
+                                                    <tr>
+                                                        <td>{{ $orderpro->order_id }}</td>
+                                                        <td>
+                                                            <input type="hidden" name="product_id[]" value="{{ $orderpro->rel_to_product->id }}">
+                                                            <input type="text" readonly class="form-control" value="{{ $orderpro->rel_to_product->product_name }}">
+                                                        </td>
+                                                        <td>
+                                                            <input style="width: 60px; border: solid solid #ddd;" min="1"  type="number" class="form-control qty" name="quantity[]" value="{{ $orderpro->quantity }}">
+                                                            <input type="hidden" name="price[]" class="price" value="{{ $orderpro->rel_to_product->product_price }}">
+                                                        </td>
+                                                        <td class="total_price">{{ $orderpro->rel_to_product->product_price*$orderpro->quantity }}</td>
+                                                        <td><button class="btn btn-danger" onclick="removeProduct(this)">Remove</button></td></td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                             <tbody>
                                             <tr>
@@ -136,7 +162,6 @@
                                                                     <option value="">Select A Product</option>
                                                                 @foreach ($products as $product)
                                                                     <option value="{{ $product->id }}" {{ $product->id == $orderproducts->product_id?'selected':'' }}>{{ $product->product_name }}</option>
-                                                                    {{-- <option value="{{ $product->id }}" {{ in_array($product->id, $orderproducts->product_id) ? 'selected' : '' }}>{{ $product->product_name }}</option> --}}
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -235,81 +260,7 @@
 @section('footer_script')
 
 
-{{-- ===== --}}
-
 <script>
-    $(document).ready(function () {
-        var selectedCourierId = {{ $orders->courier_id ?? 0 }};
-        var selectedCityId = {{ $orders->city_id ?? 0 }};
-        var selectedZoneId = {{ $orders->courier_zone_id ?? 0 }};
-
-        // Trigger the change event on page load to populate the cities based on the pre-selected courier
-        $("#courier_id").trigger('change');
-
-        $("#courier_id").on('change', function () {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                }
-            });
-
-            // Fetch cities
-            $.ajax({
-                url: '{{ route('getCities') }}',
-                type: 'POST',
-                data: { _token: CSRF_TOKEN, id: $(this).val() },
-                success: function (data) {
-                    $("#city_id").empty();
-                    $("#city_id").append('<option value="">Select A City</option>');
-                    $.each(data.cities, function (index, value) {
-                        $("#city_id").append(new Option(value, index));
-                    });
-
-                    // Select the city based on the previously selected courier
-                    $("#city_id").val(selectedCityId).trigger('change');
-                }
-            });
-        });
-
-        $("#city_id").on('change', function () {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                }
-            });
-
-            $.ajax({
-                url: '/getzone',
-                type: 'POST',
-                data: {_token: CSRF_TOKEN, id: $(this).val()},
-                success: function (data) {
-                    $("#zone_id").empty();
-                    $("#zone_id").append('<option value="">Select A Zone</option>');
-
-                    $.each(data, function (index, value) {
-                        $("#zone_id").append(new Option(value, index));
-                    });
-
-                    // Select the zone based on the previously selected city
-                    $("#zone_id").val(selectedZoneId).trigger('change');
-                },
-                error: function (xhr, status, error) {
-                    // Handle AJAX errors
-                    console.error('Error during AJAX request:', status, error);
-                }
-            });
-        });
-    });
-</script>
-
-{{-- ======= --}}
-
-
-{{-- <script>
     $(document).ready(function () {
         var selectedCourierId = {{ $orders->city_id ?? 0 }};
 
@@ -375,7 +326,7 @@
             });
         });
     });
-</script> --}}
+</script>
 
 
 <script>
@@ -406,9 +357,8 @@
                     'X-CSRF-TOKEN': CSRF_TOKEN
                 }
             });
-
             $.ajax({
-                url: '/getProduct',
+                url: '/getProductupdate',
                 type: 'POST',
                 data: {_token: CSRF_TOKEN, id: $(this).val()},
                 success: function (data) {
@@ -419,8 +369,8 @@
                         '<input type="text" class="form-control" value="' + (data.productName ? data.productName : '') + '" readonly>' +
                         '</td>' +
                         '<td>' +
-                        '<input style="width: 60px; border: none solid #ddd;" min="1" readonly type="number" class="form-control qty" name="quantity[]" value="1">' +
-                        '<input type="hidden" name="price" class="price" value="' + (data.product_price ? data.product_price : '') + '">' +
+                        '<input style="width: 60px; border: 1px solid #ddd;" min="1" type="number" class="form-control qty" name="quantity[]" value="1">' +
+                        '<input type="hidden" name="price[]" class="price" value="' + (data.product_price ? data.product_price : '') + '">' +
                         '</td>' +
                         '<td class="total_price">' + ((data.product_price ? data.product_price : 0) * 1).toFixed(2) + '</td>' +
                         '<td><button class="btn btn-danger" onclick="removeProduct(this)">Remove</button></td>' +
@@ -481,73 +431,5 @@
         };
     });
 </script>
-{{-- <script>
-    $(document).ready(function () {
-        // Function to add a product row to the table
-        function addProductRow(product) {
-            var newRowHtml = '<tr>' +
-                '<td>' + (product.sku ? product.sku : 'null') + '</td>' +
-                '<td>' +
-                '<input type="hidden" name="product_id[]" value="' + (product.product_id ? product.product_id : '') + '">' +
-                '<input type="text" class="form-control" value="' + (product.productName ? product.productName : '') + '" readonly>' +
-                '</td>' +
-                '<td>' +
-                '<input style="width: 60px; border: 1px solid #ddd;" min="1" type="number" class="form-control qty" name="quantity[]" value="1">' +
-                '<input type="hidden" name="price[]" class="price" value="' + (product.product_price ? product.product_price : '') + '">' +
-                '</td>' +
-                '<td class="total_price">' + ((product.product_price ? product.product_price : 0) * 1).toFixed(2) + '</td>' +
-                '<td><button type="button" class="btn btn-danger" onclick="removeProduct(this)">Remove</button></td>' +
-                '</tr>';
 
-            // Append the new row to the table body
-            $('#prod_row').append(newRowHtml);
-
-            // Update totals
-            updateTotals();
-
-            // Add event listener for quantity input change
-            $('.qty').on('input', function () {
-                updateRowTotal($(this), product.product_price);
-            });
-        }
-
-        // Fetch existing order products
-        var existingProducts = {!! json_encode($orderProducts) !!};
-
-        // Add existing products to the table
-        existingProducts.forEach(function (product) {
-            addProductRow(product);
-        });
-
-        // Event listener for product selection change
-        $('#product').on('change', function () {
-            var selectedProductId = $(this).val();
-
-            // Check if the selected product is already in the table
-            var isProductExists = $('.prod_row').find('[name="product_id[]"][value="' + selectedProductId + '"]').length > 0;
-
-            // If the product is not in the table, fetch and add it
-            if (!isProductExists) {
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': CSRF_TOKEN
-                    }
-                });
-
-                $.ajax({
-                    url: '{{ route('getProduct') }}',
-                    type: 'POST',
-                    data: { _token: CSRF_TOKEN, id: selectedProductId },
-                    success: function (data) {
-                        addProductRow(data);
-                    }
-                });
-            }
-        });
-
-        // ... (other JavaScript code)
-    });
-</script> --}}
 @endsection
