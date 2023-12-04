@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('invoice_id');
             $table->integer('sub_total');
             $table->integer('shipping_cost')->nullable();
-            $table->integer('discount')->nullable();
+            $table->integer('discount')->default(0);
             $table->integer('total');
             $table->integer('courier_id');
             $table->integer('city_id');
