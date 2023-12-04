@@ -92,7 +92,11 @@
                                         <div class="form-group col-12">
                                             <label for="city_id">City Name</label>
                                             <select name="city_id" id="city_id" class="form-control select2">
-                                                <option value="{{ $orders->city_id }}">{{ $orders->rel_to_city->name }}</option>
+                                                @if ($orders->city_id != null)
+                                                    <option value="{{ $orders->city_id }}">{{ $orders->rel_to_city->name }}</option>
+                                                @else
+                                                    <option value="">Select A City</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -101,7 +105,11 @@
                                         <div class="form-group col-12">
                                             <label for="zone_id">Zone Name</label>
                                             <select name="courier_zone_id" id="zone_id" class="form-control select2">
-                                                <option value="{{ $orders->courier_zone_id }}">{{ $orders->rel_to_courierzone->zone }}</option>
+                                                @if ($orders->courier_zone_id != null)
+                                                    <option value="{{ $orders->courier_zone_id }}">{{ $orders->rel_to_courierzone->zone }}</option>
+                                                @else
+                                                    <option value="">Select A Zone</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
