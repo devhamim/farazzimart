@@ -213,12 +213,12 @@ function orders_store(Request $request){
         'sku' => $product->sku,
         'productName' => $product->product_name,
         'product_price' => $product->product_price,
-        'quantity' => $product->quantity,
         'sub_total' => $product->product_price*$product->quantity,
     ];
 
     return response()->json($data);
 }
+
 
 
 // orders_update
@@ -304,20 +304,21 @@ public function orders_update(Request $request)
             'updated_at' => Carbon::now(),
         ]
     );
-if($request->product_id != ''){
-    $productIds = $request->product_id;
-
-    foreach ($productIds as $key => $product) {
-        OrderProduct::where('order_id',$order_id)->update([
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'updated_at' => Carbon::now(),
-            ]
-        );
+    if (!empty($request->product_id)) {
+        foreach ($request->product_id as $key => $productId) {
+            OrderProduct::updateOrCreate(
+                [
+                    'order_id' => $order_id,
+                    'product_id' => $productId,
+                ],
+                [
+                    'quantity' => $request->quantity[$key],
+                    'price' => $request->price[$key],
+                    'updated_at' => now(),
+                ]
+            );
+        }
     }
-
-}
 
     return back()->withSuccess('Order updated successfully');
 }
@@ -325,6 +326,11 @@ if($request->product_id != ''){
 function orders_delete($id){
 
     Order::find($id)->delete();
+    return back()->withError('Order Delete Successfully');
+}
+
+function orders_product_delete($id){
+    OrderProduct::find($id)->delete();
     return back()->withError('Order Delete Successfully');
 }
 

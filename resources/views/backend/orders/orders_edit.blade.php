@@ -139,7 +139,7 @@
                                             <tbody id="prod_row">
                                                 @foreach ($orderproduct as $orderpro)
                                                     <tr>
-                                                        <td>{{ $orderpro->order_id }}</td>
+                                                        <td>{{ $orderpro->rel_to_product->sku }}</td>
                                                         <td>
                                                             <input type="hidden" name="product_id[]" value="{{ $orderpro->rel_to_product->id }}">
                                                             <input type="text" readonly class="form-control" value="{{ $orderpro->rel_to_product->product_name }}">
@@ -149,7 +149,7 @@
                                                             <input type="hidden" name="price[]" class="price" value="{{ $orderpro->rel_to_product->product_price }}">
                                                         </td>
                                                         <td class="total_price">{{ $orderpro->rel_to_product->product_price*$orderpro->quantity }}</td>
-                                                        <td><button class="btn btn-danger" onclick="removeProduct(this)">Remove</button></td></td>
+                                                        <td><a class="btn btn-danger" href="{{ route('orders.product.delete',$orderpro->id) }}">Remove</a></td></td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -383,23 +383,65 @@
                     updateTotals();
 
                     // Add event listener for quantity input change
-                    $('.qty').on('input', function () {
-                        updateRowTotal($(this), data.product_price);
-                    });
+                    // $('.qty').on('input', function () {
+                    //     updateRowTotal($(this), data.product_price);
+                    // });
                 }
             });
         });
 
-        // Function to update the row total when quantity changes
-        function updateRowTotal(input, productPrice) {
-            var quantity = parseFloat(input.val());
+        // // Function to update the row total when quantity changes
+        // function updateRowTotal(input, productPrice) {
+        //     var quantity = parseFloat(input.val());
+        //     var row = input.closest('tr');
+        //     var totalCell = row.find('.total_price');
+        //     var newTotal = productPrice * quantity;
+        //     totalCell.text(newTotal.toFixed(2));
+
+        //     // Update totals
+        //     updateTotals();
+        // }
+        $(document).on('input', '.qty', function () {
+            updateRowTotal($(this));
+        });
+
+        function updateRowTotal(input) {
             var row = input.closest('tr');
+            var productPrice = parseFloat(row.find('.price').val());
+            var quantity = parseFloat(input.val());
             var totalCell = row.find('.total_price');
             var newTotal = productPrice * quantity;
             totalCell.text(newTotal.toFixed(2));
 
             // Update totals
             updateTotals();
+
+            // Update OrderProduct on the server
+            var productId = row.find('input[name="product_id[]"]').val();
+            updateOrderProduct(productId, quantity);
+        }
+
+        function updateOrderProduct(productId, quantity) {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': CSRF_TOKEN
+                }
+            });
+
+            $.ajax({
+                url: '/updateOrderProduct', // Update this with your actual route
+                type: 'POST',
+                data: {_token: CSRF_TOKEN, product_id: productId, quantity: quantity},
+                success: function (data) {
+                    // Handle success if needed
+                },
+                error: function (xhr, status, error) {
+                    // Handle AJAX errors
+                    console.error('Error during AJAX request:', status, error);
+                }
+            });
         }
 
         // Function to update the overall totals
