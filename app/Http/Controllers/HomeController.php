@@ -44,7 +44,8 @@ class HomeController extends Controller
         $total_hold = Order::where('status', 0)->count();
         $total_completed = Order::where('status', 2)->count();
         $total_cancel = Order::where('status', 4)->count();
-        // $brands_order = Order::where('product_id', $product_id->first()->rel_to_brand)->get();
+        $total_ondelevary = Order::where('status', 5)->count();
+        $total_pendinginvoice = Order::where('status', 6)->count();
         return view('home', [
             'orders_count'=>$orders_count,
             'users_count'=>$users_count,
@@ -56,7 +57,8 @@ class HomeController extends Controller
             'total_hold'=>$total_hold,
             'total_completed'=>$total_completed,
             'total_cancel'=>$total_cancel,
-            // 'brands_order'=>$brands_order,
+            'total_pendinginvoice'=>$total_pendinginvoice,
+            'total_ondelevary'=>$total_ondelevary,
         ]);
     }
 

@@ -40,6 +40,7 @@ class OrderslistController extends Controller
         $total_completed = Order::where('status', 2)->count();
         $total_cancel = Order::where('status', 4)->count();
         $total_ondelevary = Order::where('status', 5)->count();
+        $total_pendinginvoice = Order::where('status', 6)->count();
         $couriers = courier::all();
         return view('backend.orders.orders_list', [
             'order_id'=>$order_id,
@@ -53,6 +54,7 @@ class OrderslistController extends Controller
             'total_cancel'=>$total_cancel,
             'couriers'=>$couriers,
             'total_ondelevary'=>$total_ondelevary,
+            'total_pendinginvoice'=>$total_pendinginvoice,
         ]);
     }
 
@@ -69,6 +71,7 @@ class OrderslistController extends Controller
         $total_completed = Order::where('status', 2)->count();
         $total_cancel = Order::where('status', 4)->count();
         $total_ondelevary = Order::where('status', 5)->count();
+        $total_pendinginvoice = Order::where('status', 6)->count();
         $couriers = courier::all();
         return view('backend.orders.orders_couriers_list', [
             'order_id'=>$order_id,
@@ -82,6 +85,7 @@ class OrderslistController extends Controller
             'total_cancel'=>$total_cancel,
             'couriers'=>$couriers,
             'total_ondelevary'=>$total_ondelevary,
+            'total_pendinginvoice'=>$total_pendinginvoice,
         ]);
     }
     //orders_add

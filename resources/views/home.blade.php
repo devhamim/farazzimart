@@ -125,6 +125,30 @@
                     </div>
                 </div>
             </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Total On Delevary</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_ondelevary }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+            <a href="#">
+                <div class="card border-3 border-top border-top-success">
+                    <div class="card-body">
+                        <h5 class="text-info">Pending Invoice</h5>
+                        <div class="metric-value d-inline-block">
+                            <h1 class="mb-1">{{ $total_pendinginvoice }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div> 
     </div>
     <div class="row">

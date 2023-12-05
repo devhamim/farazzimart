@@ -118,10 +118,11 @@
                                         <select name="status" class="form-control">
                                             <option value="0" {{ $orders->status == 0?'selected':'' }}>On Hold</option>
                                             <option value="1" {{ $orders->status == 1?'selected':'' }}>Processing</option>
-                                            <option value="2" {{ $orders->status == 2?'selected':'' }}>Completed</option>
                                             <option value="3" {{ $orders->status == 3?'selected':'' }}>Pending Payment</option>
-                                            <option value="4" {{ $orders->status == 4?'selected':'' }}>Canceled</option>
                                             <option value="5" {{ $orders->status == 5?'selected':'' }}>On Delivary</option>
+                                            <option value="6" {{ $orders->status == 6?'selected':'' }}>Pending Invoice</option>
+                                            <option value="2" {{ $orders->status == 2?'selected':'' }}>Completed</option>
+                                            <option value="4" {{ $orders->status == 4?'selected':'' }}>Canceled</option>
                                         </select>
                                     </div>
                                 </div>

@@ -30,7 +30,7 @@
 
                 <div class="row mb-md-4 mb-3">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5>Total Order</h5>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-info">Total Processing</h5>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-secondary">Total Pending Payment</h5>
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-warning">Total Hold</h5>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="##">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-danger">Total Canceled</h5>
@@ -94,7 +94,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-success">Total Completed</h5>
@@ -106,12 +106,24 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-success">On Delivary</h5>
                                     <div class="metric-value d-inline-block">
                                         <h1 class="mb-1">{{ $total_ondelevary }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
+                        <a href="">
+                            <div class="card border-3 border-top border-top-success">
+                                <div class="card-body">
+                                    <h5 class="text-success">Pending Invoice</h5>
+                                    <div class="metric-value d-inline-block">
+                                        <h1 class="mb-1">{{ $total_pendinginvoice }}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -247,6 +259,8 @@
                                                             <div class="btn btn-warning">Pending Payment</div>
                                                         @elseif ($order->status == 5)
                                                             <div class="btn btn-warning">On Delivary</div>
+                                                        @elseif ($order->status == 6)
+                                                            <div class="btn btn-warning">Pending Invoice</div>
                                                         @else
                                                             <div class="btn btn-danger">Canceled</div>
                                                         @endif
