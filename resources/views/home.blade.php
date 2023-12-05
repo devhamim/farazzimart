@@ -275,7 +275,7 @@
         <!-- chart cards end -->
 
         <!-- Data card 8 Start -->
-        <div class="col-xl-8 col-md-12">
+        <div class="col-xl-12 col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Recent Orders</h5>
                 <div class="table-responsive">
