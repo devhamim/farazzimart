@@ -73,8 +73,8 @@
                                         </div>
                                         <h3 class="product-title"><a href="{{route('product.details', $product->slug)}}">{{$product->product_name}}</a></h3><!-- End .product-title -->
                                         @if ($product->product_discount != null)
-                                            <span class="new-price">৳ {{$product->product_discount}}</span>
-                                            <span class="old-price">Was ৳ {{$product->product_price}}</span>
+                                            <span class="new-price">৳ {{$product->product_price}}</span>
+                                            <del style="color: #cccccc">Was ৳ {{$product->product_discount}}</del>
                                         @else
                                             <span class="product-price">৳ {{$product->product_price}}</span>
                                         @endif
