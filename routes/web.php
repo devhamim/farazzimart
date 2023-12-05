@@ -30,6 +30,7 @@ use App\Http\Controllers\courierZoneController;
 use App\Http\Controllers\mediaController;
 use App\Http\Controllers\OrderslistController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\printInvoiceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\invoiceController;
 
@@ -114,6 +115,14 @@ Route::post('/orders/update', [OrderslistController::class, 'orders_update'])->n
 Route::get('/orders/delete/{id}', [OrderslistController::class, 'orders_delete'])->name('orders.delete');
 Route::get('/orders/exportOrdersReport', [OrderslistController::class, 'orders_exportOrdersReport'])->name('orders.exportOrdersReport');
 Route::get('/orders/product/delete/{id}', [OrderslistController::class, 'orders_product_delete'])->name('orders.product.delete');
+
+// print
+Route::get('/order/view-invoice/{orderId}', [printInvoiceController::class, 'view_invoice'])->name('view.invoice');
+Route::post('/getclickdatas', [printInvoiceController::class, 'getclickdatas'])->name('getclickdatas');
+Route::post('/getprints', [printInvoiceController::class, 'getprints'])->name('getprints');
+Route::post('/multi/view/invoice', [printInvoiceController::class, 'multi_view_invoice'])->name('multi.view.invoice');
+Route::post('/excel/exportOrdersReport', [printInvoiceController::class, 'excel_exportOrdersReport'])->name('excel.exportOrdersReport');
+
 
 // Category
 Route::get('/category/add', [CategoryController::class, 'category_add'])->name('category.add');

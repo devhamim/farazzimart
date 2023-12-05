@@ -125,25 +125,29 @@
                            class="btn btn-success btn-sm">Add Order</a>
                     </div>
                     <div class="col-md-2 col-2">
-                        <form action="https://ecom.prodevsltd.com/admin-orders/bulk-print" method="post" id="all_print_form">
-                            <input type="hidden" name="_token" value="ktLkxYSgW2CFqo1LaSSBAFMYLYEfg60BNopr8gRu"> 
                             <div class="form-group">
-                                <button type="button" id="bulk_print_btn" class="btn btn-info btn-sm">Print Invoice
-                                </button>
+                              
                             </div>
-                        </form>
+                            <form action="{{ route('multi.view.invoice') }}" method="post" id="all_print_form">
+                                @csrf                     
+                                
+                                <input type="hidden" name="print_data" id="checked_value">
+                                <div class="form-group">
+                                    <button type="submit" id="bulk_print_btn" class="btn btn-info btn-sm">Print Invoice</button>
+                                </div>
+                            </form>
                     </div>
 
                     <div class="col-md-4 col-4">
-                        <form action="{{ route('orders.exportOrdersReport') }}" method="post" id="all_courier_csv">
+                        <form action="{{ route('excel.exportOrdersReport') }}" method="post" id="all_courier_csv">
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" name="status" id="courier_status">
                                 <input type="hidden" id="all_ord_id" name="all_ord_id">
-                                <button type="button" id="steadfast_csv" class="btn btn-success btn-sm">Stead Fast
+                                <button type="submit" id="steadfast_csv" class="btn btn-success btn-sm">Stead Fast
                                     Export
                                 </button>
-                                <button type="button" id="redex_csv" class="btn btn-danger btn-sm">Redex Export
+                                <button type="submit" id="redex_csv" class="btn btn-danger btn-sm">Redex Export
                                 </button>
                             </div>
                         </form>
@@ -189,7 +193,8 @@
                                 <table id="report-table" class="table table-bordered table-striped text-center">
                                     <thead>
                                     <tr>
-                                        <th><input type="checkbox" id="master"></th>
+                                        {{-- <th><input type="checkbox" id="master"></th> --}}
+                                        <th></th>
                                         <th>SL.</th>
                                         <th>Invoice ID</th>
                                         <th>Customer Info</th>
@@ -205,8 +210,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($order_id as $sl=>$order)
-                                        <tr id="tr_{{ $sl+1 }}">
-                                            <td><input type="checkbox" class="sub_chk" data-id="{{ $sl+1 }}">
+                                        <tr id="tr_{{ $order->id }}">
+                                            <td>
+                                                <input type="checkbox" name="checkbox" class="sub_chk" data-id="{{ $order->id }}">
                                             </td>
                                             <td>{{ $sl+1 }}</td>
                                             <td>{{ $order->order_id }}</td>
@@ -252,7 +258,9 @@
                                             {{-- <td>Mr. Employee</td> --}}
 
                                             <td class="text-center">
-                                                <a href="{{ route('invoice.download', $order->id) }}" class="d-block mb-1 print" data-id="12"><i class="fa fa-print"></i></a>
+                                                {{-- <a href="{{ route('invoice.download', $order->id) }}" class="d-block mb-1 print" data-id="12"><i class="fa fa-print"></i></a> --}}
+
+                                                <a href="{{ route('view.invoice', $order->order_id) }}" class="d-block mb-1 print" data-id="{{ $order->id }}"><i class="fa fa-print"></i></a>
                                                 
                                                 <a href="{{ route('orders.edit', $order->order_id) }}" class="d-block mb-1">
                                                     <i class="fa fa-edit"></i>
@@ -277,107 +285,105 @@
         </div>
     </div>
 
-
-
-    <script>
-        $('.print').on('click', function () {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                url: 'https://ecom.prodevsltd.com/admin-orders/print',
-                type: 'POST',
-                data: {_token: CSRF_TOKEN, id: $(this).data('id')},
-                success: function (data) {
-                    newWin = window.open("");
-                    newWin.document.write(data);
-                    newWin.document.close();
-                }
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            $('#master').on('click', function (e) {
-                if ($(this).is(':checked', true)) {
-                    $(".sub_chk").prop('checked', true);
-                } else {
-                    $(".sub_chk").prop('checked', false);
-                }
-            });
-
-
-            $('#status').on('change', function (e) {
-                var allVals = [];
-                $(".sub_chk:checked").each(function () {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-                if (allVals.length <= 0) {
-                    alert("Please select row.");
-                } else {
-                    $('#all_status').val(allVals);
-                    $('#all_status_form').submit();
-                }
-            });
-
-            $('#bulk_print_btn').on('click', function (e) {
-                var allVals = [];
-                $(".sub_chk:checked").each(function () {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-                if (allVals.length <= 0) {
-                    alert("Please select row.");
-                } else {
-
-                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                    $.ajax({
-                        url: 'https://ecom.prodevsltd.com/admin-orders/bulk-print',
-                        type: 'POST',
-                        data: {_token: CSRF_TOKEN, all_inv_id: allVals},
-                        success: function (data) {
-                            newWin = window.open("");
-                            newWin.document.write(data);
-                            newWin.document.close();
-                        }
-                    });
-                }
-            });
-
-            //courier export
-            $('#steadfast_csv').on('click', function (e) {
-                var allVals = [];
-                $(".sub_chk:checked").each(function () {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-                if (allVals.length <= 0) {
-                    alert("Please select row.");
-                } else {
-                    $('#all_ord_id').val(allVals);
-                    $('#courier_status').val(1);
-                    $('#all_courier_csv').submit();
-                }
-            });
-
-            $('#redex_csv').on('click', function (e) {
-                var allVals = [];
-                $(".sub_chk:checked").each(function () {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-                if (allVals.length <= 0) {
-                    alert("Please select row.");
-                } else {
-                    $('#all_ord_id').val(allVals);
-                    $('#courier_status').val(2);
-                    $('#all_courier_csv').submit();
-                }
-            });
-        });
-    </script>
-
-
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //check value
+        var checkboxes = document.querySelectorAll('.sub_chk');
+        //passing data to input
+        let checked_value = document.getElementById('checked_value');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkedIDs = [];
+                var checkedCheckboxes = document.querySelectorAll('.sub_chk:checked');
+    
+                checkedCheckboxes.forEach(function(checkedCheckbox) {
+                    checkedIDs.push(checkedCheckbox.getAttribute('data-id'));
+                });
+    
+                checked_value.value = checkedIDs.join(', ');
+                // console.log(checkedIDs); // Display the array of checked IDs in the console
+                // You can perform further actions with the checkedIDs array here
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        //check value
+        var checkboxes = document.querySelectorAll('.sub_chk');
+        //passing data to input
+        let checked_value = document.getElementById('all_ord_id');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkedIDs = [];
+                var checkedCheckboxes = document.querySelectorAll('.sub_chk:checked');
+    
+                checkedCheckboxes.forEach(function(checkedCheckbox) {
+                    checkedIDs.push(checkedCheckbox.getAttribute('data-id'));
+                });
+    
+                checked_value.value = checkedIDs.join(', ');
+                // console.log(checkedIDs); // Display the array of checked IDs in the console
+                // You can perform further actions with the checkedIDs array here
+            });
+        });
+    });
+</script>
+<script>
+    $('.print').on('click', function () {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': CSRF_TOKEN
+            }
+        });
+
+        $.ajax({
+            url: '/getprints',
+            type: 'POST',
+            data: {_token: CSRF_TOKEN, id: $(this).data('id')},
+            success: function (data) {
+                newWin = window.open("");
+                newWin.document.write(data);
+                newWin.document.close();
+            }
+        });
+    });
+</script>
+
+<script>
+    //courier export
+    $('#steadfast_csv').on('click', function (e) {
+        var allVals = [];
+        $(".sub_chk:checked").each(function () {
+            allVals.push($(this).attr('data-id'));
+        });
+
+        if (allVals.length <= 0) {
+            alert("Please select row.");
+        } else {
+            $('#all_ord_id').val(allVals);
+            $('#courier_status').val(1);
+            $('#all_courier_csv').submit();
+        }
+    });
+
+    $('#redex_csv').on('click', function (e) {
+        var allVals = [];
+        $(".sub_chk:checked").each(function () {
+            allVals.push($(this).attr('data-id'));
+        });
+
+        if (allVals.length <= 0) {
+            alert("Please select row.");
+        } else {
+            $('#all_ord_id').val(allVals);
+            $('#courier_status').val(2);
+            $('#all_courier_csv').submit();
+        }
+    });
+</script>
