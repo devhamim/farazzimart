@@ -124,10 +124,7 @@
                         <a href="{{ route('orders.add') }}"
                            class="btn btn-success btn-sm">Add Order</a>
                     </div>
-                    <div class="col-md-2 col-2">
-                            <div class="form-group">
-                              
-                            </div>
+                    <div class="col-md-2 col-2 text-end">
                             <form action="{{ route('multi.view.invoice') }}" method="post" id="all_print_form">
                                 @csrf                     
                                 
@@ -139,6 +136,7 @@
                     </div>
 
                     <div class="col-md-4 col-4">
+                        
                         <form action="{{ route('excel.exportOrdersReport') }}" method="post" id="all_courier_csv">
                             @csrf
                             <div class="form-group">
@@ -162,7 +160,7 @@
                                             <option value="{{ $courier->id }}">{{ $courier->name }}</option>
                                         @endforeach
                                 </select>
-                                <button class="btn btn-success">sub</button>
+                                <button class="btn btn-success">Search</button>
                                 <a href="{{ route('orders.list') }}" class="btn btn-secondary mx-2">Reset</a>
                             </div>
                         </form>
