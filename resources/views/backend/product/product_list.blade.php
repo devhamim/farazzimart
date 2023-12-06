@@ -60,8 +60,8 @@
                                         <td>{{$product->product_discount}}</td>
                                         <td><span class="badge badge-{{$product->status == 1 ? 'success' : 'danger'}}">{{$product->status == 1 ? 'Active' : 'Deactive'}}</span></td>
                                         <td>
-                                            <a href="{{route('product.edit', $product->id)}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp; </a>
-                                            <a href="{{route('product.delete', $product->id)}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp; </a>
+                                            <a href="{{route('product.edit', $product->id)}}" class=""><i class="fa fa-edit"></i> </a>
+                                            <a href="{{route('product.delete', $product->id)}}" class=""><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>
                                 @endforeach

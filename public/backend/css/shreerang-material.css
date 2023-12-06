@@ -564,9 +564,9 @@ body {
 .table.table-fixed {
   table-layout: fixed; }
 
-.table td,
+/* .table td,
 .table th {
-  white-space: nowrap; }
+  white-space: nowrap; } */
 .table th {
   font-weight: 500; }
 
@@ -4020,7 +4020,7 @@ button.list-group-item-dark {
   .sidenav-vertical .sidenav-block,
   .sidenav-vertical .sidenav-inner > .sidenav-item,
   .sidenav-vertical .sidenav-inner > .sidenav-header {
-    width: 15.625rem; }
+    width: 13.625rem; }
   .sidenav-vertical .sidenav-inner {
     flex-direction: column;
     flex: 1 1 auto; }

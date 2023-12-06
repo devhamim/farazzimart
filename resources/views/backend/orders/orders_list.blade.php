@@ -234,7 +234,7 @@
                                                 <br>
                                                 
                                             </td>
-                                            <td >
+                                            <td style="width: 20px">
                                                 @foreach ($order->rel_to_orderpro as $OrderProduct) 
                                                     {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
                                                 @endforeach
