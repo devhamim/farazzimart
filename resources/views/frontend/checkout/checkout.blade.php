@@ -85,7 +85,7 @@
                                             </span> X
                                         </td>
                                         <td class="ps-3 text-center mt-2" style="padding-top: 15px; justify-content: center; width: 15%; margin: 0 auto"> 
-                                            <input type="number" class="qty-input form-control mx-2" value="{{ $data['item_quantity'] }}" min="1" max="100" step="1" data-decimals="0" required>
+                                            <input type="number" name="quantity[{{ $data['item_id'] }}]" class="qty-input form-control mx-2" value="{{ $data['item_quantity'] }}" min="1" max="100" step="1" data-decimals="0" required>
                                         </td>
                                         <td>
                                             <div class="cart-product-quantity">
@@ -125,17 +125,6 @@
                                             <td>৳ {{ $shipping->amount }}</td>
                                         </tr>
                                     @endforeach
-                                    {{-- <tr class="summary-shipping-row">
-                                        <td>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" name="charge" id="express-shipping" class="custom-control-input" value="150">
-                                                <label class="custom-control-label" for="express-shipping">ঢাকার বাইরে ডেলিভারি</label>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>৳ 150</td>
-                                    </tr> --}}
                                 </tbody>
                             </table><!-- End .table table-summary -->
                             <div class="cart-bottom mt-3">

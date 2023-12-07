@@ -38,7 +38,7 @@ class CheckoutController extends Controller
 
     // order_store
     function order_store(Request $request) {
-        
+
         $request->validate([
             'name' => 'required',
             'mobile' => 'required',
@@ -78,10 +78,11 @@ class CheckoutController extends Controller
                 'order_id' => $order_id,
                 'shipping_cost' => $request->charge,
                 'sub_total' => $request->sub_total,
-                'total' => $request->total,
+                'total' => $request->total+$request->charge,
                 'order_date' => Carbon::now(),
                 'created_at' => Carbon::now(),
             ]);
+
 
             $items_in_cart = $cart_data;
             foreach($items_in_cart as $key=>$itemdata) {
