@@ -46,7 +46,7 @@
                         <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
-                                    <h5 class="text-info">Total Processing</h5>
+                                    <h5 class="text-info">Total Hold</h5>
                                     <div class="metric-value d-inline-block">
                                         <h1 class="mb-1">{{ $total_processing }}</h1>
                                     </div>
@@ -72,7 +72,7 @@
                         <a href="">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
-                                    <h5 class="text-warning">Total Hold</h5>
+                                    <h5 class="text-warning">Total Processing</h5>
                                     <div class="metric-value d-inline-block">
                                         <h1 class="mb-1">{{ $total_hold }}</h1>
                                     </div>
@@ -250,19 +250,19 @@
                                             <td class="text-center">
                                                 <div class="dropdown mx-1">
                                                         @if ($order->status == 0)
-                                                            <div class="btn btn-info">On Hold</div>
+                                                            <div class="badge badge-info">Processing</div>
                                                         @elseif ($order->status == 1)
-                                                            <div class="btn btn-primary">Processing</div>
+                                                            <div class="badge badge-primary">On Hold</div>
                                                         @elseif ($order->status == 2)
-                                                            <div class="btn btn-success">Completed</div>
+                                                            <div class="badge badge-success">Completed</div>
                                                         @elseif ($order->status == 3)
-                                                            <div class="btn btn-warning">Pending Payment</div>
+                                                            <div class="badge badge-warning">Pending Payment</div>
                                                         @elseif ($order->status == 5)
-                                                            <div class="btn btn-warning">On Delivary</div>
+                                                            <div class="badge badge-default">On Delivary</div>
                                                         @elseif ($order->status == 6)
-                                                            <div class="btn btn-warning">Pending Invoice</div>
+                                                            <div class="badge badge-dark">Pending Invoice</div>
                                                         @else
-                                                            <div class="btn btn-danger">Canceled</div>
+                                                            <div class="badge badge-danger">Canceled</div>
                                                         @endif
                                                 </div>                                                
                                             </td>

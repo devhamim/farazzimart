@@ -70,7 +70,7 @@
             <a href="#">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
-                        <h5 class="text-info">Total Processing</h5>
+                        <h5 class="text-info">Total Hold</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{ $total_processing }}</h1>
                         </div>
@@ -94,7 +94,7 @@
             <a href="#">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
-                        <h5 class="text-info">Total Hold</h5>
+                        <h5 class="text-info">Total Processing</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{ $total_hold }}</h1>
                         </div>

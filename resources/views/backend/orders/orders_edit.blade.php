@@ -116,8 +116,8 @@
                                     <div class="form-group col-12">
                                         <label for="" class="form-label">Order status</label>
                                         <select name="status" class="form-control">
-                                            <option value="0" {{ $orders->status == 0?'selected':'' }}>On Hold</option>
-                                            <option value="1" {{ $orders->status == 1?'selected':'' }}>Processing</option>
+                                            <option value="0" {{ $orders->status == 0?'selected':'' }}>Processing</option>
+                                            <option value="1" {{ $orders->status == 1?'selected':'' }}>On Hold</option>
                                             <option value="3" {{ $orders->status == 3?'selected':'' }}>Pending Payment</option>
                                             <option value="5" {{ $orders->status == 5?'selected':'' }}>On Delivary</option>
                                             <option value="6" {{ $orders->status == 6?'selected':'' }}>Pending Invoice</option>

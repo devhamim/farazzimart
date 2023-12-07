@@ -116,8 +116,8 @@
                                         <tr class="summary-shipping-row">
                                             <td>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" name="charge" id="standart-shipping" checked="" class="custom-control-input" value="{{ $shipping->amount }}">
-                                                    <label class="custom-control-label" for="standart-shipping">{{ $shipping->text }}</label>
+                                                    <input type="radio" name="charge" id="standart-shipping{{ $shipping->id }}" checked="" class="custom-control-input" value="{{ $shipping->amount }}">
+                                                    <label class="custom-control-label" for="standart-shipping{{ $shipping->id }}">{{ $shipping->text }}</label>
                                                 </div>
                                             </td>
                                             <td></td>
