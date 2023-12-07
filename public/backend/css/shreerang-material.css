@@ -4020,7 +4020,7 @@ button.list-group-item-dark {
   .sidenav-vertical .sidenav-block,
   .sidenav-vertical .sidenav-inner > .sidenav-item,
   .sidenav-vertical .sidenav-inner > .sidenav-header {
-    width: 13.625rem; }
+    width: 12.625rem; }
   .sidenav-vertical .sidenav-inner {
     flex-direction: column;
     flex: 1 1 auto; }
@@ -4473,7 +4473,7 @@ button.list-group-item-dark {
 
   .layout-fixed:not(.layout-collapsed) .layout-container,
   .layout-fixed-offcanvas:not(.layout-collapsed) .layout-container {
-    padding-left: 14.625rem; }
+    padding-left: 13.1rem; }
   .layout-fixed:not(.layout-collapsed).layout-reversed .layout-container,
   .layout-fixed-offcanvas:not(.layout-collapsed).layout-reversed .layout-container {
     padding-right: 15.625rem;
@@ -4515,7 +4515,7 @@ html:not(.layout-footer-fixed) .layout-content {
   .layout-navbar-fixed:not(.layout-collapsed) .layout-2 .layout-navbar,
   .layout-fixed.layout-navbar-fixed:not(.layout-collapsed) .layout-2 .layout-navbar,
   .layout-fixed-offcanvas.layout-navbar-fixed:not(.layout-collapsed) .layout-2 .layout-navbar {
-    left: 14.625rem; }
+    left: 12.625rem; }
   .layout-navbar-fixed:not(.layout-collapsed).layout-reversed .layout-2 .layout-navbar,
   .layout-fixed.layout-navbar-fixed:not(.layout-collapsed).layout-reversed .layout-2 .layout-navbar,
   .layout-fixed-offcanvas.layout-navbar-fixed:not(.layout-collapsed).layout-reversed .layout-2 .layout-navbar {
