@@ -31,8 +31,6 @@ class OrderslistController extends Controller
     function orders_list(){
         // $order_id = Order::all();
         $order_id = Order::with('rel_to_billing')->orderBy('created_at', 'desc')->get();
-        // $billingdetails = Billingdetails::where('order_id', $order_id->first()->order_id)->get();
-        // $OrderProducts = OrderProduct::where('order_id', $order_id->first()->order_id)->get();
         $total_orders = Order::count();
         $total_processing = Order::where('status', 1)->count();
         $total_pending = Order::where('status', 3)->count();
@@ -44,8 +42,6 @@ class OrderslistController extends Controller
         $couriers = courier::all();
         return view('backend.orders.orders_list', [
             'order_id'=>$order_id,
-            // 'billingdetails'=>$billingdetails,
-            // 'OrderProducts'=>$OrderProducts,
             'total_orders'=>$total_orders,
             'total_processing'=>$total_processing,
             'total_pending'=>$total_pending,
