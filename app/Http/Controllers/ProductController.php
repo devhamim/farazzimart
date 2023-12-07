@@ -44,9 +44,9 @@ class ProductController extends Controller
             'description'=> 'required',
             'product_price'=> 'required',
             'sku'=> 'required',
-            'preview_image' => 'required|mimes:jpg,jpeg,gif,png,webp|max:5000',
+            'preview_image' => 'required',
             'quantity' => 'required',
-            'gallery_image' => 'required|image|mimes:jpg,jpeg,gif,png,webp',
+            'gallery_image' => 'required',
             
         ]);
         $after_emplode_cat = implode(',', $request->category_id);

@@ -101,6 +101,7 @@
                                             $total = $total + ($data["item_quantity"] * $data["product_price"]);
                                         }
                                     @endphp
+                                    
                                     @endforeach
 
                                     <tr class="summary-total">

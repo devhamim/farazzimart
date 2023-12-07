@@ -236,8 +236,7 @@
                                             </td>
                                             <td>
                                                 @foreach ($order->rel_to_orderpro as $OrderProduct) 
-                                                    {{-- {{ $OrderProduct->quantity }} x  --}}
-                                                    {{ $OrderProduct->rel_to_product->product_name }} <br>
+                                                    {{ $OrderProduct->quantity }} x {{ $OrderProduct->rel_to_product->product_name }} <br>
                                                 @endforeach
                                             </td>
                                             <td>৳ {{ $order->total }}</td>

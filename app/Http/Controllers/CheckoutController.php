@@ -38,7 +38,6 @@ class CheckoutController extends Controller
 
     // order_store
     function order_store(Request $request) {
-
         $request->validate([
             'name' => 'required',
             'mobile' => 'required',
@@ -83,17 +82,43 @@ class CheckoutController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
+            // $quantitys = $request->quantity;
+            // $items_in_cart = $cart_data;
+            // foreach($items_in_cart as $key=>$itemdata) {
+            //     OrderProduct::create([
+            //         'order_id' => $order_id,
+            //         'product_id' => $itemdata['item_id'],
+            //         'quantity' => $quantitys,
+            //         'created_at' => Carbon::now(),
+            //     ]);
+            //     Inventory::where('product_id', $itemdata['item_id'])->decrement('quantity', $itemdata['item_quantity']);
+            // }
+            $quantities = $request->quantity;
 
             $items_in_cart = $cart_data;
-            foreach($items_in_cart as $key=>$itemdata) {
-                OrderProduct::create([
-                    'order_id' => $order_id,
-                    'product_id' => $itemdata['item_id'],
-                    'quantity' => $itemdata['item_quantity'],
-                    'created_at' => Carbon::now(),
-                ]);
-                Inventory::where('product_id', $itemdata['item_id'])->decrement('quantity', $itemdata['item_quantity']);
+
+            foreach ($items_in_cart as $key => $itemdata) {
+                $productId = $itemdata['item_id'];
+
+                // Check if the product ID exists in the quantities array
+                if (isset($quantities[$productId])) {
+                    // Use the correct quantity for the current product
+                    $quantity = $quantities[$productId];
+
+                    // Create OrderProduct record
+                    OrderProduct::create([
+                        'order_id' => $order_id,
+                        'product_id' => $productId,
+                        'quantity' => $quantity,
+                        'created_at' => Carbon::now(),
+                    ]);
+
+                    // Update inventory
+                    Inventory::where('product_id', $productId)
+                        ->decrement('quantity', $quantity);
+                }
             }
+
             // Cookie::queue(Cookie::forget('shopping_cart'));
             Cookie::queue(Cookie::forget('shopping_cart'));
 
