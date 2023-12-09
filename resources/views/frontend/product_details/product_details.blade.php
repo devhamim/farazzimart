@@ -53,8 +53,8 @@
                             <div class="product-details">
                                 <h1 class="product-title">{{$product_info->first()->product_name}}</h1>
                                 <div class="product-price">
-                                    Price: <span class="pl-3">৳ {{$product_info->first()->after_discount}}</span>
-                                    @if ($product_info->first()->product_discount != null)
+                                    Price: <span class="pl-3">৳ {{$product_info->first()->product_discount}}</span>
+                                    @if ($product_info->first()->product_price != null)
                                         <span class="line-through pl-3 text-dark" style="font-size: 14px">৳{{$product_info->first()->product_price}}</span>
                                     @endif
                                 </div><!-- End .product-price -->
@@ -83,9 +83,9 @@
                                             <div class="col-lg-6">
                                                 <div>
                                                     <h5 class="d-block">ফোনে অর্ডারের জন্য ডায়াল করুন</h5>
-                                                    <a href="tel:01303523442" class="support-number">  
+                                                    <a href="tel:01954-056251" class="support-number">  
                                                         <i class="fa fa-phone"></i> 
-                                                        01303523442 <span class="bkash_personal">Customer Care</span>
+                                                        01954-056251 <span class="bkash_personal">Customer Care</span>
                                                     </a>
                                                 </div>
                                             </div>
@@ -98,9 +98,9 @@
                                                     <a href="https://www.facebook.com/dialog/send?app_id=794605019112340&link={{ urlencode(route('product.details',$product_info->first()->slug)) }}&redirect_uri={{ urlencode(route('product.details',$product_info->first()->slug)) }}&quote={{ urlencode($product_info->first()->product_name) }}" target="_blank"><i class="icon-facebook-messenger"></i></a> --}}
     
                                                     <ul class="text-danger">
-                                                        <li>বিকাশ মার্চেন্ট নাম্বার: 01893-900580</li>
-                                                        <li>বিকাশ / নগদ নাম্বার : 01752-774046</li>
-                                                        <li>বিকাশ / নগদ নাম্বার : 01775-931232</li>
+                                                        <!--<li>বিকাশ মার্চেন্ট নাম্বার: 01893-900580</li>-->
+                                                        <!--<li>বিকাশ / নগদ নাম্বার : 01752-774046</li>-->
+                                                        <li>বিকাশ / নগদ নাম্বার : 01954-056251</li>>
                                                     </ul>
                                                 </div>
                                             </div>

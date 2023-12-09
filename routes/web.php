@@ -102,6 +102,7 @@ Route::get('/customer/list', [customerController::class, 'customer_list'])->name
 
 // order
 Route::get('/orders/list', [OrderslistController::class, 'orders_list'])->name('orders.list');
+Route::get('/orders/list/status{status}', [OrderslistController::class, 'orders_list_status'])->name('orders.list.status');
 Route::get('/orders/courier/list', [OrderslistController::class, 'orders_courier_list'])->name('orders.courier.list');
 Route::get('/orders/add', [OrderslistController::class, 'orders_add'])->name('orders.add');
 Route::post('/orders/store', [OrderslistController::class, 'orders_store'])->name('orders.store');

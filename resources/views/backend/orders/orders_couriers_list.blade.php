@@ -30,7 +30,7 @@
 
                 <div class="row mb-md-4 mb-3">
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list') }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5>Total Order</h5>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list.status', 1) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-info">Total Hold</h5>
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list.status', 3) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-secondary">Total Pending Payment</h5>
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list.status', 0) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-warning">Total Processing</h5>
@@ -82,7 +82,7 @@
                     </div>
 
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="##">
+                        <a href="{{ route('orders.list.status', 4) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-danger">Total Canceled</h5>
@@ -94,7 +94,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list.status', 2) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-success">Total Completed</h5>
@@ -106,10 +106,10 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="#">
+                        <a href="{{ route('orders.list.status', 5) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
-                                    <h5 class="text-success">On Delivary</h5>
+                                    <h5 class="text-success">Total On Delivary</h5>
                                     <div class="metric-value d-inline-block">
                                         <h1 class="mb-1">{{ $total_ondelevary }}</h1>
                                     </div>
@@ -118,7 +118,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-                        <a href="">
+                        <a href="{{ route('orders.list.status', 6) }}">
                             <div class="card border-3 border-top border-top-success">
                                 <div class="card-body">
                                     <h5 class="text-success">Pending Invoice</h5>

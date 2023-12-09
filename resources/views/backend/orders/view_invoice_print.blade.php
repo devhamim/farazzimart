@@ -39,7 +39,7 @@
                                 <td>{{ $sl+1 }}</td>
                                 <td>{{ $Order->rel_to_product->product_name }}</td>
                                 <td>{{ $Order->quantity }}</td>
-                                <td>{{ $Order->rel_to_product->product_price*$Order->quantity }}</td>
+                                <td>{{ $Order->rel_to_product->product_discount*$Order->quantity }}</td>
                             </tr>
                             @endforeach
                             <tr>

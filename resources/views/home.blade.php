@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a >
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         @php
@@ -31,7 +31,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a>
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Staff</h5>
@@ -43,7 +43,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list') }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Order</h5>
@@ -55,7 +55,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('product.list') }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Product</h5>
@@ -67,7 +67,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 1) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Hold</h5>
@@ -79,7 +79,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 3) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Pending Payment</h5>
@@ -91,7 +91,7 @@
             </a>
         </div> 
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 0) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Processing</h5>
@@ -103,7 +103,7 @@
             </a>
         </div> 
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 4) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Canceled</h5>
@@ -115,7 +115,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 2) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total Completed</h5>
@@ -127,7 +127,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 5) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Total On Delevary</h5>
@@ -139,7 +139,7 @@
             </a>
         </div>
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 mb-md-4 mb-3">
-            <a href="#">
+            <a href="{{ route('orders.list.status', 6) }}">
                 <div class="card border-3 border-top border-top-success">
                     <div class="card-body">
                         <h5 class="text-info">Pending Invoice</h5>
@@ -300,16 +300,20 @@
                                 <td>{{ $orders->created_at->format('d-M-Y') }}</td>
                                 <td>
                                     <label class="label label-warning">
-                                        @if ($orders->status == 0)
-                                        <div class="btn btn-info">On Hold</div>
-                                        @elseif ($orders->status == 1)
-                                            <div class="btn btn-primary">Processing</div>
-                                        @elseif ($orders->status == 2)
-                                            <div class="btn btn-success">Completed</div>
-                                        @elseif ($orders->status == 3)
-                                            <div class="btn btn-warning">Pending Payment</div>
+                                        @if ($order->status == 0)
+                                            <div class="badge badge-info">Processing</div>
+                                        @elseif ($order->status == 1)
+                                            <div class="badge badge-primary">On Hold</div>
+                                        @elseif ($order->status == 2)
+                                            <div class="badge badge-success">Completed</div>
+                                        @elseif ($order->status == 3)
+                                            <div class="badge badge-warning">Pending Payment</div>
+                                        @elseif ($order->status == 5)
+                                            <div class="badge badge-default">On Delivary</div>
+                                        @elseif ($order->status == 6)
+                                            <div class="badge badge-dark">Pending Invoice</div>
                                         @else
-                                            <div class="btn btn-danger">Canceled</div>
+                                            <div class="badge badge-danger">Canceled</div>
                                         @endif
                                     </label>
                                 </td>

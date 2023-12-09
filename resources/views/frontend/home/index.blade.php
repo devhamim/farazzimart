@@ -155,11 +155,11 @@
                         </figure>
 
                         <div class="product-body">
-                            @if ($product->product_discount != null)
-                                <span class="new-price d-block">৳ {{$product->product_price}}</span>
-                                <del style="color: #cccccc">Was ৳ {{$product->product_discount}}</del>
+                            @if ($product->product_price != null)
+                                <span class="new-price d-block">৳ {{$product->product_discount}}</span>
+                                <del style="color: #cccccc">Was ৳ {{$product->product_price}}</del>
                             @else
-                                <span class="product-price">৳ {{$product->product_price}}</span>
+                                <span class="product-price">৳ {{$product->product_discount}}</span>
                             @endif
                             <h3 class="product-title"><a href="{{route('product.details', $product->slug)}}">{{Str::limit($product->product_name, '19', '')}}</a></h3>
                         </div>
@@ -205,11 +205,11 @@
                     </figure>
                     <div class="text-center">
                         <div class="product-body">
-                            @if ($product->product_discount != null)
-                                <span class="new-price d-block">৳ {{ $product->product_price }}</span>
-                                <del style="color: #cccccc">Was ৳ {{$product->product_discount}}</del>
+                             @if ($product->product_price != null)
+                                <span class="new-price d-block">৳ {{$product->product_discount}}</span>
+                                <del style="color: #cccccc">Was ৳ {{$product->product_price}}</del>
                             @else
-                                <span class="product-price">৳ {{ $product->product_price }}</span>
+                                <span class="product-price">৳ {{$product->product_discount}}</span>
                             @endif
                             <h3 class="product-title"><a href="{{ route('product.details', $product->slug) }}">{{ Str::limit($product->product_name, '19', '') }}</a></h3>
                         </div>

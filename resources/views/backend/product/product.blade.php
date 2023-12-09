@@ -26,7 +26,7 @@
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="form-label">Regular Price *</label>
-                                    <input type="number" name="product_discount" class="form-control" placeholder="Regular Price">
+                                    <input type="number" name="product_price" class="form-control" placeholder="Regular Price">
                                     @error('product_discount')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -44,7 +44,7 @@
                             <div class="col-lg-6 col-lg-6">
                                 <div class="form-group">
                                     <label class="form-label">Sale Price *</label>
-                                    <input type="number" name="product_price" class="form-control" placeholder="Sale Price">
+                                    <input type="number" name="product_discount" class="form-control" placeholder="Sale Price">
                                     @error('product_price')
                                         <span class="text-danger">{{$message}}</span>
                                     @enderror

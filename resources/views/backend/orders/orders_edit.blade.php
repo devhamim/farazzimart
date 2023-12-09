@@ -155,9 +155,9 @@
                                                         </td>
                                                         <td>
                                                             <input style="width: 60px; border: solid solid #ddd;" min="1"  type="number" class="form-control qty" name="quantity[]" value="{{ $orderpro->quantity }}">
-                                                            <input type="hidden" name="price[]" class="price" value="{{ $orderpro->rel_to_product->product_price }}">
+                                                            <input type="hidden" name="price[]" class="price" value="{{ $orderpro->rel_to_product->product_discount }}">
                                                         </td>
-                                                        <td class="total_price">{{ $orderpro->rel_to_product->product_price*$orderpro->quantity }}</td>
+                                                        <td class="total_price">{{ $orderpro->rel_to_product->product_discount*$orderpro->quantity }}</td>
                                                         <td><a class="btn btn-danger" href="{{ route('orders.product.delete',$orderpro->id) }}">Remove</a></td></td>
                                                     </tr>
                                                 @endforeach

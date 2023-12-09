@@ -52,7 +52,37 @@ class OrderslistController extends Controller
             'total_ondelevary'=>$total_ondelevary,
             'total_pendinginvoice'=>$total_pendinginvoice,
         ]);
+    } 
+    
+    //orders_list_status
+    function orders_list_status($status){
+        // $order_id = Order::all();
+        $order_id = Order::with('rel_to_billing')->orderBy('created_at', 'desc')->get();
+        $order_status = Order::where('status', $status)->get();
+        $total_orders = Order::count();
+        $total_processing = Order::where('status', 1)->count();
+        $total_pending = Order::where('status', 3)->count();
+        $total_hold = Order::where('status', 0)->count();
+        $total_completed = Order::where('status', 2)->count();
+        $total_cancel = Order::where('status', 4)->count();
+        $total_ondelevary = Order::where('status', 5)->count();
+        $total_pendinginvoice = Order::where('status', 6)->count();
+        $couriers = courier::all();
+        return view('backend.orders.orders_list_status', [
+            'order_id'=>$order_id,
+            'total_orders'=>$total_orders,
+            'total_processing'=>$total_processing,
+            'total_pending'=>$total_pending,
+            'total_hold'=>$total_hold,
+            'total_completed'=>$total_completed,
+            'total_cancel'=>$total_cancel,
+            'couriers'=>$couriers,
+            'total_ondelevary'=>$total_ondelevary,
+            'total_pendinginvoice'=>$total_pendinginvoice,
+            'order_status'=>$order_status,
+        ]);
     }
+
 
     // orders.courier.list
     function orders_courier_list(Request $request){
@@ -189,7 +219,7 @@ function orders_store(Request $request){
         'product_id' => $product->id,
         'sku' => $product->sku,
         'productName' => $product->product_name,
-        'product_price' => $product->product_price,
+        'product_price' => $product->product_discount,
         'quantity' => $product->quantity,
         'sub_total' => $product->product_price*$product->quantity,
     ];
@@ -212,7 +242,7 @@ function orders_store(Request $request){
         'product_id' => $product->id,
         'sku' => $product->sku,
         'productName' => $product->product_name,
-        'product_price' => $product->product_price,
+        'product_price' => $product->product_discount,
         'sub_total' => $product->product_price*$product->quantity,
     ];
 
