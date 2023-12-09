@@ -34,6 +34,7 @@ class HomeController extends Controller
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") = ?', [$currentMonth])
             ->sum('total');
             
+        $todayOrders = Order::whereDate('created_at', now()->toDateString())->count();
         $product_id = Product::all();
         $orders_list = Order::all();
         $products_count = Product::count();
@@ -59,6 +60,16 @@ class HomeController extends Controller
             'total_cancel'=>$total_cancel,
             'total_pendinginvoice'=>$total_pendinginvoice,
             'total_ondelevary'=>$total_ondelevary,
+            'todayOrders'=>$todayOrders,
+            'statusCounts' => [
+                'hold' => $total_processing,
+                'pending' => $total_pending,
+                'processing' => $total_hold,
+                'completed' => $total_completed,
+                'cancel' => $total_cancel,
+                'ondelevary' => $total_ondelevary,
+                'pendinginvoice' => $total_pendinginvoice,
+            ],
         ]);
     }
 

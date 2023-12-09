@@ -350,7 +350,7 @@ public function orders_update(Request $request)
         }
     }
 
-    return back()->withSuccess('Order updated successfully');
+    return redirect()->route('orders.list')->withSuccess('Order updated successfully');
 }
 
 function orders_delete($id){

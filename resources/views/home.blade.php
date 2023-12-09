@@ -153,129 +153,8 @@
     </div>
     <div class="row">
 
-        <!-- chart cards start -->
-        {{-- <div class="col-xl-6">
-            <div class="card mb-4">
-                <div class="card-header with-elements">
-                    <h6 class="card-header-title mb-0">Sale Order</h6>
-                    <div class="card-header-elements ml-auto">
-                        <label class="text m-0">
-                            <span class="text-light text-tiny font-weight-semibold align-middle">SHOW STATS</span>
-                            <span class="switcher switcher-sm d-inline-block align-middle mr-0 ml-2">
-                                <input type="checkbox" class="switcher-input" checked>
-                                <span class="switcher-indicator">
-                                    <span class="switcher-yes"></span>
-                                    <span class="switcher-no"></span>
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-                <div class="row no-gutters row-bordered">
-                    <div class="col-md-5 col-lg-12 col-xl-5">
-                        <div class="card-body">
-                            <div class="pb-4">
-                                Total Sale
-                                <div class="float-right">
-                                    <span class="text-muted small">৳{{ $total_processing }}</span><i class="feather icon-arrow-down text-danger"></i>
-                                </div>
-                                <div class="progress mt-1" style="height:6px;">
-                                    <div class="progress-bar bg-primary" style="width: 45%;"></div>
-                                </div>
-                            </div>
-                            <div class="pb-4">
-                                Stock
-                                <div class="float-right">
-                                    <span class="text-muted small">{{ $products_count }} P</span><i class="feather icon-arrow-up text-success"></i>
-                                </div>
-                                <div class="progress mt-1" style="height:6px;">
-                                    <div class="progress-bar bg-success" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                            <div class="pb-4">
-                                Total Order
-                                <div class="float-right">
-                                    <span class="text-muted small">{{ $orders_count }}</span><i class="feather icon-arrow-up text-success"></i>
-                                </div>
-                                <div class="progress mt-1" style="height:6px;">
-                                    <div class="progress-bar bg-danger" style="width: 30%;"></div>
-                                </div>
-                            </div>
-                            <div class="pb-0">
-                                User
-                                <div class="float-right">
-                                    <span class="text-muted small">{{ $users_count }}</span><i class="feather icon-arrow-down text-danger"></i>
-                                </div>
-                                <div class="progress mt-1" style="height:6px;">
-                                    <div class="progress-bar bg-warning" style="width: 55%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-lg-12 col-xl-7">
-                        <div class="card-body">
-                            <div id="chart-pie-moris" style="height:250px"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6">
-            <div class="card d-flex w-100 mb-4">
-                <div class="row no-gutters row-bordered row-border-light h-100">
-                    <div class="d-flex col-sm-6 col-md-6 col-lg-6 align-items-center">
-                        <div class="card-body media align-items-center text-dark">
-                            <i class="lnr lnr-diamond display-4 d-block text-primary"></i>
-                            <span class="media-body d-block ml-3">
-                                <span class="text-big mr-1 text-primary">৳{{ $orders_price }}</span>
-                                <br>
-                                <small class="text-muted">Total Earned</small>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4 bg-pattern-2-dark">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="lnr lnr-cart display-4 text-primary"></div>
-                                <div class="ml-3">
-                                    @php
-                                        $monthly = 0;
-
-                                        $monthly += $month_order
-                                    @endphp
-
-                                    <div class="text-muted small">Monthly sales</div>
-                                    <div class="text-large">৳{{ $monthly }}</div>
-                                </div>
-                            </div>
-                            <div id="ecom-chart-1" class="mt-4 chart-shadow-primary" style="height:55px"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card mb-4 bg-pattern-2-dark">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="lnr lnr-gift display-4 text-danger"></div>
-                                <div class="ml-3">
-                                    <div class="text-muted small">Products</div>
-                                    <div class="text-large">{{ $products_count }}</div>
-                                </div>
-                            </div>
-                            <div id="ecom-chart-3" class="mt-4 chart-shadow-danger" style="height:55px"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- chart cards end -->
-
         <!-- Data card 8 Start -->
-        <div class="col-xl-12 col-md-12">
+        <div class="col-xl-8 col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header">Recent Orders</h5>
                 <div class="table-responsive">
@@ -324,31 +203,27 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-xl-4 col-md-12">
-            <div class="card mb-4">
-                <h5 class="card-header">Anual Sales Report</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Brand</th>
-                            </tr>
-                        </thead>
+        <div class="col-xl-4 col-md-12">
+            <div class="card">
+                <h5 class="card-header">Today's Report</h5>
+                <div class="card-body">
+                    <table class="table table-striped">
                         <tbody>
-                            @foreach ($brands->take(5) as $brand)
-
+                        <tr>
+                            <th>Orders</th>
+                            <td>{{ $todayOrders }}</td>
+                        </tr>
+                        @foreach($statusCounts as $status => $count)
                             <tr>
-                                <td><img src="{{ asset('uploads/brand') }}/{{ $brand->brand_image }}" alt="" class="img-fluid rounded-circle ui-w-20"></td>
-                                <td>{{ $brand->brand_name }}</td>
+                                <th>{{ ucfirst($status) }}</th>
+                                <td>{{ $count }}</td>
                             </tr>
-                            @endforeach
-
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>
 
